@@ -1,0 +1,35 @@
+.navbar {
+  position: fixed !important;
+  width: 100%;
+  height: 60px;
+  bottom: 0px;
+  left: 0px;
+  padding: 0px 5% !important;
+  background-color: white;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.navbar ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 50px;
+}
+
+.navbar ul a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+@media screen and (max-width: 500px) {
+  .navbar svg {
+    font-size: 15px;
+  }
+  .navbar ul a {
+    font-size: 10px;
+  }
+}

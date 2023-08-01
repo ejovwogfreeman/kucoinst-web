@@ -1,0 +1,35 @@
+.carousel-control-prev,
+.carousel-control-next {
+  z-index: 5;
+  position: absolute;
+}
+
+.carousel-indicators {
+  display: none;
+}
+
+.header {
+  padding-top: 60px !important;
+}
+
+.header img {
+  height: 150px;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 960px) {
+  .contents h1 {
+    font-size: 20px;
+    margin: 0px;
+  }
+
+  .contents p {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .contents p {
+    font-size: 12px;
+  }
+}

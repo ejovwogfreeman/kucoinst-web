@@ -1,0 +1,53 @@
+svg {
+  font-size: 30px;
+  padding: 5px;
+}
+
+svg:first-child {
+  padding: 1px;
+  padding-left: 5px;
+}
+
+form {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+form img {
+  width: 200px;
+}
+
+form label {
+  display: block;
+  width: 100%;
+}
+
+form input {
+  display: block;
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  /* padding: 3px 10px; */
+}
+
+form button {
+  display: block;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: black;
+  color: white;
+  outline: none;
+  border-radius: 3px;
+  padding: 5px;
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.center {
+  text-align: center;
+  margin-top: 20px;
+}
