@@ -34,7 +34,7 @@
 
 @media screen and (max-width: 500px) {
   .crypto-container {
-    padding: 20px 1%;
+    padding: 20px 1% 60px;
   }
 
   .symbol-price {
