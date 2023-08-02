@@ -37,8 +37,24 @@ const Crypto = () => {
   return (
     <>
       <div className="price-volume">
-        <span onClick={() => setPage(true)}>Pricing List</span>
-        <span onClick={() => setPage(false)}>Volume</span>
+        <span
+          onClick={() => setPage(true)}
+          style={{
+            color: page ? "blue" : "black",
+            borderColor: page ? "blue" : "rgba(0,0,0,0.5)",
+          }}
+        >
+          Pricing List
+        </span>
+        <span
+          onClick={() => setPage(false)}
+          style={{
+            color: !page ? "blue" : "black",
+            borderColor: !page ? "blue" : "rgba(0,0,0,0.5)",
+          }}
+        >
+          Volume
+        </span>
       </div>
       <div className="crypto-container">
         {data.map((x) => {
