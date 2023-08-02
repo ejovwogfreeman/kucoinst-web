@@ -4,40 +4,41 @@ import { FaHouseUser, FaChartBar } from "react-icons/fa";
 import { TbChartCandle } from "react-icons/tb";
 import { BiChat } from "react-icons/bi";
 import { BsPersonSquare } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <nav className="navbar">
       <ul>
         <li>
-          <a href="">
+          <Link to="/">
             <FaHouseUser />
             <span>Home</span>
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="">
+          <Link to="/market">
             <FaChartBar />
             <span>Markets</span>
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="">
+          <Link to="">
             <TbChartCandle />
             <span>Trade</span>
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="">
+          <Link to="">
             <BiChat />
             <span>Assets</span>
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="">
+          <Link to="">
             <BsPersonSquare />
             <span>Me</span>
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>

@@ -73,6 +73,7 @@ const Header = () => {
         {data.map((x) => {
           return (
             <div
+              key={x.uuid}
               style={{ background: "white" }}
               className="p-3 d-flex rounded flex-column align-items-center"
             >

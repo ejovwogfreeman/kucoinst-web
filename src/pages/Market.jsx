@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../css/Crypto.css";
 
-const Crypto = () => {
+const Market = () => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -36,7 +36,7 @@ const Crypto = () => {
 
   return (
     <>
-      <div className="price-volume">
+      <div className="price-volume" style={{ paddingTop: "60px" }}>
         <span
           onClick={() => setPage(true)}
           style={{
@@ -45,7 +45,7 @@ const Crypto = () => {
             cursor: "pointer",
           }}
         >
-          Pricing List
+          Optional
         </span>
         <span
           onClick={() => setPage(false)}
@@ -55,7 +55,7 @@ const Crypto = () => {
             cursor: "pointer",
           }}
         >
-          Volume
+          USDT
         </span>
       </div>
       <div className="crypto-container">
@@ -99,4 +99,4 @@ const Crypto = () => {
   );
 };
 
-export default Crypto;
+export default Market;
