@@ -66,7 +66,7 @@ const Crypto = () => {
                   <span className="d-flex align-items-center">
                     <img src={x.iconUrl} alt="" width="20px" />
                     <span className="symbol-price d-flex align-items-center justify-content-between">
-                      <span className="ms-3">{x.symbol}/USDT</span>
+                      <span className="ms-3">{x.symbol.slice(0, 5)}/USDT</span>
                       <span className="ms-5">{x.price.slice(0, 7)}</span>
                     </span>
                   </span>

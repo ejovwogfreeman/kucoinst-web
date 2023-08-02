@@ -41,3 +41,13 @@
     width: 200px;
   }
 }
+
+@media screen and (max-width: 400px) {
+  .crypto-container {
+    font-size: 13px;
+  }
+
+  .symbol-price {
+    width: 150px;
+  }
+}
