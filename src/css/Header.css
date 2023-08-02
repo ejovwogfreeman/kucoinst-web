@@ -14,7 +14,75 @@
 
 .header img {
   height: 150px;
-  object-fit: cover;
+}
+
+.flex-component {
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.1);
+  overflow-x: scroll;
+  width: 100%;
+}
+
+.flex-component div {
+  margin: 10px;
+  margin-right: 0px;
+  font-size: 13px;
+}
+
+.banner1 {
+  padding: 20px 5% 0px;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.banner1 .img {
+  flex: 1;
+  border-radius: 5px;
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("../assets/banner1.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: white;
+  padding: 20px;
+}
+
+.banner1 .text {
+  flex: 1;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.banner1 .text div svg {
+  font-size: 25px;
+  margin-right: 10px;
+}
+
+.banner1 .text a {
+  background-color: white;
+  flex: 1;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner1 .text a:first-child {
+  margin-bottom: 10px;
+}
+
+.banner2 {
+  padding: 20px 5%;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.banner2 img {
+  width: 100%;
+  display: block;
+  border-radius: 5px;
 }
 
 @media screen and (max-width: 960px) {
@@ -29,7 +97,46 @@
 }
 
 @media screen and (max-width: 500px) {
+  .banner1,
+  .banner2 {
+    padding: 10px 1% 0px;
+  }
+  .banner1 h4,
+  .banner1 h5 {
+    font-size: 15px;
+  }
+  .flex-component div {
+    margin-bottom: 0px;
+  }
+  .banner2 {
+    margin-bottom: 10px;
+  }
+  .banner1 a {
+    font-size: 10px;
+  }
+  .banner1 .text {
+    margin-left: 5px;
+  }
+  .banner1 .text a:first-child {
+    margin-bottom: 5px;
+  }
+}
+
+/* @media screen and (max-width: 500px) {
   .contents p {
     font-size: 12px;
   }
-}
+  .banner1 {
+    display: block;
+  }
+  .banner1 .img {
+    margin-bottom: 10px;
+  }
+  .banner1 .text {
+    margin-left: 0px;
+    display: block;
+  }
+  .banner1 .text a {
+    height: 30px;
+  }
+} */
