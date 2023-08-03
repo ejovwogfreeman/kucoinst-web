@@ -26,15 +26,27 @@
   border-radius: 3px;
   margin-bottom: 10px !important;
   padding: 10px !important;
+  color: black;
 }
 
 .symbol-price {
   width: 300px;
 }
 
+.loading-gif {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 200px;
+}
+
+.loading-gif img {
+  width: 50px;
+}
+
 @media screen and (max-width: 500px) {
   .crypto-container {
-    padding: 20px 1% 60px;
+    padding: 10px 1% 60px;
   }
 
   .symbol-price {

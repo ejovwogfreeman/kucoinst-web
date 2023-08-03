@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../css/Crypto.css";
+import { Link } from "react-router-dom";
+import loading from "../assets/loading.gif";
 
 const Crypto = () => {
   const [data, setData] = useState(null);
@@ -27,7 +29,11 @@ const Crypto = () => {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="loading-gif">
+        <img src={loading} alt="loading-gif" />
+      </div>
+    );
   }
 
   if (error) {
@@ -61,7 +67,7 @@ const Crypto = () => {
       <div className="crypto-container">
         {data.map((x) => {
           return (
-            <div key={x.uuid} className="crypto">
+            <Link to="/" key={x.uuid} className="crypto">
               {page ? (
                 <>
                   <span className="d-flex align-items-center">
@@ -91,7 +97,7 @@ const Crypto = () => {
                   <span className={`btn ${"btn-primary"}`}>{x.marketCap}</span>
                 </>
               )}
-            </div>
+            </Link>
           );
         })}
       </div>
