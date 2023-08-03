@@ -1,11 +1,14 @@
 import React from "react";
 import logo from "../assets/titleicon.png";
 import "../css/Topbar.css";
+import { Link } from "react-router-dom";
 
 const Topbar = () => {
   return (
     <div className="topbar">
-      <img src={logo} alt="" />
+      <Link to="/">
+        <img src={logo} alt="" />
+      </Link>
     </div>
   );
 };
