@@ -45,7 +45,7 @@ const Trade = () => {
   }
 
   return (
-    <div className="trade">
+    <div className="trade bg-dark">
       <div
         className={`info ${data.price >= 1 ? "text-success" : "text-danger"}`}
       >
