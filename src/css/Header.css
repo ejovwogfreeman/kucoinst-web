@@ -4,8 +4,8 @@
   position: absolute;
 }
 
-.carousel-indicators {
-  display: none;
+.carousel-indicators [data-bs-target] {
+  width: 10px;
 }
 
 .header {
