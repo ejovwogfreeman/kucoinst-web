@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
 import "../css/Crypto.css";
 import loading from "../assets/loading.gif";
+import { useParams } from "react-router-dom";
 
-const CryptoDetail = () => {
+const Trade = () => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(true);
 
+  const params = useParams();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://api.coinranking.com/v2/coins");
+        const response = await fetch(
+          `https://api.coinranking.com/v2/coin/${params.id}`
+        );
         if (!response.ok) {
           throw new Error("Network response was not OK");
         }
@@ -42,4 +47,4 @@ const CryptoDetail = () => {
   return <div className="price-volume"></div>;
 };
 
-export default CryptoDetail;
+export default Trade;

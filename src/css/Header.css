@@ -38,9 +38,6 @@
 
 .banner1 .img {
   flex: 1;
-  border-radius: 5px;
-  /* background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-    url("../assets/banner1.png"); */
   background: url("../assets/banner1.png");
   background-repeat: no-repeat;
   background-position: center;
@@ -121,23 +118,9 @@
   .banner1 .text a:first-child {
     margin-bottom: 5px;
   }
+  .flex-component div {
+    margin: 3px;
+    margin-right: 0px;
+    font-size: 13px;
+  }
 }
-
-/* @media screen and (max-width: 500px) {
-  .contents p {
-    font-size: 12px;
-  }
-  .banner1 {
-    display: block;
-  }
-  .banner1 .img {
-    margin-bottom: 10px;
-  }
-  .banner1 .text {
-    margin-left: 0px;
-    display: block;
-  }
-  .banner1 .text a {
-    height: 30px;
-  }
-} */
