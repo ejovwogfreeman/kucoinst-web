@@ -1,0 +1,10 @@
+.trade {
+  padding-top: 70px;
+  background-color: black;
+  color: white;
+}
+
+.trade .info {
+  padding-left: 10px;
+  padding-bottom: 10px;
+}

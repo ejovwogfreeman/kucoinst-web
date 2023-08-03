@@ -17,7 +17,6 @@ const Market = () => {
           throw new Error("Network response was not OK");
         }
         const data = await response.json();
-        console.log(data.data.coins);
         setData(data.data.coins);
         setIsLoading(false);
       } catch (error) {
@@ -67,7 +66,7 @@ const Market = () => {
       <div className="crypto-container">
         {data.map((x) => {
           return (
-            <Link to={`trade/${x.uuid}`} key={x.uuid} className="crypto">
+            <Link to={`/trade/${x.uuid}`} key={x.uuid} className="crypto">
               {page ? (
                 <>
                   <span className="d-flex align-items-center">

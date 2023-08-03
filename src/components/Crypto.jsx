@@ -17,7 +17,6 @@ const Crypto = () => {
           throw new Error("Network response was not OK");
         }
         const data = await response.json();
-        console.log(data.data.coins);
         setData(data.data.coins);
         setIsLoading(false);
       } catch (error) {
