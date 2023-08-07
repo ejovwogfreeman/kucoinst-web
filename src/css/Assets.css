@@ -1,0 +1,100 @@
+.assets-container {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.assets-banner {
+  background: url("../assets/bluebg.png");
+  color: white;
+  padding-top: 60px;
+  height: 250px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.assets-banner div {
+  text-align: center;
+}
+
+.assets-banner div .bal {
+  display: flex;
+  align-items: center;
+}
+
+.transactions {
+  background-color: white;
+  margin: 20px 5%;
+  padding: 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.transactions span {
+  display: block;
+  text-align: center;
+}
+
+.transactions span img {
+  width: 50px;
+}
+
+.transactions span h6 {
+  font-weight: bold;
+}
+
+.assets {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+}
+
+.assets span {
+  flex: 1;
+  display: block;
+  text-align: center;
+  padding: 20px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+}
+
+.assets-components {
+  padding: 20px 5% 60px;
+}
+
+.assets-components .asset-div {
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.assets-components .asset-div h5 {
+  font-weight: bold;
+}
+
+.assets-components table {
+  width: 100%;
+}
+
+.assets-components table {
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+tr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+tr th,
+tr td {
+  flex: 1;
+  text-align: center;
+}

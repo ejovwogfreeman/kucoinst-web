@@ -5,6 +5,8 @@ import Topbar from "./components/Topbar";
 import Navbar from "./components/Navbar";
 import Market from "./pages/Market";
 import Trade from "./pages/Trade";
+import Assets from "./pages/Assets";
+import Account from "./pages/Account";
 
 const App = () => {
   return (
@@ -14,6 +16,8 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/market" element={<Market />} />
         <Route path="/trade/:id" element={<Trade />} />
+        <Route path="/assets" element={<Assets />} />
+        <Route path="/account" element={<Account />} />
       </Routes>
       <Navbar />
     </BrowserRouter>

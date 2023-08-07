@@ -29,13 +29,13 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-          <Link to="">
+          <Link to="/assets">
             <BiChat />
             <span>Assets</span>
           </Link>
         </li>
         <li>
-          <Link to="">
+          <Link to="/account">
             <BsPersonSquare />
             <span>Me</span>
           </Link>
