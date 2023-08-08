@@ -15,6 +15,7 @@ import { MdArrowForwardIos } from "react-icons/md";
 import { BsChatLeftDots } from "react-icons/bs";
 import { FiSettings } from "react-icons/fi";
 import profilelogo from "../assets/profilelogo.png";
+import { Link } from "react-router-dom";
 
 const Account = () => {
   const datas = [
@@ -88,17 +89,17 @@ const Account = () => {
   return (
     <div className="account-container">
       <div className="account-banner">
-        <span className="abs-left">
+        <Link to="" className="abs-left">
           <BsChatLeftDots />
-        </span>
+        </Link>
         <div className="profileinfo">
           <img src={profilelogo} alt="" width="60px" />
           <span>vVP6HP</span>
           <span>ID:23120</span>
         </div>
-        <span className="abs-right">
+        <Link to="/settings" className="abs-right">
           <FiSettings />
-        </span>
+        </Link>
       </div>
       <div className="asset-container">
         <div className="contain">

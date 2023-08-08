@@ -7,6 +7,7 @@ import Market from "./pages/Market";
 import Trade from "./pages/Trade";
 import Assets from "./pages/Assets";
 import Account from "./pages/Account";
+import Settings from "./pages/Settings";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/trade/:id" element={<Trade />} />
         <Route path="/assets" element={<Assets />} />
         <Route path="/account" element={<Account />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
       <Navbar />
     </BrowserRouter>
