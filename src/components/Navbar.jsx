@@ -23,7 +23,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-          <Link to="">
+          <Link to="/">
             <TbChartCandle />
             <span>Trade</span>
           </Link>
