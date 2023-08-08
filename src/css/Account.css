@@ -63,4 +63,7 @@
   .asset-div {
     font-size: 13px;
   }
+  .asset-container .contain {
+    padding: 5px;
+  }
 }
