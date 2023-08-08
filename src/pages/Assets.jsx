@@ -87,7 +87,7 @@ const Assets = () => {
           <>
             {coins.map((coin) => {
               return (
-                <div key={coin.id} className="asset-div">
+                <div key={coin.id} className="asset-divs">
                   <h5 className="text-primary">{coin.name}</h5>
                   <table>
                     <tr>
@@ -96,13 +96,9 @@ const Assets = () => {
                       <th>Coin(USDT)</th>
                     </tr>
                     <tr>
-                      <td className="d-flex align-items-center justify-content-between bg">
-                        <td>{coin.available}</td>
-                        <td>0000000.00</td>
-                        <td>{coin.available}</td>
-                      </td>
-                      <td></td>
-                      <td></td>
+                      <td>{coin.available}</td>
+                      <td>0000000.00</td>
+                      <td>{coin.available}</td>
                     </tr>
                   </table>
                 </div>
