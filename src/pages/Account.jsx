@@ -12,6 +12,9 @@ import icon9 from "../assets/icon-online.png";
 import icon10 from "../assets/icon-help.png";
 import icon11 from "../assets/icon-introduction.png";
 import { MdArrowForwardIos } from "react-icons/md";
+import { BsChatLeftDots } from "react-icons/bs";
+import { FiSettings } from "react-icons/fi";
+import profilelogo from "../assets/profilelogo.png";
 
 const Account = () => {
   const datas = [
@@ -85,13 +88,17 @@ const Account = () => {
   return (
     <div className="account-container">
       <div className="account-banner">
-        <div>
-          <span>Assts</span>
-          <span className="bal">
-            <h1>802341.3251</h1>
-            <span>USDT</span>
-          </span>
+        <span className="abs-left">
+          <BsChatLeftDots />
+        </span>
+        <div className="profileinfo">
+          <img src={profilelogo} alt="" width="60px" />
+          <span>vVP6HP</span>
+          <span>ID:23120</span>
         </div>
+        <span className="abs-right">
+          <FiSettings />
+        </span>
       </div>
       <div className="asset-container">
         <div className="contain">
