@@ -41,6 +41,9 @@
 .asset-div {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .asset-div:last-child {
@@ -50,4 +53,14 @@
 .asset-div img {
   width: 30px;
   margin-right: 10px;
+}
+
+.asset-div .span {
+  margin-right: 5px;
+}
+
+@media screen and (max-width: 500px) {
+  .asset-div {
+    font-size: 13px;
+  }
 }

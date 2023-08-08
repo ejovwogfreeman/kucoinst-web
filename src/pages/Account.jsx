@@ -11,6 +11,7 @@ import icon8 from "../assets/icon-share.png";
 import icon9 from "../assets/icon-online.png";
 import icon10 from "../assets/icon-help.png";
 import icon11 from "../assets/icon-introduction.png";
+import { MdArrowForwardIos } from "react-icons/md";
 
 const Account = () => {
   const datas = [
@@ -18,56 +19,67 @@ const Account = () => {
       id: 1,
       icon: icon1,
       action: "Primary verification",
+      text: "Certificating",
     },
     {
       id: 2,
       icon: icon2,
       action: "Advanced Verification",
+      text: "Not Verified",
     },
     {
       id: 3,
       icon: icon3,
       action: "Transaction Details",
+      text: "",
     },
     {
       id: 4,
       icon: icon4,
       action: "Fast Transaction",
+      text: "Today's Profit 0.00",
     },
     {
       id: 5,
       icon: icon5,
       action: "Contract Position",
+      text: "",
     },
     {
       id: 6,
       icon: icon6,
       action: "Wallet Address",
+      text: "",
     },
     {
       id: 7,
       icon: icon7,
       action: "Payment Method Management",
+      text: "",
     },
     {
       id: 8,
       icon: icon8,
       action: "I Want To Share",
+      text: "",
     },
     {
       id: 9,
       icon: icon9,
       action: "Online Customer Service",
+      text: "",
     },
     {
       id: 10,
       icon: icon10,
       action: "Help Center",
+      text: "",
     },
     {
       id: 11,
       icon: icon11,
       action: "Introduction to the platform",
+      text: "",
     },
   ];
   return (
@@ -86,8 +98,14 @@ const Account = () => {
           {datas.map((data) => {
             return (
               <div key={data.id} className="asset-div">
-                <img src={data.icon} alt="" />
-                <span>{data.action}</span>
+                <span className="d-flex align-items-center justify-content-between">
+                  <img src={data.icon} alt="" />
+                  <spacln>{data.action}</spacln>
+                </span>
+                <span className="d-flex align-items-center justify-content-between">
+                  <span className="span">{data.text}</span>
+                  <MdArrowForwardIos />
+                </span>
               </div>
             );
           })}
