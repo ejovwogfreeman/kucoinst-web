@@ -11,6 +11,8 @@ svg:first-child {
 form {
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 20px;
+  padding-top: 80px !important;
+  padding-bottom: 80px !important;
 }
 
 form img {

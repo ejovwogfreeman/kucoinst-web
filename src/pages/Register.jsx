@@ -4,7 +4,7 @@ import img from "../assets/titleicon.png";
 import "../css/Register.css";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
-import { BiSolidUserRectangle } from "react-icons/bi";
+import { FaUserCircle } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { FcInvite } from "react-icons/fc";
 import { AiFillMail } from "react-icons/ai";
@@ -17,9 +17,6 @@ const Register = () => {
   };
   return (
     <form>
-      <div className="center">
-        <img src={img} alt="" />
-      </div>
       <span onClick={() => handleRegType()} className="btn btn-primary mb-2">
         {regType ? "Use Phone" : "Use Email"}
       </span>
@@ -46,7 +43,7 @@ const Register = () => {
       <div className="form-group">
         <label htmlFor="">Username</label>
         <div className="d-flex align-items-center border">
-          <BiSolidUserRectangle />
+          <FaUserCircle />
           <input type="text" placeholder="Enter username" />
         </div>
       </div>

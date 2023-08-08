@@ -1,20 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import img from "../assets/titleicon.png";
-import { BiSolidUserRectangle } from "react-icons/bi";
+import { FaUserCircle } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import "../css/Login.css";
 
 const Login = () => {
   return (
     <form>
-      <div className="center">
-        <img src={img} alt="" />
-      </div>
       <div className="form-group">
         <label htmlFor="">Username</label>
         <div className="d-flex align-items-center border">
-          <BiSolidUserRectangle />
+          <FaUserCircle />
           <input type="text" placeholder="Enter username" />
         </div>
       </div>
@@ -28,7 +24,7 @@ const Login = () => {
       <button>Login</button>
       <div className="center">
         <Link>Forgot Password?</Link>
-        <p>
+        <p className="mt-2">
           New Here? <Link to="/register">Register Now</Link>
         </p>
       </div>
