@@ -22,7 +22,7 @@ const port = process.env.PORT || 5000;
 app.use("/api/files/", require("./routes/fileRoutes"));
 app.use("/api/auth/", require("./routes/authRoutes"));
 app.use("/api/users/", require("./routes/userRoutes"));
-app.use("/api/ticket/", require("./routes/ticketRoutes"));
+// app.use("/api/ticket/", require("./routes/ticketRoutes"));
 
 app.listen(port, () => {
   console.log(`server running on port ${port}`);
