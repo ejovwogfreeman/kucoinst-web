@@ -70,10 +70,7 @@ const Login = () => {
           />
         </div>
       </div>
-      <button
-        disabled={loading}
-        style={{ background: loading ? "rgba(21, 95,	200, 0.8)" : "#155fc8" }}
-      >
+      <button disabled={loading} className="btn btn-dark mt-0">
         {loading ? "LOADING" : "LOGIN"}
       </button>
       <div className="center">

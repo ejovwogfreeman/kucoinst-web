@@ -72,10 +72,7 @@ const Register = () => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <span
-        onClick={() => handleRegType()}
-        className="btn btn-primary mb-2 w-100"
-      >
+      <span onClick={() => handleRegType()} className="btn btn-dark mb-2 w-100">
         {regType ? "Use Phone Number" : "Use Email"}
       </span>
       {regType ? (
@@ -155,10 +152,7 @@ const Register = () => {
           />
         </div>
       </div>
-      <button
-        disabled={loading}
-        style={{ background: loading ? "rgba(21, 95,	200, 0.8)" : "#155fc8" }}
-      >
+      <button disabled={loading} className="btn btn-dark mt-0">
         {loading ? "LOADING" : "REGISTER"}
       </button>
       <div className="center">
