@@ -10,18 +10,33 @@ import Account from "./pages/Account";
 import Settings from "./pages/Settings";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import ProtectedRoutes from "./components/ProtectedRoutes";
+import Toastify from "./components/Toastify";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Topbar />
+      <Toastify />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/market" element={<Market />} />
-        <Route path="/trade/:id" element={<Trade />} />
-        <Route path="/assets" element={<Assets />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="/settings" element={<Settings />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/" element={<Home />} />
+        </Route>
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/market" element={<Market />} />
+        </Route>
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/trade/:id" element={<Trade />} />
+        </Route>
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/assets" element={<Assets />} />
+        </Route>
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/account" element={<Account />} />
+        </Route>
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/settings" element={<Settings />} />
+        </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
