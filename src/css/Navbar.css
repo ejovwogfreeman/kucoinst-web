@@ -21,7 +21,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-decoration: none;
+}
+
+.navbar svg {
+  margin-left: -4px;
 }
 
 @media screen and (max-width: 500px) {
@@ -30,8 +35,6 @@
   }
   .navbar ul a {
     font-size: 10px;
-  }
-  .navbar ul a {
     font-size: 12px;
   }
 }

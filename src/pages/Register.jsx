@@ -72,8 +72,11 @@ const Register = () => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <span onClick={() => handleRegType()} className="btn btn-primary mb-2">
-        {regType ? "Use Phone" : "Use Email"}
+      <span
+        onClick={() => handleRegType()}
+        className="btn btn-primary mb-2 w-100"
+      >
+        {regType ? "Use Phone Number" : "Use Email"}
       </span>
       {regType ? (
         <div className="form-group">
