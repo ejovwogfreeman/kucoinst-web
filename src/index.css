@@ -33,6 +33,6 @@ li {
 }
 
 :root {
-  --primary: #ff7200;
-  --secondary: #040647;
+  --primary: rgb(1, 188, 141);
+  --secondary: #212529;
 }
