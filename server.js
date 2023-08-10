@@ -1,13 +1,45 @@
 const express = require("express");
-const dotenv = require("dotenv");
-const { connectDB } = require("./config/db");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-
+require("dotenv").config();
 const app = express();
-dotenv.config();
+const userRoutes = require("./routes/userRoutes");
+const supportRoutes = require("./routes/supportRoutes");
+const connectDB = require("./config/db");
+const User = require("./models/userModel");
+const Transaction = require("./models/transactionModel");
+const Deposit = require("./models/depositModel");
+const Investment = require("./models/investmentModel");
+const Email = require("./models/emailModel");
+const cors = require("cors");
+const multer = require("multer");
+const { GridFsStorage } = require("multer-gridfs-storage");
+const Grid = require("gridfs-stream");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+
+const corsOptions = {
+  origin: "*",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+
+let gfs, gridfsBucket;
+const conn = mongoose.connection;
+
+const port = process.env.PORT || 5000;
 connectDB();
-app.use(cors());
+
+conn.once("open", () => {
+  gridfsBucket = new mongoose.mongo.GridFSBucket(conn.db, {
+    bucketName: "photos",
+  });
+  // gfs = grid(conn.db, mongoose.mongo);
+  // gfs.collection("photos");
+  gfs = Grid(conn.db, mongoose.mongo);
+  gfs.collection("photos");
+});
+
+app.use(cors(corsOptions));
+
 app.use(express.json());
 app.use(
   bodyParser.urlencoded({
@@ -17,13 +49,30 @@ app.use(
   })
 );
 
-const port = process.env.PORT || 5000;
+app.get("/file/:filename", async (req, res) => {
+  try {
+    const file = await gfs.files.findOne({ filename: req.params.filename });
+    const readStream = gridfsBucket.openDownloadStream(file._id);
+    readStream.pipe(res);
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+});
 
-app.use("/api/files/", require("./routes/fileRoutes"));
-app.use("/api/auth/", require("./routes/authRoutes"));
-app.use("/api/users/", require("./routes/userRoutes"));
-// app.use("/api/ticket/", require("./routes/ticketRoutes"));
+app.use("/api/users", userRoutes);
+app.use("/api/support", supportRoutes);
+
+app.get("/", (req, res) => {
+  res.send("Welcome to financial freedom investment");
+});
+
+const func = async () => {
+  await Email.find().then((data) => console.log(data));
+};
+
+// func();
 
 app.listen(port, () => {
-  console.log(`server running on port ${port}`);
+  console.log(`server started at port ${port}`);
 });

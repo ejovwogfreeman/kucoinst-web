@@ -1,27 +1,32 @@
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema(
+const UserSchema = new mongoose.Schema(
   {
-    email: {
+    referralId: {
       type: String,
-      unique: true,
+      required: false,
     },
-    phoneNum: {
-      type: String,
-      unique: true,
+    referrals: {
+      type: Number,
+      default: 0,
     },
     username: {
       type: String,
-      unique: true,
+      requied: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+    },
+    phoneNum: {
+      type: String,
     },
     password: {
       type: String,
-    },
-    inviteCode: {
-      type: String,
-    },
-    invites: {
-      type: String,
+      required: true,
     },
     isAdmin: {
       type: Boolean,
@@ -42,7 +47,7 @@ const userSchema = new mongoose.Schema(
         ref: "Transaction",
       },
     ],
-    exchange: [
+    investments: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Investment",
@@ -60,8 +65,22 @@ const userSchema = new mongoose.Schema(
         ref: "withdrawal",
       },
     ],
+    mail: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Email",
+      },
+    ],
+    support: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Support",
+      },
+    ],
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("User", UserSchema);
