@@ -30,15 +30,13 @@ const registerUser = async (req, res) => {
       }
     }
 
-    if (!username || !password) {
+    if (!email || !username || !password) {
       return res
         .status(400)
         .json({ message: "Please add all fields", error: true });
     }
 
-    const userExists = await User.findOne({
-      $or: [{ username }, { email }, { phoneNum }],
-    });
+    const userExists = await User.findOne({ email });
 
     if (userExists) {
       return res
@@ -68,71 +66,12 @@ const registerUser = async (req, res) => {
       });
     }
 
-    // await sendEmail(email, "Welcome On Board", "register.html");
+    await sendEmail(email, "Welcome On Board", "register.html");
   } catch (error) {
     console.error("An error occurred:", error);
     res.status(500).send(error.message);
   }
 };
-
-// const registerUser = async (req, res) => {
-//   try {
-//     const { referral, username, email, phoneNum, password } = req.body;
-//     if (referral) {
-//       const referredUser = await User.findOne({ referralId: referral });
-//       if (referredUser) {
-//         const referralCount = (referredUser.referrals ?? 0) + 1;
-//         await User.findOneAndUpdate(
-//           { referralId: referral },
-//           { referrals: referralCount }
-//         );
-//       } else {
-//         console.log("Referred user not found");
-//       }
-//     }
-
-//     if (!username || !password) {
-//       return res
-//         .status(400)
-//         .json({ message: "Please provide the required fields" });
-//     }
-
-//     const userExists = await User.findOne({
-//       $or: [{ username }, { email }, { phoneNum }],
-//     });
-
-//     if (userExists) {
-//       return res.status(400).json({ message: "User already exists" });
-//     }
-
-//     const salt = await bcrypt.genSalt(10);
-//     const hashedPassword = await bcrypt.hash(password, salt);
-//     const referralId = refCode.generate({ length: 5 }).toString();
-
-//     const user = new User({
-//       username,
-//       email,
-//       phoneNum,
-//       referralId,
-//       password: hashedPassword,
-//     });
-
-//     await user.save();
-
-//     if (user) {
-//       const { password, ...others } = user._doc;
-//       res.status(200).json({
-//         ...others,
-//         token: accessToken(user),
-//       });
-//     } else {
-//       res.status(500).json({ message: "An error occurred" });
-//     }
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ message: "An error occurred" });
-//   }
-// };
 
 /////////////////////////////
 /////////LOGIN USER//////////

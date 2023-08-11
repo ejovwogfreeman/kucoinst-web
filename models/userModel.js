@@ -19,6 +19,8 @@ const UserSchema = new mongoose.Schema(
     },
     email: {
       type: String,
+      unique: true,
+      requied: true,
     },
     phoneNum: {
       type: String,
@@ -83,3 +85,7 @@ const UserSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model("User", UserSchema);
+
+// If you're consistently encountering a duplicate key error for the email field despite not having the unique: true property set, there could be several reasons for this behavior. Here are some potential causes to consider:
+// Existing Data: Check if you have any existing documents in your collection where the email field is already set to an empty string or null. If you have existing data that violates the uniqueness constraint (due to an empty email field), this could trigger a duplicate key error.
+// Database State: Confirm that the index settings in your database match your current
