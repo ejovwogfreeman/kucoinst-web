@@ -13,6 +13,7 @@ import Register from "./pages/Register";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import Toastify from "./components/Toastify";
 import Deposit from "./pages/Deposit";
+import DepositPage from "./pages/DepositPage";
 import Withdraw from "./pages/Withdraw";
 import Exchange from "./pages/Exchange";
 
@@ -42,6 +43,9 @@ const App = () => {
         </Route>
         <Route element={<ProtectedRoutes />}>
           <Route path="/deposit" element={<Deposit />} />
+        </Route>
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/deposit/:method" element={<DepositPage />} />
         </Route>
         <Route element={<ProtectedRoutes />}>
           <Route path="/withdraw" element={<Withdraw />} />

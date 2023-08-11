@@ -112,6 +112,46 @@
   margin: 0px !important;
 }
 
+.deposit-form {
+  text-align: center;
+  padding: 20px 20px !important;
+  margin: 20px;
+}
+
+.deposit-form h5 {
+  font-weight: bold;
+}
+
+.deposit-form .form-fields {
+  margin-top: 20px;
+}
+
+.deposit-form .form-fields {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 500px;
+  margin: 20px auto 0px;
+  padding: 20px;
+}
+
+.deposit-form .form-fields label {
+  font-weight: bold;
+}
+.deposit-form .form-fields input {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.bottom-space {
+  padding-bottom: 70px;
+}
+
+@media screen and (max-width: 600px) {
+  .deposit-form .form-fields {
+    width: 100%;
+  }
+}
+
 @media screen and (max-width: 500px) {
   .deposit-methods {
     display: block;
@@ -155,6 +195,14 @@
   }
   .exchange-form .style-flex div {
     border: 0px;
+  }
+  .deposit-form {
+    text-align: center;
+    padding: 10px 10px !important;
+    margin: 10px;
+  }
+  .bottom-space {
+    padding-bottom: 60px;
   }
 }
 
