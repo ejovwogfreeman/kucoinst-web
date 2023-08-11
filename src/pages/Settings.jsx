@@ -3,6 +3,10 @@ import "../css/Settings.css";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { FaUserCircle } from "react-icons/fa";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { FcInvite } from "react-icons/fc";
+import { AiFillMail } from "react-icons/ai";
 
 const Settings = () => {
   const navigate = useNavigate();
@@ -94,38 +98,67 @@ const Settings = () => {
   return (
     <div className="settings-container">
       <form onSubmit={handleSubmit}>
-        <h3>ACCOUNT SETTINGS</h3>
-        <label htmlFor="name">FULL NAME</label>
-        <input type="text" value={name} name="name" onChange={handleChange} />
-        <label htmlFor="username">USERNAME</label>
-        <input
-          type="text"
-          value={username}
-          name="username"
-          onChange={handleChange}
-        />
-        <label htmlFor="email">EMAIL</label>
-        <input
-          type="email"
-          value={email}
-          name="email"
-          onChange={handleChange}
-        />
-        <label htmlFor="phoneNum">PHONE NUMBER</label>
-        <input
-          type="text"
-          value={phoneNum}
-          name="phoneNum"
-          onChange={handleChange}
-        />
+        <div className="form-group">
+          <label htmlFor="">Full Name</label>
+          <div className="d-flex align-items-center border">
+            <FaUserCircle />
+            <input
+              type="text"
+              value={name}
+              name="name"
+              onChange={handleChange}
+              placeholder="Enter Full Name"
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <label htmlFor="">Username</label>
+          <div className="d-flex align-items-center border">
+            <FaUserCircle />
+            <input
+              type="text"
+              value={username}
+              name="username"
+              onChange={handleChange}
+              placeholder="Enter username"
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <label htmlFor="">Email</label>
+          <div className="d-flex align-items-center border">
+            <AiFillMail />
+            <input
+              type="text"
+              value={email}
+              name="email"
+              onChange={handleChange}
+              placeholder="Enter email"
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <label htmlFor="">Phone Number</label>
+          <div className="d-flex align-items-center border">
+            <AiFillMail />
+            <input
+              type="text"
+              value={phoneNum}
+              name="phoneNum"
+              onChange={handleChange}
+              placeholder="Enter email"
+            />
+          </div>
+        </div>
         <label htmlFor="profilePic">PROFILE PICTURE</label>
         <input
+          className="img-input"
           type="file"
           name="profilePic"
           accept="image/*"
           onChange={handleImageChange}
         />
-        <button type="submit" disabled={loading} className="btn btn-dark mt-0">
+        <button type="submit" disabled={loading} className="btn btn-dark mt-3">
           {loading ? "UPDATING..." : "UPDATE"}
         </button>
       </form>

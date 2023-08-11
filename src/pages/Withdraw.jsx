@@ -2,6 +2,7 @@ import React from "react";
 import "../css/DWE.css";
 import { MdArrowBackIos } from "react-icons/md";
 import { Link } from "react-router-dom";
+import tether from "../assets/tether.png";
 
 const Withdraw = () => {
   return (
@@ -12,7 +13,23 @@ const Withdraw = () => {
           <MdArrowBackIos />
         </Link>
       </div>
-      <h6>Please Choose from the following Withdraw channel</h6>
+      <h6 className="text-center mt-4">
+        Warm Tips: Withdrawal is limited by transaction volume
+      </h6>
+      <div className="deposit-methods">
+        <div>
+          <span>
+            <img src={tether} alt="" />
+            <h6>USDT WITHDRAWAL</h6>
+          </span>
+          <hr />
+          <section>
+            <Link to="">Withdraw</Link>
+          </section>
+        </div>
+        <div style={{ border: "0px" }}></div>
+        <div style={{ border: "0px" }}></div>
+      </div>
     </div>
   );
 };

@@ -19,24 +19,30 @@ const Deposit = () => {
       </h6>
       <div className="deposit-methods">
         <div>
-          <img src="" alt="" />
-          <h6>USDT(TRC20)</h6>
+          <span>
+            <img src={tether} alt="" />
+            <h6>USDT(TRC20)</h6>
+          </span>
           <hr />
           <section>
             <Link to="">Go buy</Link>
           </section>
         </div>
         <div>
-          <img src="" alt="" />
-          <h6>USDT(TRC20)</h6>
+          <span>
+            <img src={tether} alt="" />
+            <h6>USDT(TRC20)</h6>
+          </span>
           <hr />
           <section>
             <Link to="">Go buy</Link>
           </section>
         </div>
         <div>
-          <img src="" alt="" />
-          <h6>USDT(TRC20)</h6>
+          <span>
+            <img src={btc} alt="" />
+            <h6>USDT(TRC20)</h6>
+          </span>
           <hr />
           <section>
             <Link to="">Go buy</Link>

@@ -13,11 +13,11 @@ import { toast } from "react-toastify";
 import axios from "axios";
 
 const Register = () => {
-  const [regType, setRegType] = useState(false);
+  // const [regType, setRegType] = useState(false);
   const [value, setValue] = useState("");
-  const handleRegType = () => {
-    setRegType(!regType);
-  };
+  // const handleRegType = () => {
+  //   setRegType(!regType);
+  // };
 
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -35,7 +35,7 @@ const Register = () => {
       return toast.error("Passwords do not match");
     }
 
-    if ((!value && !email) || !username || !password1) {
+    if (!email || !username || !password1) {
       return toast.error("Please fill all required fields");
     }
 
@@ -60,7 +60,7 @@ const Register = () => {
         }
       );
 
-      toast.success("Registration successful");
+      toast.success("REGISTRATION SUCCESSFUL");
       localStorage.setItem("user", JSON.stringify(response.data));
       navigate("/");
     } catch (error) {
@@ -76,35 +76,35 @@ const Register = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <span onClick={() => handleRegType()} className="btn btn-dark mb-2 w-100">
+      {/* <span onClick={() => handleRegType()} className="btn btn-dark mb-2 w-100">
         {regType ? "Use Phone Number" : "Use Email"}
-      </span>
-      {regType ? (
-        <div className="form-group">
-          <label htmlFor="">Email</label>
-          <div className="d-flex align-items-center border">
-            <AiFillMail />
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter email"
-            />
-          </div>
+      </span> */}
+      {/* {regType ? ( */}
+      <div className="form-group">
+        <label htmlFor="">Email</label>
+        <div className="d-flex align-items-center border">
+          <AiFillMail />
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter email"
+          />
         </div>
-      ) : (
-        <div className="form-group">
-          <label htmlFor="">Phone Number</label>
-          <div className="border">
-            <PhoneInput
-              placeholder="Enter phone number"
-              value={value}
-              // onChange={(e) => setPhoneNum(e.target)}
-              onChange={setValue}
-            />
-          </div>
+      </div>
+      {/* ) : ( */}
+      <div className="form-group">
+        <label htmlFor="">Phone Number</label>
+        <div className="border">
+          <PhoneInput
+            placeholder="Enter phone number"
+            value={value}
+            // onChange={(e) => setPhoneNum(e.target)}
+            onChange={setValue}
+          />
         </div>
-      )}
+      </div>
+      {/* )} */}
       <div className="form-group">
         <label htmlFor="">Username</label>
         <div className="d-flex align-items-center border">

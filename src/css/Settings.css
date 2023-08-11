@@ -3,7 +3,7 @@
 }
 .settings-container form {
   border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 20px 10px !important;
+  padding: 20px 10px 15px !important;
   border-radius: 5px;
   margin-top: 20px;
 }
@@ -20,11 +20,14 @@
 .settings-container form input {
   display: block;
   width: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.1);
   outline: none;
-  border-radius: 3px;
-  padding: 5px 7px;
-  margin-bottom: 20px;
+  padding: 5px 10px;
+  margin-bottom: 0px !important;
+}
+
+.img-input {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  display: block;
 }
 
 @media screen and (max-width: 500px) {
