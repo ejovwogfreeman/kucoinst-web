@@ -12,6 +12,9 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import Toastify from "./components/Toastify";
+import Deposit from "./pages/Deposit";
+import Withdraw from "./pages/Withdraw";
+import Exchange from "./pages/Exchange";
 
 const App = () => {
   return (
@@ -36,6 +39,15 @@ const App = () => {
         </Route>
         <Route element={<ProtectedRoutes />}>
           <Route path="/settings" element={<Settings />} />
+        </Route>
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/deposit" element={<Deposit />} />
+        </Route>
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/withdraw" element={<Withdraw />} />
+        </Route>
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/exchange" element={<Exchange />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

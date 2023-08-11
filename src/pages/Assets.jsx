@@ -3,6 +3,7 @@ import "../css/Assets.css";
 import icon1 from "../assets/icon-deposit.png";
 import icon2 from "../assets/icon-withdraw.png";
 import icon3 from "../assets/icon-exchange.png";
+import { Link } from "react-router-dom";
 
 const Assets = () => {
   const [page, setPage] = useState(true);
@@ -47,18 +48,18 @@ const Assets = () => {
         </div>
       </div>
       <div className="transactions">
-        <span>
+        <Link to="/deposit">
           <img src={icon1} alt="" />
           <h6>Deposit</h6>
-        </span>
-        <span>
+        </Link>
+        <Link to="/withdraw">
           <img src={icon2} alt="" />
           <h6>Withdraw</h6>
-        </span>
-        <span>
+        </Link>
+        <Link to="/exchange">
           <img src={icon3} alt="" />
           <h6>Exchange</h6>
-        </span>
+        </Link>
       </div>
       <div className="assets">
         <span
