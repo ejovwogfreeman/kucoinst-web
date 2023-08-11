@@ -15,6 +15,7 @@ import Toastify from "./components/Toastify";
 import Deposit from "./pages/Deposit";
 import DepositPage from "./pages/DepositPage";
 import Withdraw from "./pages/Withdraw";
+import WithdrawPage from "./pages/WithdrawPage";
 import Exchange from "./pages/Exchange";
 
 const App = () => {
@@ -49,6 +50,9 @@ const App = () => {
         </Route>
         <Route element={<ProtectedRoutes />}>
           <Route path="/withdraw" element={<Withdraw />} />
+        </Route>
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/withdraw/:method" element={<WithdrawPage />} />
         </Route>
         <Route element={<ProtectedRoutes />}>
           <Route path="/exchange" element={<Exchange />} />

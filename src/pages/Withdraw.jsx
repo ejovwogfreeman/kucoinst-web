@@ -3,6 +3,7 @@ import "../css/DWE.css";
 import { MdArrowBackIos } from "react-icons/md";
 import { Link } from "react-router-dom";
 import tether from "../assets/tether.png";
+import btc from "../assets/btc.png";
 
 const Withdraw = () => {
   return (
@@ -24,10 +25,19 @@ const Withdraw = () => {
           </span>
           <hr />
           <section>
-            <Link to="">Withdraw</Link>
+            <Link to="/withdraw/usdt">Withdraw</Link>
           </section>
         </div>
-        <div style={{ border: "0px" }}></div>
+        <div>
+          <span>
+            <img src={btc} alt="" />
+            <h6>BTC WITHDRAWAL</h6>
+          </span>
+          <hr />
+          <section>
+            <Link to="/withdraw/btc">Withdraw</Link>
+          </section>
+        </div>
         <div style={{ border: "0px" }}></div>
       </div>
     </div>
