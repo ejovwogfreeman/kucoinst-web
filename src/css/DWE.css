@@ -204,6 +204,13 @@
   .bottom-space {
     padding-bottom: 60px;
   }
+  .deposit-form .form-fields label {
+    font-weight: bold;
+    font-size: 13px;
+  }
+  .address-text {
+    font-size: 13px;
+  }
 }
 
 select {
