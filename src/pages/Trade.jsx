@@ -2,12 +2,19 @@ import React, { useEffect, useState } from "react";
 import "../css/Trade.css";
 import loading from "../assets/loading.gif";
 import { useParams } from "react-router-dom";
+import { IoMdClose } from "react-icons/io";
 
 const Trade = () => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [page, setPage] = useState(true);
+  const [show, setShow] = useState(false);
+  const [selectedDirection, setSelectedDirection] = useState(null);
+
+  const handleShow = (direction) => {
+    setSelectedDirection(direction);
+    setShow(!show);
+  };
 
   const params = useParams();
 
@@ -64,6 +71,53 @@ const Trade = () => {
         scrolling="no"
         allowFullScreen=""
       ></iframe>
+      <div className="buy-sell bg-dark">
+        <button
+          className="btn btn-success"
+          onClick={() => handleShow("Buy Up")}
+        >
+          Buy Up
+        </button>
+        <div className="btn btn-danger" onClick={() => handleShow("Buy Fall")}>
+          Buy Fall
+        </div>
+      </div>
+      <div className={`bg-dark ${show ? "show" : "hide"}`}>
+        <h5 className="text-center fw-bold">ORDER CONFIRMATION</h5>
+        <IoMdClose className="close-icon" onClick={() => handleShow()} />
+        <table width="100%">
+          <tr>
+            <th>NAME</th>
+            <th>{data.symbol}/USDT</th>
+          </tr>
+          <tr>
+            <td>Direction</td>
+            <td>{selectedDirection}</td>
+          </tr>
+          <tr>
+            <td>Current</td>
+            <td>23455</td>
+          </tr>
+          <div className="my-2">
+            <button className="btn btn-primary me-2">30S</button>
+            <button className="btn btn-primary me-2">60S</button>
+            <button className="btn btn-primary me-2">3M</button>
+            <button className="btn btn-primary me-2">5M</button>
+          </div>
+        </table>
+        <form action="" className="buy-form">
+          <label htmlFor="">Buy Quantity</label>
+          <input
+            type="text"
+            placeholder="Buy and make profit based on the timeframes above"
+          />
+          <div className="d-flex align-items-center justify-content-between mt-2">
+            <h6>Available Balance: 2345678</h6>
+            <h6>Handling Fee: 0.01%</h6>
+          </div>
+          <button className="btn btn-success mt-2">Confirm Order</button>
+        </form>
+      </div>
     </div>
   );
 };

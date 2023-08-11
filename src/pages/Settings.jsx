@@ -1,15 +1,133 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../css/Settings.css";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Settings = () => {
+  const navigate = useNavigate();
+  const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [profile, setProfile] = useState({
+    name: "",
+    username: "",
+    email: "",
+    phoneNum: "",
+    profilePic: null,
+  });
+
+  const { name, username, email, phoneNum, profilePic } = profile;
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setProfile((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleImageChange = (event) => {
+    setProfile((prevData) => ({
+      ...prevData,
+      profilePic: event.target.files[0],
+    }));
+  };
+
+  const authToken = JSON.parse(localStorage.getItem("user")).token;
+  const config = {
+    headers: {
+      "auth-token": authToken,
+    },
+  };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/users/user", config)
+      .then((response) => {
+        setUser(response.data);
+        console.log(user);
+        setProfile({
+          ...profile,
+          name: response.data.name,
+          username: response.data.username,
+          email: response.data.email,
+          phoneNum: response.data.phoneNum,
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!name || !username || !email || !profilePic) {
+      return toast.error("PLEASE FILL ALL FIELDS");
+    }
+
+    setLoading(true);
+
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("username", username);
+    formData.append("email", email);
+    formData.append("phoneNum", phoneNum);
+    formData.append("files", profilePic);
+
+    try {
+      await axios.patch(
+        "http://localhost:8000/api/users/update-user",
+        formData,
+        config
+      );
+      toast.success("PROFILE UPDATED SUCCESSFULLY");
+      setLoading(false);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      toast.error("ERROR UPDATING PROFILE");
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="settings-container">
-      <form>
+      <form onSubmit={handleSubmit}>
         <h3>ACCOUNT SETTINGS</h3>
-        <label htmlFor="">USERNAME</label>
-        <input type="text" />
-        <label htmlFor="">PROFILE PICTURE</label>
-        <input type="file" src="" alt="" />
+        <label htmlFor="name">FULL NAME</label>
+        <input type="text" value={name} name="name" onChange={handleChange} />
+        <label htmlFor="username">USERNAME</label>
+        <input
+          type="text"
+          value={username}
+          name="username"
+          onChange={handleChange}
+        />
+        <label htmlFor="email">EMAIL</label>
+        <input
+          type="email"
+          value={email}
+          name="email"
+          onChange={handleChange}
+        />
+        <label htmlFor="phoneNum">PHONE NUMBER</label>
+        <input
+          type="text"
+          value={phoneNum}
+          name="phoneNum"
+          onChange={handleChange}
+        />
+        <label htmlFor="profilePic">PROFILE PICTURE</label>
+        <input
+          type="file"
+          name="profilePic"
+          accept="image/*"
+          onChange={handleImageChange}
+        />
+        <button type="submit" disabled={loading} className="btn btn-dark mt-0">
+          {loading ? "UPDATING..." : "UPDATE"}
+        </button>
       </form>
     </div>
   );

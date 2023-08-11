@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
@@ -14,32 +14,33 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const user = { username, password };
-
   const handleSubmit = (e) => {
-    setLoading(true);
     e.preventDefault();
 
     if (!username || !password) {
-      setLoading(false);
       return toast.error("PLEASE FILL ALL FIELDS");
     }
 
+    setLoading(true);
+
+    const user = { username, password };
+
     axios
-      .post("http://localhost:8000/api/auth/login", user, {
+      .post("http://localhost:8000/api/users/login", user, {
         headers: {
           "Content-Type": "application/json",
-          Accept: "applicatioon/json",
+          Accept: "application/json",
         },
       })
       .then((res) => {
         toast.success("LOGIN SUCCESSFUL");
         setLoading(false);
-        navigate("/");
         localStorage.setItem("user", JSON.stringify(res.data));
+        navigate("/");
       })
       .catch((err) => {
         toast.error("INCORRECT CREDENTIALS");
+        console.log(err);
         setLoading(false);
       });
   };

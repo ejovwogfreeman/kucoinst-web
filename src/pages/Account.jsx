@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../css/Account.css";
 import icon1 from "../assets/icon-primary.png";
 import icon2 from "../assets/icon-advanced.png";
@@ -16,8 +16,28 @@ import { BsChatLeftDots } from "react-icons/bs";
 import { FiSettings } from "react-icons/fi";
 import profilelogo from "../assets/profilelogo.png";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Account = () => {
+  const [user, setUser] = useState({});
+  const authToken = JSON.parse(localStorage.getItem("user")).token;
+  const config = {
+    headers: {
+      "auth-token": authToken,
+    },
+  };
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/users/user", config)
+      .then((response) => {
+        setUser(response.data);
+        console.log(user.profileImage[0].link);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
   const datas = [
     {
       id: 1,
@@ -87,39 +107,86 @@ const Account = () => {
     },
   ];
   return (
-    <div className="account-container">
-      <div className="account-banner">
-        <Link to="" className="abs-left">
-          <BsChatLeftDots />
-        </Link>
-        <div className="profileinfo">
-          <img src={profilelogo} alt="" width="60px" />
-          <span>vVP6HP</span>
-          <span>ID:23120</span>
-        </div>
-        <Link to="/settings" className="abs-right">
-          <FiSettings />
-        </Link>
-      </div>
-      <div className="asset-container">
-        <div className="contain">
-          {datas.map((data) => {
-            return (
-              <div key={data.id} className="asset-div">
-                <span className="d-flex align-items-center justify-content-between">
-                  <img src={data.icon} alt="" />
-                  <spacln>{data.action}</spacln>
-                </span>
-                <span className="d-flex align-items-center justify-content-between">
-                  <span className="span">{data.text}</span>
-                  <MdArrowForwardIos />
-                </span>
+    <>
+      {user.profileImage && user.profileImage.length > 0 ? (
+        <>
+          <div className="account-container">
+            <div className="account-banner">
+              <Link to="" className="abs-left">
+                <BsChatLeftDots />
+              </Link>
+              <div className="profileinfo">
+                {user.profileImage ? (
+                  <img
+                    src={`http://localhost:8000/${user.profileImage[0].link}`}
+                    width="70px"
+                  />
+                ) : (
+                  <img src={profilelogo} width="70px" />
+                )}
+                <span>{user.username}</span>
+                <span>{user.email}</span>
               </div>
-            );
-          })}
+              <Link to="/settings" className="abs-right">
+                <FiSettings />
+              </Link>
+            </div>
+            <div className="asset-container">
+              <div className="contain">
+                {datas.map((data) => {
+                  return (
+                    <div key={data.id} className="asset-div">
+                      <span className="d-flex align-items-center justify-content-between">
+                        <img src={data.icon} alt="" />
+                        <span>{data.action}</span>
+                      </span>
+                      <span className="d-flex align-items-center justify-content-between">
+                        <span className="span">{data.text}</span>
+                        <MdArrowForwardIos />
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </>
+      ) : (
+        <div className="account-container">
+          <div className="account-banner">
+            <Link to="" className="abs-left">
+              <BsChatLeftDots />
+            </Link>
+            <div className="profileinfo">
+              <img src={profilelogo} width="70px" />
+              <span>{user.username}</span>
+              <span>{user.email}</span>
+            </div>
+            <Link to="/settings" className="abs-right">
+              <FiSettings />
+            </Link>
+          </div>
+          <div className="asset-container">
+            <div className="contain">
+              {datas.map((data) => {
+                return (
+                  <div key={data.id} className="asset-div">
+                    <span className="d-flex align-items-center justify-content-between">
+                      <img src={data.icon} alt="" />
+                      <span>{data.action}</span>
+                    </span>
+                    <span className="d-flex align-items-center justify-content-between">
+                      <span className="span">{data.text}</span>
+                      <MdArrowForwardIos />
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

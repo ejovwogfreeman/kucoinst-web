@@ -19,57 +19,61 @@ const Register = () => {
     setRegType(!regType);
   };
 
-  // const [phoneNum, setPhoneNum] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
-  const [inviteCode, setInviteCode] = useState("");
+  const [referral, setReferral] = useState("");
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    let user = {
-      phoneNum: value,
-      email,
-      username,
-      password: password1,
-      inviteCode,
-    };
-
-    setLoading(true);
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (password1 !== password2) {
-      setLoading(false);
-      return toast.error("PASSWORDS DO NOT MATCH");
+      return toast.error("Passwords do not match");
     }
 
     if ((!value && !email) || !username || !password1) {
-      setLoading(false);
-      return toast.error("PLEASE REQUIRED FIELDS");
+      return toast.error("Please fill all required fields");
     }
 
-    axios
-      .post("http://localhost:8000/api/auth/register", user, {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "applicatioon/json",
-        },
-      })
-      .then((res) => {
-        toast.success("REGISTRATION SUCCESSFUL");
-        setLoading(false);
-        navigate("/");
-        localStorage.setItem("user", JSON.stringify(res.data));
-      })
-      .catch((err) => {
-        // toast.error("INCORRECT CREDENTIALS");
-        console.log(err);
-        setLoading(false);
-      });
+    const user = {
+      referral,
+      username,
+      email: email !== "" ? email : null,
+      phoneNum: value,
+      password: password1,
+    };
+
+    setLoading(true);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/users/register",
+        user,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      toast.success("Registration successful");
+      localStorage.setItem("user", JSON.stringify(response.data));
+      navigate("/");
+    } catch (error) {
+      if (error.response) {
+        toast.error(error.response.data.message || "An error occurred");
+      } else {
+        toast.error("An error occurred");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
+
   return (
     <form onSubmit={handleSubmit}>
       <span onClick={() => handleRegType()} className="btn btn-dark mb-2 w-100">
@@ -146,8 +150,8 @@ const Register = () => {
           <FcInvite />
           <input
             type="text"
-            value={inviteCode}
-            onChange={(e) => setInviteCode(e.target.value)}
+            value={referral}
+            onChange={(e) => setReferral(e.target.value)}
             placeholder="Enter invitation code"
           />
         </div>
