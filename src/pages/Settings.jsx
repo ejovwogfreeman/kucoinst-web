@@ -4,8 +4,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
-import { RiLockPasswordFill } from "react-icons/ri";
-import { FcInvite } from "react-icons/fc";
 import { AiFillMail } from "react-icons/ai";
 
 const Settings = () => {

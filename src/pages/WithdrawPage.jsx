@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "../css/DWE.css";
+import axios from "axios";
+import { toast } from "react-toastify";
 import { MdArrowBackIos } from "react-icons/md";
 import { Link, useParams, useNavigate } from "react-router-dom";
 
 const WithdrawPage = () => {
+  const [loading, setLoading] = useState(false);
   const [method, setMethod] = useState("");
   const [details, setDetails] = useState("");
   const [amount, setAmount] = useState("");
@@ -15,9 +18,47 @@ const WithdrawPage = () => {
     setMethod(value);
   }, [params.method]);
 
-  const handleSubmit = (e) => {
+  const authToken = JSON.parse(localStorage.getItem("user")).token;
+  const config = {
+    headers: {
+      "auth-token": authToken,
+    },
+  };
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ method, details, amount });
+    if (!method || !details || !amount) {
+      return toast.error("PLEASE FILL ALL FIELDS");
+    }
+
+    setLoading(true);
+
+    const withdraw = {
+      mode: method,
+      accountDetails: details,
+      amount,
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/users/withdraw",
+        withdraw,
+        config
+      );
+
+      toast.success("WITHDRAWAL MADE SUCCESSFULLY");
+      setLoading(false);
+      navigate("/");
+    } catch (error) {
+      if (error.response) {
+        toast.error(error.response.data.message || "AN ERROR OCCURED");
+        setLoading(false);
+      } else {
+        toast.error("AN ERROR OCCURED");
+        setLoading(false);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -56,7 +97,13 @@ const WithdrawPage = () => {
               onChange={(e) => setAmount(e.target.value)}
               placeholder="Enter Amount"
             />
-            <button className="btn btn-primary mt-0">SUBMIT</button>
+            <button
+              type="submit"
+              disabled={loading}
+              className="btn btn-primary mt-0"
+            >
+              {loading ? "LOADING..." : "WITHDRAW"}
+            </button>
           </div>
         </form>
       </div>

@@ -65,9 +65,11 @@ const Register = () => {
       navigate("/");
     } catch (error) {
       if (error.response) {
+        setLoading(false);
         toast.error(error.response.data.message || "An error occurred");
       } else {
         toast.error("An error occurred");
+        setLoading(false);
       }
     } finally {
       setLoading(false);
