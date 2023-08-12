@@ -17,7 +17,7 @@ const withdrawalSchema = new mongoose.Schema(
     mode: {
       type: String,
       default: null,
-      enum: ["Bank Transfer", "Bitcoin", "Luno", "Tether"],
+      enum: ["usdt", "btc"],
     },
     accountDetails: {
       type: String,

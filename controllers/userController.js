@@ -449,7 +449,7 @@ const userWithdraw = async (req, res) => {
   const { email, username, _id } = req.user;
 
   let user = await User.findById(_id);
-  let { amount, address, method } = req.body;
+  let { amount, address, mode } = req.body;
   amount = Number(amount);
 
   if (amount > user.balance || user.balance === 0) {
@@ -461,7 +461,7 @@ const userWithdraw = async (req, res) => {
   const withdrawOptions = {
     amount: amount,
     accountDetails: address,
-    mode: method,
+    mode,
   };
 
   const transactionOptions = {
@@ -502,10 +502,6 @@ const userWithdraw = async (req, res) => {
   } catch (err) {
     res.status(400).json({ message: err.message, error: true });
   }
-
-  res
-    .status(200)
-    .json({ message: "Withdrawal has been initiated Successfully" });
 };
 
 ////////////////////////////////////

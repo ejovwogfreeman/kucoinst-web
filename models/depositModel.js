@@ -17,7 +17,7 @@ const depositSchema = new mongoose.Schema(
     mode: {
       type: String,
       default: null,
-      enum: ["Bitcoin", "Tether", "Etherium", "Luno"],
+      enum: ["usdt_trc20", "usdt_erc", "btc"],
     },
     proof: [Object],
     status: {
