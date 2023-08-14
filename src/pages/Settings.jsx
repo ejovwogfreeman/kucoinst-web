@@ -44,7 +44,7 @@ const Settings = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/users/user", config)
+      .get("https://kucoinst-web.onrender.com/api/users/user", config)
       .then((response) => {
         setUser(response.data);
         console.log(user);

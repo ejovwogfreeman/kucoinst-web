@@ -28,7 +28,7 @@ const Account = () => {
   };
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/users/user", config)
+      .get("https://kucoinst-web.onrender.com/api/users/user", config)
       .then((response) => {
         setUser(response.data);
         console.log(user.profileImage[0].link);
@@ -118,7 +118,7 @@ const Account = () => {
               <div className="profileinfo">
                 {user.profileImage ? (
                   <img
-                    src={`http://localhost:8000/${user.profileImage[0].link}`}
+                    src={`https://kucoinst-web.onrender.com/${user.profileImage[0].link}`}
                     width="70px"
                   />
                 ) : (

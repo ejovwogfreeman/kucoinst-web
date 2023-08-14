@@ -40,7 +40,7 @@ const WithdrawPage = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/users/withdraw",
+        "https://kucoinst-web.onrender.com/api/users/withdraw",
         withdraw,
         config
       );

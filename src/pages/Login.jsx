@@ -26,7 +26,7 @@ const Login = () => {
     const user = { username, password };
 
     axios
-      .post("http://localhost:8000/api/users/login", user, {
+      .post("https://kucoinst-web.onrender.com/api/users/login", user, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",

@@ -51,7 +51,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/users/register",
+        "https://kucoinst-web.onrender.com/api/users/register",
         user,
         {
           headers: {
