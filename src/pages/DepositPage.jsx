@@ -47,7 +47,7 @@ const DepositPage = () => {
   useEffect(() => {
     const address =
       params.method === "usdt_trc20"
-        ? "0TUQSURgy9KUcV7c9AWVMrLVr1m2nHPLEZp"
+        ? "TUQSURgy9KUcV7c9AWVMrLVr1m2nHPLEZp"
         : params.method.trim() === "usdt_erc20"
         ? "0x0d2B1bF4Bde9D74543303C9CB846f6d9394Dc4E1"
         : "bc1qtjlh63059h0rxsv7c70pa5gl7h6zxyh30ek4ly";
