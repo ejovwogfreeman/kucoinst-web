@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/userModel");
 const Investment = require("../models/investmentModel");
 const Transaction = require("../models/transactionModel");
+const Trade = require("../models/tradeModel");
 const Deposit = require("../models/depositModel");
 const Withdrawal = require("../models/withdrawalModel");
 const refCode = require("voucher-code-generator");
