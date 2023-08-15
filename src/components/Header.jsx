@@ -16,7 +16,7 @@ const Header = () => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [page, setPage] = useState(true);
+  // const [page, setPage] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {

@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "../css/Trade.css";
-import loading from "../assets/loading.gif";
+import loader from "../assets/loading.gif";
 import { useParams } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
+// import Speedometer from "../components/Speedometer";
+import axios from "axios";
+import { toast } from "react-toastify"; // Make sure to import toast
+import "react-toastify/dist/ReactToastify.css"; // Import toast styles
+import GaugeChart from "react-gauge-chart";
 
 const Trade = () => {
   const [data, setData] = useState(null);
@@ -10,6 +15,124 @@ const Trade = () => {
   const [error, setError] = useState(null);
   const [show, setShow] = useState(false);
   const [selectedDirection, setSelectedDirection] = useState(null);
+  const [user, setUser] = useState({});
+  const [duration, setDuration] = useState(null);
+  const [amount, setAmount] = useState("");
+  const [loading, setLoading] = useState(false); // Corrected state variable name
+
+  const [showModal, setShowModal] = useState(false);
+
+  const [speed, setSpeed] = useState(0);
+  const [time, setTime] = useState(0);
+
+  const [showTime, setShowTime] = useState(true);
+
+  const authToken = JSON.parse(localStorage.getItem("user")).token;
+  const config = {
+    headers: {
+      "auth-token": authToken,
+    },
+  };
+
+  const [showBtn, setShowBtn] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get("https://kucoinst-web.onrender.com/api/users/user", config)
+      .then((response) => {
+        setUser(response.data);
+        console.log(response.data); // Logging the response data
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error); // More informative error logging
+      });
+  }, []);
+
+  const handleClick = (e) => {
+    setDuration(e.target.getAttribute("data-value"));
+    document.querySelectorAll(".btn-primary").forEach((span) => {
+      span.classList.remove("active");
+    });
+    e.target.classList.add("active");
+  };
+
+  const handleChange = (e) => {
+    setAmount(e.target.value);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const randomSpeed = Math.random() * 100;
+      setSpeed(randomSpeed);
+
+      setTime((prevTime) => prevTime + 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleShowBtn = () => {
+    setTime(0);
+    if (duration === "30") {
+      setTimeout(() => {
+        setShowBtn(true);
+        setShowTime(false);
+      }, 30000);
+    } else if (duration === "60") {
+      setTimeout(() => {
+        setShowBtn(true);
+        setShowTime(false);
+      }, 60000);
+    } else if (duration === "180") {
+      setTimeout(() => {
+        setShowBtn(true);
+        setShowTime(false);
+      }, 180000);
+    } else {
+      setTimeout(() => {
+        setShowBtn(true);
+        setShowTime(false);
+      }, 360000);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log({
+      duration,
+      amount,
+    });
+
+    if (!amount || !duration) {
+      return toast.error("PLEASE FILL ALL FIELDS");
+    }
+
+    setLoading(true);
+
+    const trade = {
+      duration,
+      amount,
+    };
+
+    try {
+      const response = await axios.post(
+        "https://kucoinst-web.onrender.com/api/users/trade",
+        trade,
+        config
+      );
+      setShowModal(true);
+      handleShowBtn();
+      setLoading(false);
+    } catch (error) {
+      if (error.response) {
+        toast.error(error.response.data.message || "AN ERROR OCCURRED");
+      } else {
+        toast.error("AN ERROR OCCURRED");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleShow = (direction) => {
     setSelectedDirection(direction);
@@ -28,7 +151,6 @@ const Trade = () => {
           throw new Error("Network response was not OK");
         }
         const data = await response.json();
-        console.log(data.data.coin);
         setData(data.data.coin);
         setIsLoading(false);
       } catch (error) {
@@ -42,7 +164,7 @@ const Trade = () => {
   if (isLoading) {
     return (
       <div className="loading-gif">
-        <img src={loading} alt="loading-gif" />
+        <img src={loader} alt="loading-gif" />
       </div>
     );
   }
@@ -96,27 +218,96 @@ const Trade = () => {
           </tr>
           <tr>
             <td>Current</td>
-            <td>23455</td>
+            <td>{data.price.slice(0, 7)}</td>
           </tr>
-          <div className="my-2">
-            <button className="btn btn-primary me-2">30S</button>
-            <button className="btn btn-primary me-2">60S</button>
-            <button className="btn btn-primary me-2">3M</button>
-            <button className="btn btn-primary me-2">5M</button>
-          </div>
         </table>
-        <form action="" className="buy-form">
+        <form action="" className="buy-form" onSubmit={handleSubmit}>
+          <div className="my-2">
+            <span
+              data-value="30"
+              className="btn btn-primary me-2"
+              onClick={handleClick}
+            >
+              30S
+            </span>
+            <span
+              data-value="60"
+              className="btn btn-primary me-2"
+              onClick={handleClick}
+            >
+              60S
+            </span>
+            <span
+              data-value="180"
+              className="btn btn-primary me-2"
+              onClick={handleClick}
+            >
+              3M
+            </span>
+            <span
+              data-value="300"
+              className="btn btn-primary me-2"
+              onClick={handleClick}
+            >
+              5M
+            </span>
+          </div>
           <label htmlFor="">Buy Quantity</label>
           <input
-            type="text"
+            type="number"
+            onChange={handleChange}
+            value={amount}
             placeholder="Buy and make profit based on the timeframes above"
           />
           <div className="d-flex align-items-center justify-content-between mt-2">
-            <h6>Available Balance: 2345678</h6>
+            <h6>Available Balance: {user.balance}</h6>
             <h6>Handling Fee: 0.01%</h6>
           </div>
-          <button className="btn btn-success mt-2">Confirm Order</button>
+          <button disabled={loading} className="btn btn-success mt-2 w-100">
+            {loading ? "LOADING" : "CONFIRM ORDER"}
+          </button>
         </form>
+      </div>
+      <div className={showModal ? "trade-modal-cover" : "hide-modal"}>
+        <div className="trade-modal rounded">
+          <h4 className="text-center text-dark fw-bold">{data.symbol}</h4>
+          {showTime ? (
+            <>
+              <GaugeChart
+                id="speedometer"
+                nrOfLevels={3}
+                percent={speed / 100}
+                arcsLength={[0.3, 0.5, 0.2]}
+                colors={["#ff0000", "#ffa500", "#00ff00"]}
+                textColor="#000"
+                needleColor="#333"
+                needleBaseColor="#333"
+                hideText
+              />
+              <div style={{ textAlign: "center", marginTop: "10px" }}>
+                <p className="text-dark">Time: {time} seconds</p>
+              </div>
+            </>
+          ) : (
+            ""
+          )}
+          {showBtn ? (
+            <span
+              className="btn btn-success mt-2 w-100"
+              onClick={() => {
+                toast.success("TRADE MADE SUCCESSFULLY");
+                setShowModal(false);
+                setTimeout(() => {
+                  window.location.reload();
+                }, 3000);
+              }}
+            >
+              Close Page
+            </span>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
     </div>
   );

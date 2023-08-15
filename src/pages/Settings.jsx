@@ -48,13 +48,6 @@ const Settings = () => {
       .then((response) => {
         setUser(response.data);
         console.log(user);
-        setProfile({
-          ...profile,
-          name: response.data.name,
-          username: response.data.username,
-          email: response.data.email,
-          phoneNum: response.data.phoneNum,
-        });
       })
       .catch((error) => {
         console.error("Error fetching data:", error);

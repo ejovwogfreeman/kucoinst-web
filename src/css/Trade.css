@@ -72,6 +72,35 @@ tr td:last-child {
   cursor: pointer;
 }
 
+.trade-modal-cover {
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1111111111111111111111;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trade-modal {
+  background-color: white;
+  width: 300px;
+  padding: 10px !important;
+}
+
+.hide-modal {
+  font-display: none;
+}
+
+.btn-primary.active {
+  background-color: #198754;
+  border-color: #198754;
+  color: white;
+}
+
 @media screen and (max-width: 500px) {
   h6 {
     font-size: 15px;
