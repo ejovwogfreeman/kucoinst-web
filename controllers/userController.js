@@ -539,7 +539,7 @@ const userTrade = async (req, res) => {
       gain = (30 * amount) / 100;
     } else if (duration === "180") {
       gain = (50 * amount) / 100;
-    } else if (duration === "360") {
+    } else if (duration === "300") {
       gain = (60 * amount) / 100;
     } else {
       return res.status(400).json({ message: "Invalid duration", error: true });
