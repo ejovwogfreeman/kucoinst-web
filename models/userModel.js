@@ -60,7 +60,7 @@ const UserSchema = new mongoose.Schema(
         ref: "deposit",
       },
     ],
-    trade: [
+    trades: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "trade",
