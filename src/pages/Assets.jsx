@@ -12,7 +12,7 @@ const Assets = ({ user }) => {
     {
       id: 1,
       name: "USDT",
-      available: "802341.3251",
+      available: user.balance,
     },
     {
       id: 2,
@@ -91,12 +91,12 @@ const Assets = ({ user }) => {
                 <div key={coin.id} className="asset-divs">
                   <h5 className="text-primary">{coin.name}</h5>
                   <table>
-                    <tr>
+                    <tr className="px-2">
                       <th>Available(USDT)</th>
                       <th>In Review(USDT)</th>
                       <th>Coin(USDT)</th>
                     </tr>
-                    <tr>
+                    <tr className="px-2">
                       <td>{coin.available}</td>
                       <td>0000000.00</td>
                       <td>{coin.available}</td>
