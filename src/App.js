@@ -17,8 +17,30 @@ import DepositPage from "./pages/DepositPage";
 import Withdraw from "./pages/Withdraw";
 import WithdrawPage from "./pages/WithdrawPage";
 import Exchange from "./pages/Exchange";
+import axios from "axios";
 
 const App = () => {
+  const [user, setUser] = useState({});
+
+  const authToken = JSON.parse(localStorage.getItem("user")).token;
+  const config = {
+    headers: {
+      "auth-token": authToken,
+    },
+  };
+
+  useEffect(() => {
+    axios
+      .get("https://kucoinst-web.onrender.com/api/users/user", config)
+      .then((response) => {
+        setUser(response.data);
+        console.log(response.data); // Logging the response data
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error); // More informative error logging
+      });
+  }, []);
+
   return (
     <BrowserRouter>
       <Topbar />
@@ -31,10 +53,10 @@ const App = () => {
           <Route path="/market" element={<Market />} />
         </Route>
         <Route element={<ProtectedRoutes />}>
-          <Route path="/trade/:id" element={<Trade />} />
+          <Route path="/trade/:id" element={<Trade user={user} />} />
         </Route>
         <Route element={<ProtectedRoutes />}>
-          <Route path="/assets" element={<Assets />} />
+          <Route path="/assets" element={<Assets user={user} />} />
         </Route>
         <Route element={<ProtectedRoutes />}>
           <Route path="/account" element={<Account />} />

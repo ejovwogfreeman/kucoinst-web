@@ -5,7 +5,7 @@ import icon2 from "../assets/icon-withdraw.png";
 import icon3 from "../assets/icon-exchange.png";
 import { Link } from "react-router-dom";
 
-const Assets = () => {
+const Assets = ({ user }) => {
   const [page, setPage] = useState(true);
 
   let coins = [
@@ -42,7 +42,7 @@ const Assets = () => {
         <div>
           <span>Assts</span>
           <span className="bal">
-            <h1>802341.3251</h1>
+            <h1>{user.balance}</h1>
             <span>USDT</span>
           </span>
         </div>

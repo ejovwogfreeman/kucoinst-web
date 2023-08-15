@@ -3,19 +3,17 @@ import "../css/Trade.css";
 import loader from "../assets/loading.gif";
 import { useParams } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
-// import Speedometer from "../components/Speedometer";
 import axios from "axios";
 import { toast } from "react-toastify"; // Make sure to import toast
 import "react-toastify/dist/ReactToastify.css"; // Import toast styles
 import GaugeChart from "react-gauge-chart";
 
-const Trade = () => {
+const Trade = ({ user }) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [show, setShow] = useState(false);
   const [selectedDirection, setSelectedDirection] = useState(null);
-  const [user, setUser] = useState({});
   const [duration, setDuration] = useState(null);
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(false); // Corrected state variable name
@@ -26,6 +24,7 @@ const Trade = () => {
   const [time, setTime] = useState(0);
 
   const [showTime, setShowTime] = useState(true);
+  const [showBtn, setShowBtn] = useState(false);
 
   const authToken = JSON.parse(localStorage.getItem("user")).token;
   const config = {
@@ -33,20 +32,6 @@ const Trade = () => {
       "auth-token": authToken,
     },
   };
-
-  const [showBtn, setShowBtn] = useState(false);
-
-  useEffect(() => {
-    axios
-      .get("https://kucoinst-web.onrender.com/api/users/user", config)
-      .then((response) => {
-        setUser(response.data);
-        console.log(response.data); // Logging the response data
-      })
-      .catch((error) => {
-        console.error("Error fetching user data:", error); // More informative error logging
-      });
-  }, []);
 
   const handleClick = (e) => {
     setDuration(e.target.getAttribute("data-value"));
@@ -271,7 +256,7 @@ const Trade = () => {
       <div className={showModal ? "trade-modal-cover" : "hide-modal"}>
         <div className="trade-modal rounded">
           <h4 className="text-center text-dark fw-bold">{data.symbol}</h4>
-          {showTime ? (
+          {showTime && showModal && (
             <>
               <GaugeChart
                 id="speedometer"
@@ -288,10 +273,8 @@ const Trade = () => {
                 <p className="text-dark">Time: {time} seconds</p>
               </div>
             </>
-          ) : (
-            ""
           )}
-          {showBtn ? (
+          {showBtn && (
             <span
               className="btn btn-success mt-2 w-100"
               onClick={() => {
@@ -304,8 +287,6 @@ const Trade = () => {
             >
               Close Page
             </span>
-          ) : (
-            ""
           )}
         </div>
       </div>
