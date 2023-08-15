@@ -521,6 +521,15 @@ const userTrade = async (req, res) => {
         .json({ message: "Invalid input data", error: true });
     }
 
+    let user = await User.findById(_id);
+
+    let balance = user.balance;
+    if (amount > balance || balance === 0)
+      return res.status(400).json({
+        message: "You don't have sufficient balance to trade",
+        error: true,
+      });
+
     // Calculate gain based on duration
     let gain;
     if (duration === 30) {
