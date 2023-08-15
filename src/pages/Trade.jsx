@@ -124,6 +124,17 @@ const Trade = ({ user }) => {
     setShow(!show);
   };
 
+  let gain;
+  if (duration === "30") {
+    gain = (20 * amount) / 100;
+  } else if (duration === "60") {
+    gain = (30 * amount) / 100;
+  } else if (duration === "180") {
+    gain = (50 * amount) / 100;
+  } else {
+    gain = (60 * amount) / 100;
+  }
+
   const params = useParams();
 
   useEffect(() => {
@@ -272,6 +283,44 @@ const Trade = ({ user }) => {
               <div style={{ textAlign: "center", marginTop: "10px" }}>
                 <p className="text-dark">Time: {time} seconds</p>
               </div>
+            </>
+          )}
+          {showTime && showModal && (
+            <table className="text-dark" width="100%">
+              <tr className="px-2">
+                <td>Current</td>
+                <td>{data.price.slice(0, 7)}</td>
+              </tr>
+              <tr className="px-2">
+                <td>Direction</td>
+                <td>{selectedDirection}</td>
+              </tr>
+              <tr className="px-2">
+                <td>Quantity</td>
+                <td>{amount} USDT</td>
+              </tr>
+              <tr className="px-2">
+                <td>Expected</td>
+                <td>{gain} USDT</td>
+              </tr>
+            </table>
+          )}
+          {showBtn && (
+            <>
+              <div className="text-success d-flex align-items-center justify-content-center">
+                <h3 className="text-strong">+{gain}</h3>
+                <span>USDT</span>
+              </div>
+              <table className="text-dark" width="100%">
+                <tr className="px-2">
+                  <td>Direction</td>
+                  <td>{selectedDirection}</td>
+                </tr>
+                <tr className="px-2">
+                  <td>Quantity</td>
+                  <td>{amount} USDT</td>
+                </tr>
+              </table>
             </>
           )}
           {showBtn && (
