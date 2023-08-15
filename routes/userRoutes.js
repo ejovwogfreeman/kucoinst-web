@@ -12,6 +12,7 @@ const {
   getUser,
   userDeposit,
   userWithdraw,
+  userTrade,
   getTransaction,
   getDeposit,
   getWithdrawal,
@@ -51,6 +52,7 @@ router.post("/deposit", verify, upload.array("files"), userDeposit);
 router.post("/deposit/confirm", checkAdmin, confirmDeposit);
 router.post("/deposit/process", checkAdmin, processDeposit);
 router.post("/deposit/decline", checkAdmin, declineDeposit);
+router.post("/trade", verify, userTrade);
 router.post("/withdraw", verify, userWithdraw);
 router.post("/withdraw/confirm", checkAdmin, confirmWithdraw);
 router.post("/withdraw/process", checkAdmin, processWithdraw);

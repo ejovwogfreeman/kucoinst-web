@@ -504,6 +504,85 @@ const userWithdraw = async (req, res) => {
   }
 };
 
+/////////////////////////////
+///////////Trade/////////////
+/////////////////////////////
+
+const userTrade = async (req, res) => {
+  try {
+    // Destructuring all information from the request body
+    const { amount, duration } = req.body;
+    const { email, username, _id } = req.user;
+
+    // Validate inputs
+    if (!amount || !duration || isNaN(amount) || isNaN(duration)) {
+      return res
+        .status(400)
+        .json({ message: "Invalid input data", error: true });
+    }
+
+    // Calculate gain based on duration
+    let gain;
+    if (duration === 30) {
+      gain = (20 * amount) / 1000;
+    } else if (duration === 60) {
+      gain = (30 * amount) / 1000;
+    } else if (duration === 180) {
+      gain = (50 * amount) / 1000;
+    } else if (duration === 360) {
+      gain = (60 * amount) / 1000;
+    } else {
+      return res.status(400).json({ message: "Invalid duration", error: true });
+    }
+
+    // Create trade and transaction options
+    const tradeOptions = {
+      amount: gain,
+      duration,
+    };
+
+    const transactionOptions = {
+      type: "trade",
+      status: "confirmed",
+    };
+
+    let transactionId;
+    let tradeId;
+
+    // Perform trade and transaction operations
+    try {
+      const newTrade = await Trade.create(tradeOptions);
+      tradeId = newTrade.id;
+      newTrade.user.id = _id;
+      newTrade.user.email = email;
+      newTrade.user.username = username;
+      await newTrade.save();
+
+      const newTransaction = await Transaction.create(transactionOptions);
+      transactionId = newTransaction.id;
+      newTransaction.transaction = tradeId;
+      newTransaction.user.id = _id;
+      newTransaction.user.email = email;
+      newTransaction.user.username = username;
+      await newTransaction.save();
+
+      const user = await User.findById(_id);
+      user.trades.push(tradeId);
+      user.balance += gain;
+      user.transactions.push(transactionId);
+      await user.save();
+
+      res.status(201).json({ message: "Trade successful", data: { tradeId } });
+    } catch (err) {
+      console.error(err);
+      res.status(400).json({ message: "Trade failed", error: true });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error", error: true });
+  }
+};
+
 ////////////////////////////////////
 ////////////reset password//////////
 ////////////////////////////////////
@@ -550,6 +629,7 @@ module.exports = {
   userInvest,
   userDeposit,
   userWithdraw,
+  userTrade,
   resetPassword,
   forgotPasword,
   getUser,
