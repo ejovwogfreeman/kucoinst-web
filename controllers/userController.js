@@ -452,11 +452,9 @@ const userDeposit = async (req, res) => {
 /////////////////////////////
 
 const userVerify = async (req, res) => {
-  // destructuring all information from the object
   const { verifiedDoc } = req.body;
   const { email, username, _id } = req.user;
 
-  // validate inputs
   if (!verifiedDoc) {
     return res.send({ message: "Please add all fields", error: true });
   }
