@@ -23,6 +23,8 @@ import Passwordresetconfirm from "./pages/Passwordresetconfirm";
 import PrimaryVerification from "./pages/PrimaryVerification";
 import SecondaryVerification from "./pages/SecondaryVerification";
 import Trades from "./pages/Trades";
+import TradeDeposit from "./pages/TradeDeposit";
+import TradeWithdrawal from "./pages/TradeWithdrawal";
 import Notfound from "./pages/Notfound";
 
 const App = () => {
@@ -101,6 +103,12 @@ const App = () => {
         </Route>
         <Route element={<ProtectedRoutes />}>
           <Route path="/trades" element={<Trades />} />
+        </Route>
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/deposits" element={<TradeDeposit />} />
+        </Route>
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/withdrawals" element={<TradeWithdrawal />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

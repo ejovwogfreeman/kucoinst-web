@@ -95,47 +95,61 @@ const Account = () => {
       url: "/trades",
     },
     {
-      id: 5,
-      icon: icon5,
-      action: "Contract Position",
+      id: 4,
+      icon: icon3,
+      action: "Deposits Details",
       text: "",
-      url: "/",
+      url: "/deposits",
     },
     {
-      id: 6,
-      icon: icon6,
-      action: "Wallet Address",
+      id: 4,
+      icon: icon3,
+      action: "Withdrawal Details",
       text: "",
-      url: "/",
+      url: "/withdrawals",
     },
-    {
-      id: 7,
-      icon: icon7,
-      action: "Payment Method Management",
-      text: "",
-      url: "/",
-    },
+    // {
+    //   id: 5,
+    //   icon: icon5,
+    //   action: "Contract Position",
+    //   text: "",
+    //   url: "/",
+    // },
+    // {
+    //   id: 6,
+    //   icon: icon6,
+    //   action: "Wallet Address",
+    //   text: "",
+    //   url: "/",
+    // },
+    // {
+    //   id: 7,
+    //   icon: icon7,
+    //   action: "Payment Method Management",
+    //   text: "",
+    //   url: "/",
+    // },
     {
       id: 8,
       icon: icon8,
       action: "I Want To Share",
-      text: "",
-      url: "/",
+      text: user.referralId,
+      url: "",
     },
-    {
-      id: 9,
-      icon: icon9,
-      action: "Online Customer Service",
-      text: "",
-      url: "/",
-    },
-    {
-      id: 10,
-      icon: icon10,
-      action: "Help Center",
-      text: "",
-      url: "/",
-    },
+    // {
+    //   id: 9,
+    //   icon: icon9,
+    //   action: "Online Customer Service",
+    //   text: "",
+    //   url: "/",
+    // },
+    // {
+    //   id: 10,
+    //   icon: icon10,
+    //   action: "Help Center",
+    //   text: "",
+    //   url: "/",
+    // },
     {
       id: 11,
       icon: icon11,
@@ -209,13 +223,20 @@ const Account = () => {
                       <img src={data.icon} alt="" />
                       <span>{data.action}</span>
                     </span>
-                    <Link
-                      to={data.url}
-                      className="text-dark d-flex align-items-center justify-content-between"
-                    >
-                      <span className="span">{data.text}</span>
-                      <MdArrowForwardIos />
-                    </Link>
+                    {data.url !== "" ? (
+                      <Link
+                        to={data.url}
+                        className="text-dark d-flex align-items-center justify-content-between"
+                      >
+                        <span className="span">{data.text}</span>
+                        <MdArrowForwardIos />
+                      </Link>
+                    ) : (
+                      <span className="text-dark d-flex align-items-center justify-content-between">
+                        <span className="span">{data.text}</span>
+                        <MdArrowForwardIos />
+                      </span>
+                    )}
                   </div>
                 );
               })}
