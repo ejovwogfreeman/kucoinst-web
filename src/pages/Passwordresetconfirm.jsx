@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { AiFillMail } from "react-icons/ai";
 import { toast } from "react-toastify";
 import { RiLockPasswordFill } from "react-icons/ri";
 
 const Passwordresetconfirm = () => {
+  const [email, setEmail] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
   const [loading, setLoading] = useState(false);
@@ -12,7 +14,7 @@ const Passwordresetconfirm = () => {
     e.preventDefault();
     setLoading(true);
 
-    if (!password1 || !password2) {
+    if (!email || !password1 || !password2) {
       setLoading(false);
       return toast.error("PLEASE FILL ALL FIELDS");
     }
@@ -24,7 +26,7 @@ const Passwordresetconfirm = () => {
     axios
       .post(
         "https://kucoinst-web.onrender.com/api/users/reset-password",
-        { password1 },
+        { email, password1 },
         {
           headers: {
             "Content-Type": "application/json",
@@ -35,7 +37,7 @@ const Passwordresetconfirm = () => {
       .then((res) => {
         toast.success("PASSWORD RESET SUCCESSFUL");
         setLoading(false);
-        Navigate("/");
+        Navigate("/login");
       })
       .catch((err) => {
         toast.error("INCORRECT CREDENTIALS");
@@ -49,6 +51,18 @@ const Passwordresetconfirm = () => {
       <div className="general-container">
         <div className="body">
           <form onSubmit={handleSubmit} className="signin-form">
+            <div className="form-group">
+              <label htmlFor="">Email</label>
+              <div className="d-flex align-items-center border">
+                <AiFillMail />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter email"
+                />
+              </div>
+            </div>
             <div className="form-group">
               <label htmlFor="">PASSWORD</label>
               <div className="d-flex align-items-center border">

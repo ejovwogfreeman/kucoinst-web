@@ -70,7 +70,7 @@ const Account = () => {
       id: 1,
       icon: icon1,
       action: "Primary verification",
-      text: "verify Now",
+      text: "Verify Now",
       url: "/primary_verification",
     },
     {
@@ -85,7 +85,7 @@ const Account = () => {
       icon: icon4,
       action: "Fast Transaction",
       text: "Today's Profit " + todayProfitSum,
-      url: "/",
+      url: "",
     },
     {
       id: 4,
@@ -143,13 +143,13 @@ const Account = () => {
     //   text: "",
     //   url: "/",
     // },
-    // {
-    //   id: 10,
-    //   icon: icon10,
-    //   action: "Help Center",
-    //   text: "",
-    //   url: "/",
-    // },
+    {
+      id: 10,
+      icon: icon10,
+      action: "Help Center",
+      text: "",
+      url: "/help_center",
+    },
     {
       id: 11,
       icon: icon11,
