@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import { AiFillMail } from "react-icons/ai";
 import { toast } from "react-toastify";
 import { RiLockPasswordFill } from "react-icons/ri";
+import axios from "axios";
 
 const Passwordresetconfirm = () => {
   const [email, setEmail] = useState("");
