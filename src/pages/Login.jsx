@@ -75,7 +75,7 @@ const Login = () => {
         {loading ? "LOADING" : "LOGIN"}
       </button>
       <div className="center">
-        <Link to="/reset_password">Forgot Password?</Link>
+        <Link to="/forgot_password">Forgot Password?</Link>
         <p className="mt-2">
           New Here? <Link to="/register">Register Now</Link>
         </p>

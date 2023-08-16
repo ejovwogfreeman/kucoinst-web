@@ -20,7 +20,7 @@ const Passwordresetconfirm = () => {
                 required
               />
             </div>
-            <button disabled={loading}>
+            <button disabled={loading} className="btn btn-dark mt-0">
               {loading ? "LOADING..." : "RESET PASSWORD"}
             </button>
             <section style={{ marginTop: "20px" }}>
