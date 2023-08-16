@@ -27,7 +27,7 @@ const Passwordresetconfirm = () => {
     axios
       .post(
         "https://kucoinst-web.onrender.com/api/users/reset-password",
-        { email, password1 },
+        { email, papssword: password1 },
         {
           headers: {
             "Content-Type": "application/json",
