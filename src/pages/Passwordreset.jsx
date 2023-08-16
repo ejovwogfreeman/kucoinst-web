@@ -18,7 +18,7 @@ const Passwordreset = () => {
     }
     axios
       .post(
-        "http://localhost:8000/api/users/forgot-password",
+        "https://kucoinst-web.onrender.com/api/users/forgot-password",
         { email },
         {
           headers: {
