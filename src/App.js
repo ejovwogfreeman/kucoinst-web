@@ -113,10 +113,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot_password" element={<Passwordreset />} />
-        <Route
-          path="/confirm_password_reset"
-          element={<Passwordresetconfirm />}
-        />
+        <Route path="/reset_password" element={<Passwordresetconfirm />} />
         <Route path="*" element={<Notfound />} />
       </Routes>
       <Navbar />
