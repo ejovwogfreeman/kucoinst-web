@@ -667,20 +667,46 @@ const userTrade = async (req, res) => {
 ////////////////////////////////////
 ////////////reset password//////////
 ////////////////////////////////////
-const resetPassword = async (req, res, next) => {
-  const id = req.headers.userid;
-  const password = req.body.password;
-  // hash password
-  const salt = await bcrypt.genSalt(10);
-  const hashedpassword = await bcrypt.hash(password, salt);
-  const user = await User.findByIdAndUpdate(id, { password: hashedpassword });
+// const resetPassword = async (req, res, next) => {
+//   const id = req.headers.userid;
+//   const password = req.body.password;
+//   // hash password
+//   const salt = await bcrypt.genSalt(10);
+//   const hashedpassword = await bcrypt.hash(password, salt);
+//   const user = await User.findByIdAndUpdate(id, { password: hashedpassword });
 
-  if (user)
+//   if (user)
+//     return res.status(200).json({ message: "Password reset is successful" });
+
+//   res
+//     .status(400)
+//     .json({ error: true, message: "An error occcurred, please try again" });
+// };
+
+const resetPassword = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    await User.findByIdAndUpdate(user._id, {
+      password: hashedPassword,
+    });
+
     return res.status(200).json({ message: "Password reset is successful" });
-
-  res
-    .status(400)
-    .json({ error: true, message: "An error occcurred, please try again" });
+  } catch (error) {
+    console.error("Error resetting password:", error);
+    return res
+      .status(500)
+      .json({ message: "An error occurred while resetting password" });
+  }
 };
 
 ////////////////////////////////////
