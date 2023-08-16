@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AiFillMail } from "react-icons/ai";
 import { toast } from "react-toastify";
 import { RiLockPasswordFill } from "react-icons/ri";
@@ -10,6 +10,8 @@ const Passwordresetconfirm = () => {
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,7 +40,7 @@ const Passwordresetconfirm = () => {
       .then((res) => {
         toast.success("PASSWORD RESET SUCCESSFUL");
         setLoading(false);
-        Navigate("/login");
+        navigate("/login");
       })
       .catch((err) => {
         toast.error("INCORRECT CREDENTIALS");
