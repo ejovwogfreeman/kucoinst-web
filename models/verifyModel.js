@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const tradeSchema = new mongoose.Schema(
+const verifySchema = new mongoose.Schema(
   {
     user: {
       id: {
@@ -10,22 +10,15 @@ const tradeSchema = new mongoose.Schema(
       username: String,
       email: String,
     },
-    amount: {
-      type: Number,
-      requied: true,
-    },
-    duration: {
+    verifiedDoc: {
       type: String,
-      default: null,
+      requied: false,
     },
-    profit: {
-      type: Number,
-      default: 0,
-    },
+    verifiedPic: [Object],
   },
   {
     timestamps: true,
   }
 );
 
-module.exports = mongoose.model("Trade", tradeSchema);
+module.exports = mongoose.model("Verify", verifySchema);

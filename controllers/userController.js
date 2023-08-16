@@ -6,6 +6,7 @@ const Transaction = require("../models/transactionModel");
 const Trade = require("../models/tradeModel");
 const Deposit = require("../models/depositModel");
 const Withdrawal = require("../models/withdrawalModel");
+const Verify = require("../models/verifyModel");
 const refCode = require("voucher-code-generator");
 const sendEmail = require("../helpers/email");
 // const mongoose = require("mongoose");
@@ -148,7 +149,8 @@ const accessToken = (user) => {
 
 const updateUser = async (req, res) => {
   // destructuring the email and password from the object
-  const { oldPassword, password, name, username, email, phoneNum } = req.body;
+  const { oldPassword, password, name, address, username, email, phoneNum } =
+    req.body;
 
   if (password && oldPassword) {
     const user = await User.findById(req.user._id);
@@ -182,6 +184,9 @@ const updateUser = async (req, res) => {
 
   if (name && name !== "null") {
     await User.findByIdAndUpdate(req.user._id, { name: name });
+  }
+  if (address && address !== "null") {
+    await User.findByIdAndUpdate(req.user._id, { address: address });
   }
 
   if (username && username !== "null") {
@@ -443,6 +448,61 @@ const userDeposit = async (req, res) => {
 };
 
 /////////////////////////////
+///////////Deposit///////////
+/////////////////////////////
+
+const userVerify = async (req, res) => {
+  // destructuring all information from the object
+  const { verifiedDoc } = req.body;
+  const { email, username, _id } = req.user;
+
+  // validate inputs
+  if (!verifiedDoc) {
+    return res.send({ message: "Please add all fields", error: true });
+  }
+
+  try {
+    let filesArray = [];
+    req.files.forEach((element) => {
+      const file = {
+        fileName: element.originalname,
+        fileType: element.mimetype,
+        link: `file/${element.filename}`,
+      };
+      filesArray.push(file);
+    });
+
+    const verifyOptions = {
+      verifiedDoc,
+      verifiedPic: filesArray,
+      status: false,
+    };
+
+    let verifyId;
+
+    try {
+      const verify = await Verify.create(verifyOptions);
+      verifyId = verify.id;
+      verify.user.id = _id;
+      verify.user.email = email;
+      verify.user.username = username;
+      verify.user.verified = true;
+      await verify.save();
+
+      const user = await User.findById(_id);
+      user.verify.push(verifyId);
+      await user.save();
+    } catch (err) {
+      return res.status(400).json(err);
+    }
+
+    res.status(201).json({ message: "Files Uploaded Successfully" });
+  } catch (error) {
+    res.status(400).json({ message: error.message, error: true });
+  }
+};
+
+/////////////////////////////
 ///////////Withdraw//////////
 /////////////////////////////
 
@@ -547,8 +607,9 @@ const userTrade = async (req, res) => {
 
     // Create trade and transaction options
     const tradeOptions = {
-      amount: gain,
+      amount,
       duration,
+      profit: gain,
     };
 
     const transactionOptions = {
@@ -638,6 +699,7 @@ module.exports = {
   updateUser,
   userInvest,
   userDeposit,
+  userVerify,
   userWithdraw,
   userTrade,
   resetPassword,

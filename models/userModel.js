@@ -33,6 +33,10 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    verified: {
+      type: Boolean,
+      default: false,
+    },
     balance: {
       type: Number,
       default: 0,
@@ -41,7 +45,17 @@ const UserSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    address: {
+      type: String,
+      requied: false,
+    },
     profileImage: [Object],
+    verify: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Verify",
+      },
+    ],
     transactions: [
       {
         type: mongoose.Schema.Types.ObjectId,

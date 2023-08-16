@@ -7,6 +7,7 @@ const {
   loginUser,
   updateUser,
   userInvest,
+  userVerify,
   resetPassword,
   forgotPasword,
   getUser,
@@ -46,6 +47,7 @@ router.get("/single/:id", checkAdmin, adminGetUser);
 router.patch("/update/:id", checkAdmin, adminUpdateUser);
 router.delete("/delete/:id", checkAdmin, adminDeleteUser);
 router.get("/user", verify, getUser);
+router.get("/user/verify", verify, upload.array("files"), userVerify);
 router.patch("/update-user", verify, upload.array("files"), updateUser);
 router.post("/invest", verify, userInvest);
 router.post("/deposit", verify, upload.array("files"), userDeposit);
