@@ -11,6 +11,7 @@ form img {
 form label {
   display: block;
   width: 100%;
+  font-weight: bold;
 }
 
 form input {

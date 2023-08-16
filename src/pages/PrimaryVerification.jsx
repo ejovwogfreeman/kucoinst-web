@@ -4,33 +4,25 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
-import { AiFillMail } from "react-icons/ai";
+import { MdOutlineLocationOn } from "react-icons/md";
+import { Link } from "react-router-dom";
 
-const Settings = () => {
+const PrimaryVerification = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
   const [profile, setProfile] = useState({
-    username: "",
-    email: "",
-    phoneNum: "",
-    profilePic: null,
+    name: "",
+    address: "",
   });
 
-  const { username, email, phoneNum, profilePic } = profile;
+  const { name, address } = profile;
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setProfile((prevData) => ({
       ...prevData,
       [name]: value,
-    }));
-  };
-
-  const handleImageChange = (event) => {
-    setProfile((prevData) => ({
-      ...prevData,
-      profilePic: event.target.files[0],
     }));
   };
 
@@ -47,12 +39,6 @@ const Settings = () => {
       .then((response) => {
         setUser(response.data);
         console.log(user);
-        setProfile({
-          ...profile,
-          username: response.data.username,
-          email: response.data.email,
-          phoneNum: response.data.phoneNum,
-        });
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -62,31 +48,24 @@ const Settings = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!username || !email || !profilePic) {
+    if (!name || !address) {
       return toast.error("PLEASE FILL ALL FIELDS");
     }
 
     setLoading(true);
 
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("username", username);
-    formData.append("email", email);
-    formData.append("phoneNum", phoneNum);
-    formData.append("files", profilePic);
-
     try {
       await axios.patch(
         "https://kucoinst-web.onrender.com/api/users/update-user",
-        formData,
+        profile,
         config
       );
-      toast.success("PROFILE UPDATED SUCCESSFULLY");
+      toast.success("PRIMARY VERIFICATION SUCCESSFUL");
       setLoading(false);
       navigate("/");
     } catch (error) {
       console.error(error);
-      toast.error("ERROR UPDATING PROFILE");
+      toast.error("ERROR VERIFYING");
       setLoading(false);
     }
   };
@@ -95,58 +74,40 @@ const Settings = () => {
     <div className="settings-container">
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="">Username</label>
+          <label htmlFor="">Full Name</label>
           <div className="d-flex align-items-center border">
             <FaUserCircle />
             <input
               type="text"
-              value={username}
-              name="username"
+              value={name}
+              name="name"
               onChange={handleChange}
-              placeholder="Enter username"
+              placeholder="Enter Full Name"
             />
           </div>
         </div>
         <div className="form-group">
-          <label htmlFor="">Email</label>
+          <label htmlFor="">Address</label>
           <div className="d-flex align-items-center border">
-            <AiFillMail />
+            <MdOutlineLocationOn />
             <input
               type="text"
-              value={email}
-              name="email"
+              value={address}
+              name="address"
               onChange={handleChange}
-              placeholder="Enter email"
+              placeholder="Enter address"
             />
           </div>
         </div>
-        <div className="form-group">
-          <label htmlFor="">Phone Number</label>
-          <div className="d-flex align-items-center border">
-            <AiFillMail />
-            <input
-              type="text"
-              value={phoneNum}
-              name="phoneNum"
-              onChange={handleChange}
-              placeholder="Enter email"
-            />
-          </div>
-        </div>
-        <label htmlFor="profilePic">PROFILE PICTURE</label>
-        <input
-          className="img-input"
-          type="file"
-          name="profilePic"
-          accept="image/*"
-          onChange={handleImageChange}
-        />
         <button type="submit" disabled={loading} className="btn btn-dark mt-3">
-          {loading ? "UPDATING..." : "UPDATE"}
+          {loading ? "VERIFYING..." : "VERIFY"}
         </button>
+        <Link to="/secondary_verification" className="d-block mt-2 text-center">
+          <small>Secondary Verification</small>
+        </Link>
       </form>
     </div>
   );
 };
 
-export default Settings;
+export default PrimaryVerification;

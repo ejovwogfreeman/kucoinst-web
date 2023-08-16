@@ -18,27 +18,35 @@ import Withdraw from "./pages/Withdraw";
 import WithdrawPage from "./pages/WithdrawPage";
 import Exchange from "./pages/Exchange";
 import axios from "axios";
+import Passwordreset from "./pages/Passwordreset";
+import Passwordresetconfirm from "./pages/Passwordresetconfirm";
+import PrimaryVerification from "./pages/PrimaryVerification";
+import SecondaryVerification from "./pages/SecondaryVerification";
+import Trades from "./pages/Trades";
+import Notfound from "./pages/Notfound";
 
 const App = () => {
   const [user, setUser] = useState({});
-
-  const authToken = JSON.parse(localStorage.getItem("user")).token;
-  const config = {
-    headers: {
-      "auth-token": authToken,
-    },
-  };
-
   useEffect(() => {
-    axios
-      .get("https://kucoinst-web.onrender.com/api/users/user", config)
-      .then((response) => {
-        setUser(response.data);
-        console.log(response.data); // Logging the response data
-      })
-      .catch((error) => {
-        console.error("Error fetching user data:", error); // More informative error logging
-      });
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const authToken = JSON.parse(storedUser).token;
+      const config = {
+        headers: {
+          "auth-token": authToken,
+        },
+      };
+
+      axios
+        .get("https://kucoinst-web.onrender.com/api/users/user", config)
+        .then((response) => {
+          setUser(response.data);
+          console.log(response.data); // Logging the response data
+        })
+        .catch((error) => {
+          console.error("Error fetching user data:", error); // More informative error logging
+        });
+    }
   }, []);
 
   return (
@@ -79,8 +87,29 @@ const App = () => {
         <Route element={<ProtectedRoutes />}>
           <Route path="/exchange" element={<Exchange />} />
         </Route>
+        <Route element={<ProtectedRoutes />}>
+          <Route
+            path="/primary_verification"
+            element={<PrimaryVerification />}
+          />
+        </Route>
+        <Route element={<ProtectedRoutes />}>
+          <Route
+            path="/secondary_verification"
+            element={<SecondaryVerification />}
+          />
+        </Route>
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/trades" element={<Trades />} />
+        </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/reset_password" element={<Passwordreset />} />
+        <Route
+          path="/confirm_password_reset"
+          element={<Passwordresetconfirm />}
+        />
+        <Route path="*" element={<Notfound />} />
       </Routes>
       <Navbar />
     </BrowserRouter>

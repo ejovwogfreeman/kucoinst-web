@@ -12,7 +12,7 @@ import icon9 from "../assets/icon-online.png";
 import icon10 from "../assets/icon-help.png";
 import icon11 from "../assets/icon-introduction.png";
 import { MdArrowForwardIos } from "react-icons/md";
-import { BsChatLeftDots } from "react-icons/bs";
+import { BiLogOut } from "react-icons/bi";
 import { FiSettings } from "react-icons/fi";
 import profilelogo from "../assets/profilelogo.png";
 import { Link } from "react-router-dom";
@@ -20,11 +20,16 @@ import axios from "axios";
 
 const Account = () => {
   const [user, setUser] = useState({});
+  const [trades, setTrades] = useState([]);
   const authToken = JSON.parse(localStorage.getItem("user")).token;
   const config = {
     headers: {
       "auth-token": authToken,
     },
+  };
+  const logout = () => {
+    localStorage.removeItem("user");
+    window.location.reload();
   };
   useEffect(() => {
     axios
@@ -37,73 +42,106 @@ const Account = () => {
         console.error("Error fetching data:", error);
       });
   }, []);
+  useEffect(() => {
+    axios
+      .get("https://kucoinst-web.onrender.com/api/users/trade", config)
+      .then((response) => {
+        setTrades(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
+  const today = new Date().toISOString().split("T")[0];
+  console.log(today);
+
+  const todayProfitEntries = trades.filter((entry) =>
+    entry.createdAt.includes(today)
+  );
+
+  const todayProfitSum = todayProfitEntries.reduce(
+    (sum, entry) => sum + entry.profit,
+    0
+  );
 
   const datas = [
     {
       id: 1,
       icon: icon1,
       action: "Primary verification",
-      text: "Certificating",
+      text: "verify Now",
+      url: "/primary_verification",
     },
     {
       id: 2,
       icon: icon2,
       action: "Advanced Verification",
-      text: "Not Verified",
+      text: "Verify Now",
+      url: "/secondary_verification",
     },
     {
       id: 3,
-      icon: icon3,
-      action: "Transaction Details",
-      text: "",
+      icon: icon4,
+      action: "Fast Transaction",
+      text: "Today's Profit " + todayProfitSum,
+      url: "/",
     },
     {
       id: 4,
-      icon: icon4,
-      action: "Fast Transaction",
-      text: "Today's Profit 0.00",
+      icon: icon3,
+      action: "Trades Details",
+      text: "",
+      url: "/trades",
     },
     {
       id: 5,
       icon: icon5,
       action: "Contract Position",
       text: "",
+      url: "/",
     },
     {
       id: 6,
       icon: icon6,
       action: "Wallet Address",
       text: "",
+      url: "/",
     },
     {
       id: 7,
       icon: icon7,
       action: "Payment Method Management",
       text: "",
+      url: "/",
     },
     {
       id: 8,
       icon: icon8,
       action: "I Want To Share",
       text: "",
+      url: "/",
     },
     {
       id: 9,
       icon: icon9,
       action: "Online Customer Service",
       text: "",
+      url: "/",
     },
     {
       id: 10,
       icon: icon10,
       action: "Help Center",
       text: "",
+      url: "/",
     },
     {
       id: 11,
       icon: icon11,
       action: "Introduction to the platform",
       text: "",
+      url: "/",
     },
   ];
   return (
@@ -112,9 +150,7 @@ const Account = () => {
         <>
           <div className="account-container">
             <div className="account-banner">
-              <Link to="" className="abs-left">
-                <BsChatLeftDots />
-              </Link>
+              <BiLogOut onClick={logout} className="abs-left" />
               <div className="profileinfo">
                 {user.profileImage ? (
                   <img
@@ -154,9 +190,7 @@ const Account = () => {
       ) : (
         <div className="account-container">
           <div className="account-banner">
-            <Link to="" className="abs-left">
-              <BsChatLeftDots />
-            </Link>
+            <BiLogOut onClick={logout} className="abs-left" />
             <div className="profileinfo">
               <img src={profilelogo} width="70px" />
               <span>{user.username}</span>
@@ -175,10 +209,13 @@ const Account = () => {
                       <img src={data.icon} alt="" />
                       <span>{data.action}</span>
                     </span>
-                    <span className="d-flex align-items-center justify-content-between">
+                    <Link
+                      to={data.url}
+                      className="text-dark d-flex align-items-center justify-content-between"
+                    >
                       <span className="span">{data.text}</span>
                       <MdArrowForwardIos />
-                    </span>
+                    </Link>
                   </div>
                 );
               })}
