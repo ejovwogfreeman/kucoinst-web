@@ -218,6 +218,18 @@ const getTransaction = async (req, res) => {
 };
 
 /////////////////////////////////////////
+//////////get single transaction/////////
+/////////////////////////////////////////
+
+const getTrades = async (req, res) => {
+  const trade = await Trade.find();
+  let usertrade = trade.filter((trade) => {
+    return trade.user.email === req.user.email;
+  });
+  res.status(200).send(usertrade);
+};
+
+/////////////////////////////////////////
 //////////get single investment/////////
 /////////////////////////////////////////
 
@@ -700,6 +712,7 @@ module.exports = {
   userVerify,
   userWithdraw,
   userTrade,
+  getTrades,
   resetPassword,
   forgotPasword,
   getUser,
