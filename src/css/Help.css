@@ -1,0 +1,6 @@
+.show {
+  position: static;
+  transform: none;
+  height: auto;
+  padding: 0px !important;
+}

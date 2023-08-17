@@ -97,17 +97,17 @@ const Header = () => {
         })}
       </div>
       <div className="banner1">
-        <div className="img">
+        <Link to="/deposit" className="img">
           <h4>Quick Transactions</h4>
           <p>Support</p>
           <h5>BTC, USDT, ETH, e.t.c</h5>
-        </div>
+        </Link>
         <div className="text">
-          <Link to="">
+          <Link to="/trade/Qwsogvtv82FCd">
             <BiWorld />
-            <span>Trending Features</span>
+            <span>Futures Trading</span>
           </Link>
-          <Link to="">
+          <Link to="/help_center">
             <BiHelpCircle />
             <span>Help Center</span>
           </Link>

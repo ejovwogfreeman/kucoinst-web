@@ -26,6 +26,8 @@ import Trades from "./pages/Trades";
 import TradeDeposit from "./pages/TradeDeposit";
 import TradeWithdrawal from "./pages/TradeWithdrawal";
 import Notfound from "./pages/Notfound";
+import Help from "./pages/Help";
+import { FaProjectDiagram } from "react-icons/fa";
 
 const App = () => {
   const [user, setUser] = useState({});
@@ -109,6 +111,9 @@ const App = () => {
         </Route>
         <Route element={<ProtectedRoutes />}>
           <Route path="/withdrawals" element={<TradeWithdrawal />} />
+        </Route>
+        <Route element={<ProtectedRoutes />}>
+          <Route path="help_center" element={<Help />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
