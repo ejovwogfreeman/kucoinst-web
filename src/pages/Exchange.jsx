@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 
 const Exchange = ({ user }) => {
+  const [loading, setLoading] = useState(false);
   const [sourceCurrency, setSourceCurrency] = useState("USDT");
   const [targetCurrency, setTargetCurrency] = useState("USDT");
   const [amount, setAmount] = useState(0);
@@ -98,30 +99,34 @@ const Exchange = ({ user }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!sourceCurrency || !targetCurrency || !amount || !value) {
-      return toast.error("PLEASE FILL ALL FIELDS");
-    }
-    const exchange = {
-      sourceCurrency,
-      targetCurrency,
-      amount,
-      value,
-    };
 
     try {
+      if (!sourceCurrency || !targetCurrency || !amount || !value) {
+        throw new Error("Please fill all fields");
+      }
+
+      const exchange = {
+        sourceCurrency,
+        targetCurrency,
+        amount,
+        value,
+      };
+
+      setLoading(true);
+
       const response = await axios.post(
         "https://kucoinst-web.onrender.com/api/users/exchange",
         exchange,
         config
       );
-      setShowModal(true);
-      handleShowBtn();
-      setLoading(false);
+
+      toast.success("Exchange made successfully");
+      window.location.reload();
     } catch (error) {
-      if (error.response) {
-        toast.error(error.response.data.message || "AN ERROR OCCURRED");
+      if (error.response && error.response.data.message) {
+        toast.error(error.response.data.message);
       } else {
-        toast.error("AN ERROR OCCURRED");
+        toast.error("An error occurred");
       }
     } finally {
       setLoading(false);
@@ -212,7 +217,9 @@ const Exchange = ({ user }) => {
             </div>
           </div>
         </div>
-        <button className="btn btn-primary">Exchange</button>
+        <button disabled={loading} className="btn btn-primary">
+          {loading ? "LOADING" : "Exchange"}
+        </button>
       </form>
     </div>
   );
