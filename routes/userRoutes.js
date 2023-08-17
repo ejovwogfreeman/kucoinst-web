@@ -38,6 +38,10 @@ const {
   adminGetUser,
   adminUpdateUser,
   adminDeleteUser,
+  getExchanges,
+  processExchange,
+  confirmExchange,
+  declineExchange,
 } = require("../controllers/adminController");
 const { upload } = require("../config/file");
 
@@ -73,6 +77,10 @@ router.get("/withdrawal", verify, getWithdrawal);
 router.get("/withdrawals", checkAdmin, getWithdrawals);
 router.get("/investment", verify, getInvestment);
 router.get("/investments", checkAdmin, getInvestments);
+router.get("/exchanges", checkAdmin, getExchanges);
+router.get("/exchange/process", checkAdmin, processExchange);
+router.get("/exchange/confirm", checkAdmin, confirmExchange);
+router.get("/exchange/decline", checkAdmin, declineExchange);
 router.post("/funduser", checkAdmin, fundUser);
 
 module.exports = router;

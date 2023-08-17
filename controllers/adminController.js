@@ -5,6 +5,7 @@ const Investment = require("../models/investmentModel");
 const Transaction = require("../models/transactionModel");
 const Deposit = require("../models/depositModel");
 const Withdrawal = require("../models/withdrawalModel");
+const Exchange = require("../models/exchangeModel");
 const refCode = require("voucher-code-generator");
 const sendEmail = require("../helpers/email");
 
@@ -136,6 +137,61 @@ const declineDeposit = async (req, res) => {
   res.status(200).json({ message: "declined Successfully" });
 };
 
+////////////////////////////////////
+///////////process Withdraw/////////
+////////////////////////////////////
+
+const processExchange = async (req, res) => {
+  const { id } = req.body;
+  const exchange = await Exchange.findByIdAndUpdate(id, {
+    status: "processing",
+  });
+  const transaction = await Transaction.findOneAndUpdate(
+    { transaction: exchange.id },
+    {
+      status: "processing",
+    }
+  );
+  res.status(200).json({ message: "processing Successfully" });
+};
+
+////////////////////////////////////
+///////////Confirm Exchange//////////
+////////////////////////////////////
+
+const confirmExchange = async (req, res) => {
+  const { id } = req.body;
+  const exchange = await Exchange.findByIdAndUpdate(id, {
+    status: "confirmed",
+  });
+  const transaction = await Transaction.findOneAndUpdate(
+    { transaction: exchange.id },
+    {
+      status: "confirmed",
+    }
+  );
+
+  res.status(200).json({ message: "Confirmed Successfully" });
+};
+
+////////////////////////////////////
+///////////decline Withdraw/////////
+////////////////////////////////////
+
+const declineExchange = async (req, res) => {
+  const { id } = req.body;
+  const exchange = await Exchange.findByIdAndUpdate(id, {
+    status: "declined",
+  });
+  const transaction = await Transaction.findOneAndUpdate(
+    { transaction: exchange.id },
+    {
+      status: "declined",
+    }
+  );
+  res.status(200).json({ message: "declined Successfully" });
+};
+
 ///////////////////////////////////
 //////////get transactions/////////
 ///////////////////////////////////
@@ -150,8 +206,8 @@ const getTransactions = async (req, res) => {
 ///////////////////////////////////
 
 const getInvestments = async (req, res) => {
-  const investments = await Investment.find();
-  res.status(200).json(investments);
+  const exchanges = await Investment.find();
+  res.status(200).json(exchanges);
 };
 
 ///////////////////////////////////
@@ -170,6 +226,15 @@ const getDeposits = async (req, res) => {
 const getWithdrawals = async (req, res) => {
   const withdrawals = await Withdrawal.find();
   res.status(200).json(withdrawals);
+};
+
+///////////////////////////////////
+//////////get transactions/////////
+///////////////////////////////////
+
+const getExchanges = async (req, res) => {
+  const transactions = await Exchange.find();
+  res.status(200).json(transactions);
 };
 
 ///////////////////////////////////
@@ -251,4 +316,8 @@ module.exports = {
   adminGetUser,
   adminUpdateUser,
   adminDeleteUser,
+  getExchanges,
+  processExchange,
+  confirmExchange,
+  declineExchange,
 };
