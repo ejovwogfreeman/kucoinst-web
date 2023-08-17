@@ -89,7 +89,7 @@ const App = () => {
           <Route path="/withdraw/:method" element={<WithdrawPage />} />
         </Route>
         <Route element={<ProtectedRoutes />}>
-          <Route path="/exchange" element={<Exchange />} />
+          <Route path="/exchange" element={<Exchange user={user} />} />
         </Route>
         <Route element={<ProtectedRoutes />}>
           <Route
