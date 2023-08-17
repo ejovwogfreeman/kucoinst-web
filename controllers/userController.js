@@ -4,6 +4,7 @@ const User = require("../models/userModel");
 const Investment = require("../models/investmentModel");
 const Transaction = require("../models/transactionModel");
 const Trade = require("../models/tradeModel");
+const Exchange = require("../models/exchangeModel");
 const Deposit = require("../models/depositModel");
 const Withdrawal = require("../models/withdrawalModel");
 const Verify = require("../models/verifyModel");
@@ -221,12 +222,23 @@ const getTransaction = async (req, res) => {
 //////////get single transaction/////////
 /////////////////////////////////////////
 
-const getTrades = async (req, res) => {
+const getTrade = async (req, res) => {
   const trade = await Trade.find();
   let usertrade = trade.filter((trade) => {
     return trade.user.email === req.user.email;
   });
   res.status(200).send(usertrade);
+};
+/////////////////////////////////////////
+//////////get single exchange////////////
+/////////////////////////////////////////
+
+const getExchange = async (req, res) => {
+  const exchange = await Exchange.find();
+  let userexchange = exchange.filter((exchange) => {
+    return exchange.user.email === req.user.email;
+  });
+  res.status(200).send(userexchange);
 };
 
 /////////////////////////////////////////
@@ -649,7 +661,7 @@ const userTrade = async (req, res) => {
 
       const user = await User.findById(_id);
       user.trades.push(tradeId);
-      user.balance += gain;
+      user.balance -= gain;
       user.transactions.push(transactionId);
       await user.save();
 
@@ -667,21 +679,371 @@ const userTrade = async (req, res) => {
 ////////////////////////////////////
 ////////////reset password//////////
 ////////////////////////////////////
-// const resetPassword = async (req, res, next) => {
-//   const id = req.headers.userid;
-//   const password = req.body.password;
-//   // hash password
-//   const salt = await bcrypt.genSalt(10);
-//   const hashedpassword = await bcrypt.hash(password, salt);
-//   const user = await User.findByIdAndUpdate(id, { password: hashedpassword });
 
-//   if (user)
-//     return res.status(200).json({ message: "Password reset is successful" });
+// const userExchange = async (req, res) => {
+//   try {
+//     const { sourceCurrency, targetCurrency, amount, value } = req.body;
+//     const { email, username, _id } = req.user;
 
-//   res
-//     .status(400)
-//     .json({ error: true, message: "An error occcurred, please try again" });
+//     if (!sourceCurrency || !targetCurrency || !amount || !value) {
+//       return res
+//         .status(400)
+//         .json({ message: "Invalid input data", error: true });
+//     }
+
+//     let user = await User.findById(_id);
+
+//     let usdt = user.balance;
+//     if (
+//       (sourceCurrency === "USDT" && usdt === 0) ||
+//       (sourceCurrency === "USDT" && usdt < sourceCurrency)
+//     ) {
+//       res
+//         .status(400)
+//         .json({ message: "You do not have sufficient USDT", error: true });
+//     } else {
+//       const exchangeOptions = {
+//         sourceCurrency,
+//         targetCurrency,
+//         amount,
+//         value,
+//       };
+
+//       const transactionOptions = {
+//         type: "exchange",
+//         status: "confirmed",
+//       };
+
+//       let transactionId;
+//       let exchangeId;
+
+//       try {
+//         const newExchange = await Exchange.create(exchangeOptions);
+//         exchangeId = newExchange.id;
+//         newExchange.user.id = _id;
+//         newExchange.user.email = email;
+//         newExchange.user.username = username;
+//         await newExchange.save();
+
+//         const newTransaction = await Transaction.create(transactionOptions);
+//         transactionId = newTransaction.id;
+//         newTransaction.transaction = exchangeId;
+//         newTransaction.user.id = _id;
+//         newTransaction.user.email = email;
+//         newTransaction.user.username = username;
+//         await newTransaction.save();
+
+//         const user = await User.findById(_id);
+//         user.exchanges.push(exchangeId);
+//         user.balance -= value;
+//         user.transactions.push(transactionId);
+//         await user.save();
+
+//         res
+//           .status(201)
+//           .json({ message: "Exchange successful", data: { exchangeId } });
+//       } catch (err) {
+//         console.error(err);
+//         res.status(400).json({ message: "Exchange failed", error: true });
+//       }
+//     }
+//     let usd = user.usd;
+//     if (
+//       (sourceCurrency === "USD" && usd === 0) ||
+//       (sourceCurrency === "USD" && usd < sourceCurrency)
+//     ) {
+//       res
+//         .status(400)
+//         .json({ message: "You do not have sufficient USD", error: true });
+//     } else {
+//       const exchangeOptions = {
+//         sourceCurrency,
+//         targetCurrency,
+//         amount,
+//         value,
+//       };
+
+//       const transactionOptions = {
+//         type: "exchange",
+//         status: "confirmed",
+//       };
+
+//       let transactionId;
+//       let exchangeId;
+
+//       try {
+//         const newExchange = await Exchange.create(exchangeOptions);
+//         exchangeId = newExchange.id;
+//         newExchange.user.id = _id;
+//         newExchange.user.email = email;
+//         newExchange.user.username = username;
+//         await newExchange.save();
+
+//         const newTransaction = await Transaction.create(transactionOptions);
+//         transactionId = newTransaction.id;
+//         newTransaction.transaction = exchangeId;
+//         newTransaction.user.id = _id;
+//         newTransaction.user.email = email;
+//         newTransaction.user.username = username;
+//         await newTransaction.save();
+
+//         const user = await User.findById(_id);
+//         user.exchanges.push(exchangeId);
+//         user.usd -= value;
+//         user.transactions.push(transactionId);
+//         await user.save();
+
+//         res
+//           .status(201)
+//           .json({ message: "Exchange successful", data: { exchangeId } });
+//       } catch (err) {
+//         console.error(err);
+//         res.status(400).json({ message: "Exchange failed", error: true });
+//       }
+//     }
+//     let eth = user.eth;
+//     if (
+//       (sourceCurrency === "ETH" && eth === 0) ||
+//       (sourceCurrency === "ETH" && eth < sourceCurrency)
+//     ) {
+//       res
+//         .status(400)
+//         .json({ message: "You do not have sufficient ETH", error: true });
+//     } else {
+//       const exchangeOptions = {
+//         sourceCurrency,
+//         targetCurrency,
+//         amount,
+//         value,
+//       };
+
+//       const transactionOptions = {
+//         type: "exchange",
+//         status: "confirmed",
+//       };
+
+//       let transactionId;
+//       let exchangeId;
+
+//       try {
+//         const newExchange = await Exchange.create(exchangeOptions);
+//         exchangeId = newExchange.id;
+//         newExchange.user.id = _id;
+//         newExchange.user.email = email;
+//         newExchange.user.username = username;
+//         await newExchange.save();
+
+//         const newTransaction = await Transaction.create(transactionOptions);
+//         transactionId = newTransaction.id;
+//         newTransaction.transaction = exchangeId;
+//         newTransaction.user.id = _id;
+//         newTransaction.user.email = email;
+//         newTransaction.user.username = username;
+//         await newTransaction.save();
+
+//         const user = await User.findById(_id);
+//         user.exchanges.push(exchangeId);
+//         user.eth -= value;
+//         user.transactions.push(transactionId);
+//         await user.save();
+
+//         res
+//           .status(201)
+//           .json({ message: "Exchange successful", data: { exchangeId } });
+//       } catch (err) {
+//         console.error(err);
+//         res.status(400).json({ message: "Exchange failed", error: true });
+//       }
+//     }
+//     let btc = user.btc;
+//     if (
+//       (sourceCurrency === "BTC" && btc === 0) ||
+//       (sourceCurrency === "BTC" && btc < sourceCurrency)
+//     ) {
+//       res
+//         .status(400)
+//         .json({ message: "You do not have sufficient BTC", error: true });
+//     } else {
+//       const exchangeOptions = {
+//         sourceCurrency,
+//         targetCurrency,
+//         amount,
+//         value,
+//       };
+
+//       const transactionOptions = {
+//         type: "exchange",
+//         status: "confirmed",
+//       };
+
+//       let transactionId;
+//       let exchangeId;
+
+//       try {
+//         const newExchange = await Exchange.create(exchangeOptions);
+//         exchangeId = newExchange.id;
+//         newExchange.user.id = _id;
+//         newExchange.user.email = email;
+//         newExchange.user.username = username;
+//         await newExchange.save();
+
+//         const newTransaction = await Transaction.create(transactionOptions);
+//         transactionId = newTransaction.id;
+//         newTransaction.transaction = exchangeId;
+//         newTransaction.user.id = _id;
+//         newTransaction.user.email = email;
+//         newTransaction.user.username = username;
+//         await newTransaction.save();
+
+//         const user = await User.findById(_id);
+//         user.exchanges.push(exchangeId);
+//         user.btc -= value;
+//         user.transactions.push(transactionId);
+//         await user.save();
+
+//         res
+//           .status(201)
+//           .json({ message: "Exchange successful", data: { exchangeId } });
+//       } catch (err) {
+//         console.error(err);
+//         res.status(400).json({ message: "Exchange failed", error: true });
+//       }
+//     }
+//     let cny = user.cny;
+//     if (
+//       (sourceCurrency === "CNY" && cny === 0) ||
+//       (sourceCurrency === "CNY" && cny < sourceCurrency)
+//     ) {
+//       res
+//         .status(400)
+//         .json({ message: "You do not have sufficient CNY", error: true });
+//     } else {
+//       const exchangeOptions = {
+//         sourceCurrency,
+//         targetCurrency,
+//         amount,
+//         value,
+//       };
+
+//       const transactionOptions = {
+//         type: "exchange",
+//         status: "confirmed",
+//       };
+
+//       let transactionId;
+//       let exchangeId;
+
+//       try {
+//         const newExchange = await Exchange.create(exchangeOptions);
+//         exchangeId = newExchange.id;
+//         newExchange.user.id = _id;
+//         newExchange.user.email = email;
+//         newExchange.user.username = username;
+//         await newExchange.save();
+
+//         const newTransaction = await Transaction.create(transactionOptions);
+//         transactionId = newTransaction.id;
+//         newTransaction.transaction = exchangeId;
+//         newTransaction.user.id = _id;
+//         newTransaction.user.email = email;
+//         newTransaction.user.username = username;
+//         await newTransaction.save();
+
+//         const user = await User.findById(_id);
+//         user.exchanges.push(exchangeId);
+//         user.cny -= value;
+//         user.transactions.push(transactionId);
+//         await user.save();
+
+//         res
+//           .status(201)
+//           .json({ message: "Exchange successful", data: { exchangeId } });
+//       } catch (err) {
+//         console.error(err);
+//         res.status(400).json({ message: "Exchange failed", error: true });
+//       }
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: "Internal server error", error: true });
+//   }
 // };
+
+const userExchange = async (req, res) => {
+  try {
+    const { sourceCurrency, targetCurrency, amount, value } = req.body;
+    const { email, username, _id } = req.user;
+
+    if (!sourceCurrency || !targetCurrency || !amount || !value) {
+      return res
+        .status(400)
+        .json({ message: "Invalid input data", error: true });
+    }
+
+    let user = await User.findById(_id);
+
+    let currencyBalance = user[sourceCurrency.toLowerCase()];
+    if (currencyBalance === 0 || currencyBalance < amount) {
+      res.status(400).json({
+        message: `You do not have sufficient ${sourceCurrency}`,
+        error: true,
+      });
+    } else {
+      const exchangeOptions = {
+        sourceCurrency,
+        targetCurrency,
+        amount,
+        value,
+      };
+
+      const transactionOptions = {
+        type: "exchange",
+        status: "confirmed",
+      };
+
+      let transactionId;
+      let exchangeId;
+
+      try {
+        const newExchange = await Exchange.create(exchangeOptions);
+        exchangeId = newExchange.id;
+        newExchange.user.id = _id;
+        newExchange.user.email = email;
+        newExchange.user.username = username;
+        await newExchange.save();
+
+        const newTransaction = await Transaction.create(transactionOptions);
+        transactionId = newTransaction.id;
+        newTransaction.transaction = exchangeId;
+        newTransaction.user.id = _id;
+        newTransaction.user.email = email;
+        newTransaction.user.username = username;
+        await newTransaction.save();
+
+        const user = await User.findById(_id);
+        user.exchanges.push(exchangeId);
+        user[sourceCurrency.toLowerCase()] -= amount; // Subtract from source currency
+        user[targetCurrency.toLowerCase()] += amount; // Add to target currency
+        user.transactions.push(transactionId);
+        await user.save();
+
+        res
+          .status(201)
+          .json({ message: "Exchange successful", data: { exchangeId } });
+      } catch (err) {
+        console.error(err);
+        res.status(400).json({ message: "Exchange failed", error: true });
+      }
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error", error: true });
+  }
+};
+
+////////////////////////////////////
+////////////reset password//////////
+////////////////////////////////////
 
 const resetPassword = async (req, res) => {
   try {
@@ -738,7 +1100,9 @@ module.exports = {
   userVerify,
   userWithdraw,
   userTrade,
-  getTrades,
+  userExchange,
+  getExchange,
+  getTrade,
   resetPassword,
   forgotPasword,
   getUser,

@@ -41,6 +41,22 @@ const UserSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    usdBal: {
+      type: Number,
+      default: 0,
+    },
+    btcBal: {
+      type: Number,
+      default: 0,
+    },
+    ethBal: {
+      type: Number,
+      default: 0,
+    },
+    cnyBal: {
+      type: Number,
+      default: 0,
+    },
     profit: {
       type: Number,
       default: 0,
@@ -78,6 +94,12 @@ const UserSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "trade",
+      },
+    ],
+    exchanges: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "exchange",
       },
     ],
     withdrawal: [
