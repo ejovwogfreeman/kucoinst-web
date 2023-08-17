@@ -998,7 +998,7 @@ const userExchange = async (req, res) => {
 
       const transactionOptions = {
         type: "exchange",
-        status: "confirmed",
+        status: "pending",
       };
 
       let transactionId;

@@ -22,6 +22,11 @@ const tradeSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    status: {
+      type: String,
+      default: "pending",
+      enum: ["pending", "processing", "confirmed", "failed", "declined"],
+    },
   },
   {
     timestamps: true,
