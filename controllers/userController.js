@@ -353,8 +353,8 @@ const userInvest = async (req, res) => {
   }
 
   let user = await User.findById(_id);
-  let balance = user.balance;
-  if (amount > balance || balance === 0)
+  let usdt = user.usdt;
+  if (amount > usdt || usdt === 0)
     return res.status(400).json({
       message: "You don't have sufficient balance to make this investment",
       error: true,
@@ -390,7 +390,7 @@ const userInvest = async (req, res) => {
     await transaction.save();
 
     const user = await User.findById(_id);
-    user.balance = user.balance - amount;
+    user.usdt = user.usdt - amount;
     user.investments.push(investmentId);
     user.transactions.push(transactionId);
     await user.save();
@@ -535,7 +535,7 @@ const userWithdraw = async (req, res) => {
   let { amount, address, mode } = req.body;
   amount = Number(amount);
 
-  if (amount > user.balance || user.balance === 0) {
+  if (amount > user.usdt || user.usdt === 0) {
     return res
       .status(400)
       .json({ message: "You do not have sufficient balance.", error: true });
@@ -606,8 +606,8 @@ const userTrade = async (req, res) => {
 
     let user = await User.findById(_id);
 
-    let balance = user.balance;
-    if (amount > balance || balance === 0)
+    let usdt = user.usdt;
+    if (amount > usdt || usdt === 0)
       return res.status(400).json({
         message: "You don't have sufficient balance to trade",
         error: true,
@@ -661,7 +661,7 @@ const userTrade = async (req, res) => {
 
       const user = await User.findById(_id);
       user.trades.push(tradeId);
-      user.balance -= gain;
+      user.usdt -= gain;
       user.transactions.push(transactionId);
       await user.save();
 

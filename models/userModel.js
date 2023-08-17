@@ -37,19 +37,19 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    balance: {
+    usdt: {
       type: Number,
       default: 0,
     },
-    usdBal: {
+    usd: {
       type: Number,
       default: 0,
     },
-    btcBal: {
+    btc: {
       type: Number,
       default: 0,
     },
-    ethBal: {
+    eth: {
       type: Number,
       default: 0,
     },
