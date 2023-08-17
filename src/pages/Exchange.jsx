@@ -194,7 +194,7 @@ const Exchange = ({ user }) => {
             </div>
             <div>
               <p>Available {sourceCurrency}</p>
-              <h6>{user.balance}</h6>
+              <h6>{user.usdt}</h6>
             </div>
             <div>
               <p>Available {targetCurrency}</p>

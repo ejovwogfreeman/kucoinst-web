@@ -12,7 +12,7 @@ const Assets = ({ user }) => {
     {
       id: 1,
       name: "USDT",
-      available: user.balance,
+      available: user.usdt,
     },
     {
       id: 2,
@@ -42,7 +42,7 @@ const Assets = ({ user }) => {
         <div>
           <span>Assts</span>
           <span className="bal">
-            <h1>{user.balance}</h1>
+            <h1>{user.usdt}</h1>
             <span>USDT</span>
           </span>
         </div>

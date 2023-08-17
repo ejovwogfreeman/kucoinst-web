@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/DWE.css";
 import { MdArrowBackIos } from "react-icons/md";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import tether from "../assets/tether.png";
 import btc from "../assets/btc.png";
 

@@ -256,7 +256,7 @@ const Trade = ({ user }) => {
             placeholder="Buy and make profit based on the timeframes above"
           />
           <div className="d-flex align-items-center justify-content-between mt-2">
-            <h6>Available Balance: {user.balance}</h6>
+            <h6>Available Balance: {user.usdt}</h6>
             <h6>Handling Fee: 0.01%</h6>
           </div>
           <button disabled={loading} className="btn btn-success mt-2 w-100">
