@@ -299,10 +299,10 @@ const Trade = ({ user }) => {
                 <td>Quantity</td>
                 <td>{amount} USDT</td>
               </tr>
-              <tr className="px-2">
+              {/* <tr className="px-2">
                 <td>Expected</td>
                 <td>{gain} USDT</td>
-              </tr>
+              </tr> */}
             </table>
           )}
           {showBtn && (
