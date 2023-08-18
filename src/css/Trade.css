@@ -18,8 +18,8 @@
   padding: 10px;
 }
 
-.show,
-.hide {
+.showBox,
+.hideBox {
   transition: 0.3s ease-in-out;
   height: 370px;
   width: 100%;
@@ -27,13 +27,13 @@
   padding: 20px 10px !important;
 }
 
-.hide {
+.hideBox {
   position: fixed;
   bottom: 0;
   transform: translateY(100%);
 }
 
-.show {
+.showBox {
   position: fixed;
   bottom: 0;
   transform: translateY(0);

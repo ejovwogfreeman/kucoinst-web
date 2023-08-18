@@ -170,7 +170,7 @@ const Trade = ({ user }) => {
   }
 
   return (
-    <div className="trade bg-dark">
+    <div className="trade bg-dark" style={{ paddingBottom: "60px" }}>
       <div
         className={`info ${data.price >= 1 ? "text-success" : "text-danger"}`}
       >
@@ -200,7 +200,7 @@ const Trade = ({ user }) => {
           Buy Fall
         </div>
       </div>
-      <div className={`bg-dark ${show ? "show" : "hide"}`}>
+      <div className={`bg-dark ${show ? "showBox" : "hideBox"}`}>
         <h5 className="text-center fw-bold">ORDER CONFIRMATION</h5>
         <IoMdClose className="close-icon" onClick={() => handleShow()} />
         <table width="100%">
