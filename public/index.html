@@ -37,18 +37,23 @@
     -->
     <style>
       #google_translate_element {
-        top: 0px !important;
-        left: 0px !important;
+        bottom: 60px !important;
+        right: 10px !important;
         position: fixed;
         z-index: 10000;
-        width: 30px;
-        color: red;
       }
       #google_translate_element select {
         border: 1px solid rgba(0, 0, 0, 0.2);
         outline: none;
         padding: 3px;
-        width: 30px;
+      }
+      @media screen and (max-width: 500px) {
+        #google_translate_element {
+          top: 5px !important;
+          left: 5px !important;
+          position: fixed;
+          z-index: 10000;
+        }
       }
     </style>
     <title>Kucoin</title>
