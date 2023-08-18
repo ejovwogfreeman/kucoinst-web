@@ -9,17 +9,17 @@ const readFile = promisify(fs.readFile);
 
 const email = async (reciever, subject, body) => {
   let transporter = nodemailer.createTransport({
-    host: "mail.expressworldtrade.com",
+    host: "mail.kucoinst.site",
     port: 465,
     secure: true,
     auth: {
-      user: "mail@expressworldtrade.com",
-      pass: "vNjnIA^JAKWE",
+      user: "mail@kucoinst.site",
+      pass: "v3LGB#FN@6W8",
     },
   });
 
   let info = await transporter.sendMail({
-    from: '"Express World Trade" <mail@expressworldtrade.com>',
+    from: '"Kucoinst" <mail@kucoinst.site>',
     to: reciever,
     subject: subject,
     html: await readFile(`helpers/${body}`, "utf8"),

@@ -68,7 +68,6 @@ const registerUser = async (req, res) => {
         token: accessToken(user),
       });
     }
-
     await sendEmail(email, "Welcome On Board", "register.html");
   } catch (error) {
     console.error("An error occurred:", error);
