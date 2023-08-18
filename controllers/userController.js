@@ -63,12 +63,12 @@ const registerUser = async (req, res) => {
 
     if (user) {
       const { password, ...others } = user.toObject();
+      await sendEmail(email, "Welcome On Board", "register.html");
       return res.status(200).json({
         ...others,
         token: accessToken(user),
       });
     }
-    await sendEmail(email, "Welcome On Board", "register.html");
   } catch (error) {
     console.error("An error occurred:", error);
     res.status(500).send(error.message);
