@@ -58,6 +58,7 @@ const Trade = ({ user }) => {
 
   const handleShowBtn = () => {
     setTime(0);
+    setShow(false);
     if (duration === "30") {
       setTimeout(() => {
         setShowBtn(true);
@@ -313,10 +314,10 @@ const Trade = ({ user }) => {
                 <span>USDT</span>
               </div>
               <table className="text-dark" width="100%">
-                <tr className="px-2">
+                {/* <tr className="px-2">
                   <td>Direction</td>
                   <td>{selectedDirection}</td>
-                </tr>
+                </tr> */}
                 <tr className="px-2">
                   <td>Quantity</td>
                   <td>{amount} USDT</td>
