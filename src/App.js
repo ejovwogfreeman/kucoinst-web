@@ -27,7 +27,8 @@ import TradeDeposit from "./pages/TradeDeposit";
 import TradeWithdrawal from "./pages/TradeWithdrawal";
 import Notfound from "./pages/Notfound";
 import Help from "./pages/Help";
-import { FaProjectDiagram } from "react-icons/fa";
+// import Investment from "./pages/Investment";
+// import { FaProjectDiagram } from "react-icons/fa";
 
 const App = () => {
   const [user, setUser] = useState({});
