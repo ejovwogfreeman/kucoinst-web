@@ -1,114 +1,68 @@
 import React, { useState } from "react";
 import "../css/Assets.css";
-import icon1 from "../assets/icon-deposit.png";
-import icon2 from "../assets/icon-withdraw.png";
-import icon3 from "../assets/icon-exchange.png";
+import icon1 from "../assets/inv1.png";
+import icon2 from "../assets/inv2.png";
+import icon3 from "../assets/inv3.png";
 import { Link } from "react-router-dom";
 
 const Investment = ({ user }) => {
-  const [page, setPage] = useState(true);
-
-  let coins = [
-    {
-      id: 1,
-      name: "USDT",
-      available: user.usdt,
-    },
-    {
-      id: 2,
-      name: "BTC",
-      available: "0000000.00",
-    },
-    {
-      id: 3,
-      name: "ETH",
-      available: "0000000.00",
-    },
-    {
-      id: 4,
-      name: "USD",
-      available: "0000000.00",
-    },
-    {
-      id: 5,
-      name: "CNY",
-      available: "0000000.00",
-    },
-  ];
-
   return (
-    <div className="assets-container">
+    <div className="assets-container" style={{ paddingBottom: "20px" }}>
       <div className="assets-banner">
         <div>
-          <span>Assts</span>
-          <span className="bal">
-            <h1>{user.usdt}</h1>
-            <span>USDT</span>
-          </span>
+          <h3 className="fw-bold">Mining Earns Non-Stop</h3>
+          <p>
+            Locked Up mining is the profit of mining in the platform mining pool
+            by hosting the USDT to the platform's super-computing power miner
+          </p>
         </div>
       </div>
       <div className="transactions">
-        <Link to="/deposit">
+        <span className="invx">
           <img src={icon1} alt="" />
-          <h6>Deposit</h6>
-        </Link>
-        <Link to="/withdraw">
+          <h6>100% capital security</h6>
+        </span>
+        <span className="invx">
           <img src={icon2} alt="" />
-          <h6>Withdraw</h6>
-        </Link>
-        <Link to="/exchange">
+          <h6>Continuous revenue on holiday</h6>
+        </span>
+        <span className="invx">
           <img src={icon3} alt="" />
-          <h6>Exchange</h6>
+          <h6>Value of the day after successful deposit</h6>
+        </span>
+      </div>
+      <div className="assets-components pt-0">
+        <div className="bg-light p-2 rounded">
+          <h4 className="text-center fw-bold">For Example</h4>
+          <h5 className="text-center fw-bold">Income Calculation</h5>
+          <p>
+            The member locks 10000U on the platform and chooses a five-day
+            period, and the daily output is 0.5% to 0.7% of the locked position
+            amount. The daily output is as follows:
+          </p>
+          <p>Minimum: 10000Ux 0.5%=50U</p>
+          <p>Maximum: 10000Ux 0.7%=70U</p>
+          <p>
+            That is, you can get 250U~350U of income after 5 days. The income is
+            issued daily, and the issued income can be deposited and withdrawn
+            at any time. After the lock-up principal expires, it will be
+            automatically transferred to your asset account.
+          </p>
+        </div>
+        <div className="bg-light p-2 rounded my-4">
+          <h5 className="text-center fw-bold">
+            Will market conditions affect lock-up income?
+          </h5>
+          <p>
+            1.Lock-up mining is a mechanism for the operation of the blockchain
+            network of a currency project. It is related to the actual project
+            operation and has no direct relationship with the rise and fall of
+            the market. <br />
+          </p>
+        </div>
+        <Link to="/invest" className="btn btn-primary w-100">
+          I want to participate
         </Link>
-      </div>
-      <div className="assets">
-        <span
-          onClick={() => setPage(true)}
-          style={{
-            color: page ? "blue" : "black",
-            borderColor: page ? "blue" : "rgba(0,0,0,0.5)",
-            cursor: "pointer",
-          }}
-        >
-          Account Assets
-        </span>
-        <span
-          onClick={() => setPage(false)}
-          style={{
-            color: !page ? "blue" : "black",
-            borderColor: !page ? "blue" : "rgba(0,0,0,0.5)",
-            cursor: "pointer",
-          }}
-        >
-          Coin Assets
-        </span>
-      </div>
-      <div className="assets-components">
-        {page ? (
-          <>
-            {coins.map((coin) => {
-              return (
-                <div key={coin.id} className="asset-divs">
-                  <h5 className="text-primary">{coin.name}</h5>
-                  <table>
-                    <tr className="px-2">
-                      <th>Available(USDT)</th>
-                      <th>In Review(USDT)</th>
-                      <th>Coin(USDT)</th>
-                    </tr>
-                    <tr className="px-2">
-                      <td>{coin.available}</td>
-                      <td>0000000.00</td>
-                      <td>{coin.available}</td>
-                    </tr>
-                  </table>
-                </div>
-              );
-            })}
-          </>
-        ) : (
-          <></>
-        )}
       </div>
     </div>
   );

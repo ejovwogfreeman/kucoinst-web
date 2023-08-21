@@ -114,9 +114,9 @@ const Header = () => {
         </div>
       </div>
 
-      <div className="banner2">
+      <Link to="/investment" className="banner2 d-block">
         <img src={banner2} alt="" />
-      </div>
+      </Link>
     </div>
   );
 };

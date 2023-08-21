@@ -15,6 +15,10 @@
   justify-content: center;
 }
 
+.assets-banner .head {
+  padding: 0px 5%;
+}
+
 .assets-banner div {
   text-align: center;
 }
@@ -44,6 +48,19 @@
 }
 
 .transactions a h6 {
+  font-weight: bold;
+}
+
+.transactions .invx {
+  display: block;
+  text-align: center;
+}
+
+.transactions .invx img {
+  width: 50px;
+}
+
+.transactions .invx h6 {
   font-weight: bold;
 }
 
@@ -102,5 +119,21 @@ tr td {
 @media screen and (max-width: 500px) {
   table {
     font-size: 13px;
+  }
+  .transactions .invx h6 {
+    font-size: 13px;
+  }
+  .assets-banner .head {
+    padding: 0px 1%;
+  }
+  .assets-banner .head:last-child {
+    font-size: 15px;
+  }
+  .assets-banner .head:last-child h5 {
+    margin: 0px;
+  }
+  .assetmine {
+    padding-left: 2%;
+    padding-right: 2%;
   }
 }
