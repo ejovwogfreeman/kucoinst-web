@@ -43,10 +43,11 @@ const Invest = ({ user }) => {
         config
       );
 
-      toast.success("Exchange made successfully");
-      window.location.reload();
+      toast.success("Order made successfully");
+      setAmount("");
     } catch (error) {
       if (error.response && error.response.data.message) {
+        console.log(error.response.data.message);
         toast.error(error.response.data.message);
       } else {
         toast.error("An error occurred");
