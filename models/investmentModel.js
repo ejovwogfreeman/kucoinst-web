@@ -12,18 +12,33 @@ const investmentSchema = new mongoose.Schema(
     },
     amount: {
       type: Number,
-      requied: true,
+      required: true,
     },
     plan: {
-      type: String,
-      default: "Lock Up Mining 01",
-      enum: [
-        "Lock Up Mining 01",
-        "Lock Up Mining 02",
-        "Lock Up Mining 03",
-        "Lock Up Mining 04",
-        "Lock Up Mining 05",
-      ],
+      name: {
+        type: String,
+        enum: [
+          "Lock Up Mining 01",
+          "Lock Up Mining 02",
+          "Lock Up Mining 03",
+          "Lock Up Mining 04",
+          "Lock Up Mining 05",
+        ],
+        default: "Lock Up Mining 01",
+      },
+      minAmount: {
+        type: Number,
+        default: 2000,
+      },
+      dailyProfit: {
+        type: Number,
+        default: 0.007,
+      },
+      days: {
+        type: Number,
+        default: 5,
+      },
+      // Add more properties as needed
     },
     status: {
       type: String,
