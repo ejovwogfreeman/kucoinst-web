@@ -443,7 +443,6 @@ cron.schedule("0 0 * * *", async () => {
 });
 
 const userInvest = async (req, res) => {
-  console.log("route hit");
   const { amount, plan } = req.body;
   const { email, username, _id } = req.user;
 
