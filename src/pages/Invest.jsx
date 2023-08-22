@@ -5,10 +5,56 @@ import { MdArrowBackIos } from "react-icons/md";
 import { Link } from "react-router-dom";
 import ScrollToTop from "../components/ScrollToTop";
 import { useParams } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Invest = ({ user }) => {
   const [loading, setLoading] = useState(false);
+  const [amount, setAmount] = useState("");
   const params = useParams();
+  const authToken = JSON.parse(localStorage.getItem("user")).token;
+  const config = {
+    headers: {
+      "auth-token": authToken,
+    },
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const invest = {
+      amount,
+      plan:
+        (params.plan === "lockupmining01" && "Lock Up Mining 01") ||
+        (params.plan === "lockupmining02" && "Lock Up Mining 02") ||
+        (params.plan === "lockupmining03" && "Lock Up Mining 03") ||
+        (params.plan === "lockupmining04" && "Lock Up Mining 04") ||
+        (params.plan === "lockupmining05" && "Lock Up Mining 05"),
+    };
+    console.log(invest);
+    try {
+      if (!amount) {
+        return toast.error("Please Enter Amount");
+      }
+      setLoading(true);
+
+      const response = await axios.post(
+        "https://kucoinst-web.onrender.com/api/users/invest",
+        invest,
+        config
+      );
+
+      toast.success("Exchange made successfully");
+      window.location.reload();
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("An error occurred");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="assets-container">
       <ScrollToTop />
@@ -21,7 +67,7 @@ const Invest = ({ user }) => {
           backgroundColor: "white",
         }}
       >
-        <spanm className="fw-bold">Investment Details</spanm>
+        <span className="fw-bold">Investment Details</span>
         <Link
           to="/investment_plans"
           className="arrow-icon"
@@ -116,9 +162,14 @@ const Invest = ({ user }) => {
           </span>
         </div>
       </div>
-      <form action="" className="mining-form">
+      <form onSubmit={handleSubmit} className="mining-form">
         <label htmlFor="">Investment Amount(USDT)</label>
-        <input type="text" placeholder="Please enter amount to invest" />
+        <input
+          type="number"
+          placeholder="Please enter amount to invest"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+        />
         <h6 className="fw-bold mb-0 mt-2">Mining Earns Non-Stop</h6>
         <small>
           Locked Up mining is the profit of mining in the platform mining pool

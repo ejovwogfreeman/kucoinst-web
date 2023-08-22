@@ -103,7 +103,7 @@ const Exchange = ({ user }) => {
 
     try {
       if (!sourceCurrency || !targetCurrency || !amount || !value) {
-        throw new Error("Please fill all fields");
+        return toast.error("Please fill all fields");
       }
 
       const exchange = {

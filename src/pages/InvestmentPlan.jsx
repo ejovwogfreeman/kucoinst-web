@@ -66,7 +66,7 @@ const InvestmentPlan = ({ user }) => {
           backgroundColor: "white",
         }}
       >
-        <spanm className="fw-bold">Investment Plans</spanm>
+        <span className="fw-bold">Investment Plans</span>
         <Link
           to="/investment"
           className="arrow-icon"
@@ -120,7 +120,7 @@ const InvestmentPlan = ({ user }) => {
               <div className="d-flex align-items-center justify-content-between">
                 <span className="d-flex align-items-center">
                   <img src={img} alt="" width="50px" />
-                  <h5 className="ms-2 m-0">{x.plan}</h5>
+                  <h5 className="ms-2 m-0 fw-bold">{x.plan}</h5>
                 </span>
                 <div>
                   <Link to={`/invest/${x.url}`} className="btn btn-primary">
