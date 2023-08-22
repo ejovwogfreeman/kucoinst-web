@@ -16,8 +16,14 @@ const investmentSchema = new mongoose.Schema(
     },
     plan: {
       type: String,
-      default: "Mini Plan",
-      enum: ["Mini Plan", "Silver Plan", "Gold Plan", "Platinum Plan"],
+      default: "Lock Up Mining O1",
+      enum: [
+        "Lock Up Mining O1",
+        "Lock Up Mining O2",
+        "Lock Up Mining O3",
+        "Lock Up Mining O4",
+        "Lock Up Mining O5",
+      ],
     },
     status: {
       type: String,

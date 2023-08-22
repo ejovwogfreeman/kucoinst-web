@@ -291,14 +291,14 @@ const userInvest = async (req, res) => {
     return res
       .status(400)
       .json({ message: "Amount must not be left empty", error: true });
-  if (plan.toLowerCase().includes("mini")) {
-    if (amount < 300) {
+  if (plan.toLowerCase().includes("Lock Up Mining O1")) {
+    if (amount < 2000) {
       return res.status(400).json({
         message: "The amount is smaller than the selected plan.",
         error: true,
       });
     }
-    if (amount > 2999) {
+    if (amount > 99999999) {
       return res.status(400).json({
         message: "The amount is larger than the selected plan.",
         error: true,
@@ -306,14 +306,14 @@ const userInvest = async (req, res) => {
     }
   }
 
-  if (plan.toLowerCase().includes("silver")) {
-    if (amount < 3000) {
+  if (plan.toLowerCase().includes("Lock Up Mining O2")) {
+    if (amount < 5000) {
       return res.status(400).json({
         message: "The amount is smaller than the selected plan.",
         error: true,
       });
     }
-    if (amount > 49999) {
+    if (amount > 99999999) {
       return res.status(400).json({
         message: "The amount is larger than the selected plan.",
         error: true,
@@ -321,29 +321,43 @@ const userInvest = async (req, res) => {
     }
   }
 
-  if (plan.toLowerCase().includes("gold")) {
-    if (amount < 50000) {
+  if (plan.toLowerCase().includes("Lock Up Mining O3")) {
+    if (amount < 20000) {
       return res.status(400).json({
         message: "The amount is smaller than the selected plan.",
         error: true,
       });
     }
-    if (amount > 99999) {
+    if (amount > 99999999) {
       return res.status(400).json({
         message: "The amount is larger than the selected plan.",
         error: true,
       });
     }
   }
-
-  if (plan.toLowerCase().includes("platinum")) {
+  if (plan.toLowerCase().includes("Lock Up Mining O4")) {
     if (amount < 100000) {
       return res.status(400).json({
         message: "The amount is smaller than the selected plan.",
         error: true,
       });
     }
-    if (amount > 600000) {
+    if (amount > 99999999) {
+      return res.status(400).json({
+        message: "The amount is larger than the selected plan.",
+        error: true,
+      });
+    }
+  }
+
+  if (plan.toLowerCase().includes("Lock Up Mining O5")) {
+    if (amount < 1000000) {
+      return res.status(400).json({
+        message: "The amount is smaller than the selected plan.",
+        error: true,
+      });
+    }
+    if (amount > 99999999) {
       return res.status(400).json({
         message: "The amount is larger than the selected plan.",
         error: true,
