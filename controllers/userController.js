@@ -8,10 +8,10 @@ const Exchange = require("../models/exchangeModel");
 const Deposit = require("../models/depositModel");
 const Withdrawal = require("../models/withdrawalModel");
 const Verify = require("../models/verifyModel");
+const Investment = require("../models/Investmentodel");
 const refCode = require("voucher-code-generator");
 const sendEmail = require("../helpers/email");
 const cron = require("node-cron");
-const Investment = require("./models/Investment");
 // const mongoose = require("mongoose");
 
 ///////////////////////////
