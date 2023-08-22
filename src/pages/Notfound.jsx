@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import notfound from "../assets/notfound.gif";
+import ScrollToTop from "../components/ScrollToTop";
 
 const Notfound = () => {
   return (
@@ -13,6 +14,7 @@ const Notfound = () => {
         justifyContent: "center",
       }}
     >
+      <ScrollToTop />
       <div>
         <img src={notfound} alt="" className="ms-4 d-block" />
         <p className="mt-3">

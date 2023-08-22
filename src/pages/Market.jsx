@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../css/Crypto.css";
 import { Link } from "react-router-dom";
 import loading from "../assets/loading.gif";
+import ScrollToTop from "../components/ScrollToTop";
 
 const Market = () => {
   const [data, setData] = useState(null);
@@ -41,6 +42,7 @@ const Market = () => {
 
   return (
     <>
+      <ScrollToTop />
       <div className="price-volume" style={{ paddingTop: "60px" }}>
         <span
           onClick={() => setPage(true)}

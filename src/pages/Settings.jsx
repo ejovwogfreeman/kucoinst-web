@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { AiFillMail } from "react-icons/ai";
+import ScrollToTop from "../components/ScrollToTop";
 
 const Settings = () => {
   const navigate = useNavigate();
@@ -93,6 +94,7 @@ const Settings = () => {
 
   return (
     <div className="settings-container">
+      <ScrollToTop />
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="">Username</label>

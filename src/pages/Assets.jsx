@@ -4,6 +4,7 @@ import icon1 from "../assets/icon-deposit.png";
 import icon2 from "../assets/icon-withdraw.png";
 import icon3 from "../assets/icon-exchange.png";
 import { Link } from "react-router-dom";
+import ScrollToTop from "../components/ScrollToTop";
 
 const Assets = ({ user }) => {
   const [page, setPage] = useState(true);
@@ -38,6 +39,7 @@ const Assets = ({ user }) => {
 
   return (
     <div className="assets-container">
+      <ScrollToTop />
       <div className="assets-banner">
         <div>
           <span>Assts</span>

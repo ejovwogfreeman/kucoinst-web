@@ -11,6 +11,7 @@ import { AiFillMail } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import ScrollToTop from "../components/ScrollToTop";
 
 const Register = () => {
   // const [regType, setRegType] = useState(false);
@@ -78,6 +79,7 @@ const Register = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <ScrollToTop />
       {/* <span onClick={() => handleRegType()} className="btn btn-dark mb-2 w-100">
         {regType ? "Use Phone Number" : "Use Email"}
       </span> */}

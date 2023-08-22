@@ -6,6 +6,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import "../css/Login.css";
+import ScrollToTop from "../components/ScrollToTop";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -47,6 +48,7 @@ const Login = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <ScrollToTop />
       <div className="form-group">
         <label htmlFor="">Username</label>
         <div className="d-flex align-items-center border">

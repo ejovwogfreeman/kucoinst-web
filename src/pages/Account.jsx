@@ -17,6 +17,7 @@ import { FiSettings } from "react-icons/fi";
 import profilelogo from "../assets/profilelogo.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import ScrollToTop from "../components/ScrollToTop";
 
 const Account = () => {
   const [user, setUser] = useState({});
@@ -160,6 +161,7 @@ const Account = () => {
   ];
   return (
     <>
+      <ScrollToTop />
       {user.profileImage && user.profileImage.length > 0 ? (
         <>
           <div className="account-container">

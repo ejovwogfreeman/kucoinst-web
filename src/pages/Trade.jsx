@@ -7,6 +7,7 @@ import axios from "axios";
 import { toast } from "react-toastify"; // Make sure to import toast
 import "react-toastify/dist/ReactToastify.css"; // Import toast styles
 import GaugeChart from "react-gauge-chart";
+import ScrollToTop from "../components/ScrollToTop";
 
 const Trade = ({ user }) => {
   const [data, setData] = useState(null);
@@ -173,6 +174,7 @@ const Trade = ({ user }) => {
 
   return (
     <div className="trade bg-dark" style={{ paddingBottom: "60px" }}>
+      <ScrollToTop />
       <div
         className={`info ${data.price >= 1 ? "text-success" : "text-danger"}`}
       >

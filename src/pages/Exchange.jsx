@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { CgArrowsExchangeAltV } from "react-icons/cg";
 import { toast } from "react-toastify";
 import axios from "axios";
+import ScrollToTop from "../components/ScrollToTop";
 
 const Exchange = ({ user }) => {
   const [loading, setLoading] = useState(false);
@@ -135,6 +136,7 @@ const Exchange = ({ user }) => {
 
   return (
     <div className="top-container">
+      <ScrollToTop />
       <div className="bg-primary top">
         <span>Exchange</span>
         <Link to="/assets" className="arrow-icon">

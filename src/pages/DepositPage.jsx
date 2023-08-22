@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { MdArrowBackIos } from "react-icons/md";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import QRCode from "react-qr-code";
+import ScrollToTop from "../components/ScrollToTop";
 
 const DepositPage = () => {
   const [loading, setLoading] = useState(false);
@@ -103,6 +104,7 @@ const DepositPage = () => {
   };
   return (
     <div className="top-container">
+      <ScrollToTop />
       <div className="bg-primary top">
         <span>Deposit</span>
         <Link to="/deposit" className="arrow-icon">

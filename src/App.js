@@ -28,6 +28,7 @@ import TradeWithdrawal from "./pages/TradeWithdrawal";
 import Notfound from "./pages/Notfound";
 import Help from "./pages/Help";
 import Investment from "./pages/Investment";
+import InvestmentPlan from "./pages/InvestmentPlan";
 import Invest from "./pages/Invest";
 // import { FaProjectDiagram } from "react-icons/fa";
 
@@ -115,13 +116,19 @@ const App = () => {
           <Route path="/withdrawals" element={<TradeWithdrawal />} />
         </Route>
         <Route element={<ProtectedRoutes />}>
-          <Route path="help_center" element={<Help />} />
+          <Route path="/help_center" element={<Help />} />
         </Route>
         <Route element={<ProtectedRoutes />}>
-          <Route path="investment" element={<Investment user={user} />} />
+          <Route path="/investment" element={<Investment user={user} />} />
         </Route>
         <Route element={<ProtectedRoutes />}>
-          <Route path="invest" element={<Invest user={user} />} />
+          <Route
+            path="/investment_plans"
+            element={<InvestmentPlan user={user} />}
+          />
+        </Route>
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/invest/:plan" element={<Invest user={user} />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

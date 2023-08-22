@@ -4,10 +4,35 @@ import icon1 from "../assets/inv1.png";
 import icon2 from "../assets/inv2.png";
 import icon3 from "../assets/inv3.png";
 import { Link } from "react-router-dom";
+import { MdArrowBackIos } from "react-icons/md";
+import ScrollToTop from "../components/ScrollToTop";
 
 const Investment = ({ user }) => {
   return (
     <div className="assets-container" style={{ paddingBottom: "20px" }}>
+      <ScrollToTop />
+      <div
+        className="text-center"
+        style={{
+          paddingTop: "70px",
+          paddingBottom: "10px",
+          position: "relative",
+          backgroundColor: "white",
+        }}
+      >
+        <span className="fw-bold">Investment</span>
+        <Link
+          to="/"
+          className="arrow-icon"
+          style={{
+            position: "absolute",
+            left: "10px",
+            bottom: "7px",
+          }}
+        >
+          <MdArrowBackIos />
+        </Link>
+      </div>
       <div className="assets-banner">
         <div>
           <h3 className="fw-bold">Mining Earns Non-Stop</h3>
@@ -60,7 +85,7 @@ const Investment = ({ user }) => {
             the market. <br />
           </p>
         </div>
-        <Link to="/invest" className="btn btn-primary w-100">
+        <Link to="/investment_plans" className="btn btn-primary w-100">
           I want to participate
         </Link>
       </div>

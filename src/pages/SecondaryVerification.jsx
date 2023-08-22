@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { GrDocumentUser } from "react-icons/gr";
 import { Link } from "react-router-dom";
+import ScrollToTop from "../components/ScrollToTop";
 
 const SecondaryVerification = () => {
   const navigate = useNavigate();
@@ -87,6 +88,7 @@ const SecondaryVerification = () => {
 
   return (
     <div className="settings-container">
+      <ScrollToTop />
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="">DOCUMENT (ID/DRIVERS LISCENCE/UTILITY BILL)</label>

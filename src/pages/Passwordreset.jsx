@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AiFillMail } from "react-icons/ai";
 import axios from "axios";
 import { toast } from "react-toastify";
+import ScrollToTop from "../components/ScrollToTop";
 
 const Passwordreset = () => {
   const [email, setEmail] = useState("");
@@ -41,6 +42,7 @@ const Passwordreset = () => {
 
   return (
     <form onSubmit={handleSubmit} className="signin-form">
+      <ScrollToTop />
       <div className="form-group">
         <label htmlFor="">Email</label>
         <div className="d-flex align-items-center border">

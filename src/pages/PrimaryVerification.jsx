@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { Link } from "react-router-dom";
+import ScrollToTop from "../components/ScrollToTop";
 
 const PrimaryVerification = () => {
   const navigate = useNavigate();
@@ -72,6 +73,7 @@ const PrimaryVerification = () => {
 
   return (
     <div className="settings-container">
+      <ScrollToTop />
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="">Full Name</label>

@@ -4,10 +4,12 @@ import { MdArrowBackIos } from "react-icons/md";
 import { Link } from "react-router-dom";
 import tether from "../assets/tether.png";
 import btc from "../assets/btc.png";
+import ScrollToTop from "../components/ScrollToTop";
 
 const Deposit = () => {
   return (
     <div className="top-container">
+      <ScrollToTop />
       <div className="bg-primary top">
         <span>Deposit</span>
         <Link to="/assets" className="arrow-icon">

@@ -1,9 +1,11 @@
 import React from "react";
 import "../css/Help.css";
+import ScrollToTop from "../components/ScrollToTop";
 
 const Help = () => {
   return (
     <div className="trades-container">
+      <ScrollToTop />
       <h3 className="text-center mb-lg-4 my-3 fw-bold">HELP/FAQ</h3>
       <div className="accordion" id="accordionExample" data-aos="fade-down">
         <div className="accordion-item">

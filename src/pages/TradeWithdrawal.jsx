@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../css/Trades.css";
+import ScrollToTop from "../components/ScrollToTop";
 
 const TradeWithdrawal = () => {
   const [trades, settrades] = useState([]);
@@ -23,6 +24,7 @@ const TradeWithdrawal = () => {
   }, []);
   return (
     <div className="trades-container">
+      <ScrollToTop />
       <table width="100%">
         <tr className="px-2">
           <th>TYPE</th>

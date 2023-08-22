@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { MdArrowBackIos } from "react-icons/md";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import ScrollToTop from "../components/ScrollToTop";
 
 const WithdrawPage = () => {
   const [loading, setLoading] = useState(false);
@@ -63,6 +64,7 @@ const WithdrawPage = () => {
 
   return (
     <div className="top-container">
+      <ScrollToTop />
       <div className="bg-primary top">
         <span>Withdraw</span>
         <Link to="/withdraw" className="arrow-icon">

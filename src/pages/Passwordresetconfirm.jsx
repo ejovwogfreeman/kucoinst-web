@@ -4,6 +4,7 @@ import { AiFillMail } from "react-icons/ai";
 import { toast } from "react-toastify";
 import { RiLockPasswordFill } from "react-icons/ri";
 import axios from "axios";
+import ScrollToTop from "../components/ScrollToTop";
 
 const Passwordresetconfirm = () => {
   const [email, setEmail] = useState("");
@@ -51,6 +52,7 @@ const Passwordresetconfirm = () => {
 
   return (
     <>
+      <ScrollToTop />
       <div className="general-container">
         <div className="body">
           <form onSubmit={handleSubmit} className="signin-form">
