@@ -30,7 +30,7 @@ import Help from "./pages/Help";
 import Investment from "./pages/Investment";
 import InvestmentPlan from "./pages/InvestmentPlan";
 import Invest from "./pages/Invest";
-// import { FaProjectDiagram } from "react-icons/fa";
+import InvestmentHistory from "./pages/InvestmentHistory";
 
 const App = () => {
   const [user, setUser] = useState({});
@@ -129,6 +129,9 @@ const App = () => {
         </Route>
         <Route element={<ProtectedRoutes />}>
           <Route path="/invest/:plan" element={<Invest user={user} />} />
+        </Route>
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/orders" element={<InvestmentHistory user={user} />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

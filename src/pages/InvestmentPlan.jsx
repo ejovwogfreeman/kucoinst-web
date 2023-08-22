@@ -12,7 +12,7 @@ const InvestmentPlan = ({ user }) => {
       id: 1,
       url: "lockupmining01",
       plan: "Lock-Up Mining 01",
-      Limit: "2000 ~ 99999999",
+      limit: "2000 ~ 99999999",
       ror: "0.5 ~ 0.7%",
       period: "5(Days)",
       percent: 8.3,
@@ -21,7 +21,7 @@ const InvestmentPlan = ({ user }) => {
       id: 2,
       url: "lockupmining02",
       plan: "Lock-Up Mining 02",
-      Limit: "5000 ~ 99999999",
+      limit: "5000 ~ 99999999",
       ror: "1 ~ 1.25%",
       period: "15(Days)",
       percent: 9.1,
@@ -39,7 +39,7 @@ const InvestmentPlan = ({ user }) => {
       id: 4,
       url: "lockupmining04",
       plan: "Lock-Up Mining 04",
-      Limit: "100000 ~ 99999999",
+      limit: "100000 ~ 99999999",
       ror: "1.25 ~ 2%",
       period: "60(Days)",
       percent: 16.1,
@@ -48,7 +48,7 @@ const InvestmentPlan = ({ user }) => {
       id: 5,
       url: "lockupmining05",
       plan: "Lock-Up Mining 05",
-      Limit: "1000000 ~ 99999999",
+      limit: "1000000 ~ 99999999",
       ror: "2 ~ 2.5%",
       period: "90(Days)",
       percent: 60,
@@ -89,7 +89,9 @@ const InvestmentPlan = ({ user }) => {
             </span>
           </div>
           <div>
-            <Link className="btn btn-light">Order</Link>
+            <Link to="/orders" className="btn btn-light">
+              Orders
+            </Link>
           </div>
         </div>
         <div
