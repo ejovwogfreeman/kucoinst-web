@@ -14,38 +14,43 @@ const Invest = ({ user }) => {
       Limit: "2000 ~ 99999999",
       ror: "0.5 ~ 0.7%",
       period: "5(Days)",
+      percent: 8.3,
     },
     {
       id: 2,
-      url: "lockupmining01",
-      plan: "Lock-Up Mining 01",
-      Limit: "2000 ~ 99999999",
-      ror: "0.5 ~ 0.7%",
-      period: "5(Days)",
+      url: "lockupmining02",
+      plan: "Lock-Up Mining 02",
+      Limit: "5000 ~ 99999999",
+      ror: "1 ~ 1.25%",
+      period: "15(Days)",
+      percent: 9.1,
     },
     {
       id: 3,
-      url: "lockupmining01",
-      plan: "Lock-Up Mining 01",
-      Limit: "2000 ~ 99999999",
-      ror: "0.5 ~ 0.7%",
-      period: "5(Days)",
+      url: "lockupmining03",
+      plan: "Lock-Up Mining 03",
+      limit: "20000 ~ 99999999",
+      ror: "1.25 ~ 1.5%",
+      period: "30(Days)",
+      percent: 17,
     },
     {
       id: 4,
-      url: "lockupmining01",
-      plan: "Lock-Up Mining 01",
-      Limit: "2000 ~ 99999999",
-      ror: "0.5 ~ 0.7%",
-      period: "5(Days)",
+      url: "lockupmining04",
+      plan: "Lock-Up Mining 04",
+      Limit: "100000 ~ 99999999",
+      ror: "1.25 ~ 2%",
+      period: "60(Days)",
+      percent: 16.1,
     },
     {
       id: 5,
-      url: "lockupmining01",
-      plan: "Lock-Up Mining 01",
-      Limit: "2000 ~ 99999999",
-      ror: "0.5 ~ 0.7%",
-      period: "5(Days)",
+      url: "lockupmining05",
+      plan: "Lock-Up Mining 05",
+      Limit: "1000000 ~ 99999999",
+      ror: "2 ~ 2.5%",
+      period: "90(Days)",
+      percent: 60,
     },
   ];
   return (
@@ -63,7 +68,10 @@ const Invest = ({ user }) => {
             <Link className="btn btn-light">Order</Link>
           </div>
         </div>
-        <div className="d-flex align-items-center justify-content-between head">
+        <div
+          className="d-flex align-items-center justify-content-between head"
+          style={{ backgroundColor: "rgba(256, 256,256, 0.3)" }}
+        >
           <span>
             <h5>140.0000</h5>
             <span>Expected earnings</span>
@@ -86,27 +94,29 @@ const Invest = ({ user }) => {
               <div className="d-flex align-items-center justify-content-between">
                 <span className="d-flex align-items-center">
                   <img src={img} alt="" width="50px" />
-                  <h5 className="ms-2 m-0">Lock Up Mining 01</h5>
+                  <h5 className="ms-2 m-0">{x.plan}</h5>
                 </span>
                 <div>
-                  <Link className="btn btn-primary">Buy</Link>
+                  <Link to={x.url} className="btn btn-primary">
+                    Buy
+                  </Link>
                 </div>
               </div>
               <div className="d-flex align-items-center justify-content-between head my-2">
                 <small className="text-center">
                   <small>Single Limit</small> <br />
-                  <span>2000 ~ 99999999</span>
+                  <span>{x.limit}</span>
                 </small>
                 <small className="text-center">
                   <small>Daily Rate Of Return</small> <br />
-                  <span>0.5 ~ 0.7%</span>
+                  <span>{x.ror}</span>
                 </small>
                 <small className="text-center">
                   <small>Period</small> <br />
-                  <span>5(Days)</span>
+                  <span>{x.period}</span>
                 </small>
               </div>
-              <Progress completed={50} />
+              <Progress completed={x.percent} />
             </div>
           );
         })}
