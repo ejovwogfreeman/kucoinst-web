@@ -443,27 +443,27 @@ cron.schedule("0 0 * * *", async () => {
 });
 
 const userInvest = async (req, res) => {
+  console.log("route hit");
   const { amount, plan } = req.body;
   const { email, username, _id } = req.user;
-  const amountNumber = Number(amount);
 
-  if (!amountNumber) {
+  if (!amount) {
     return res.status(400).json({
       message: "Amount must not be left empty",
       error: true,
     });
   }
 
+  const selectedPlan = plan;
   // Plan details mapping
   const planDetails = {
-    "lock up mining o1": { minAmount: 2000, dailyProfit: 0.007, days: 5 },
-    "lock up mining o2": { minAmount: 5000, dailyProfit: 0.0125, days: 15 },
-    "lock up mining o3": { minAmount: 20000, dailyProfit: 0.015, days: 30 },
-    "lock up mining o4": { minAmount: 100000, dailyProfit: 0.02, days: 60 },
-    "lock up mining o5": { minAmount: 1000000, dailyProfit: 0.025, days: 90 },
+    "Lock Up Mining 01": { minAmount: 2000, dailyProfit: 0.007, days: 5 },
+    "Lock Up Mining 02": { minAmount: 5000, dailyProfit: 0.0125, days: 15 },
+    "Lock Up Mining 03": { minAmount: 20000, dailyProfit: 0.015, days: 30 },
+    "Lock Up Mining 04": { minAmount: 100000, dailyProfit: 0.02, days: 60 },
+    "Lock Up Mining 05": { minAmount: 1000000, dailyProfit: 0.025, days: 90 },
   };
 
-  const selectedPlan = plan.toLowerCase();
   if (!planDetails[selectedPlan]) {
     return res.status(400).json({
       message: "Invalid plan selected",
@@ -473,7 +473,7 @@ const userInvest = async (req, res) => {
 
   const { minAmount, dailyProfit, days } = planDetails[selectedPlan];
 
-  if (amountNumber < minAmount || amountNumber > 99999999) {
+  if (amount < minAmount || amount > 99999999) {
     return res.status(400).json({
       message: "Invalid amount for the selected plan",
       error: true,
@@ -482,7 +482,7 @@ const userInvest = async (req, res) => {
 
   const user = await User.findById(_id);
   const usdt = user.usdt;
-  if (amountNumber > usdt || usdt === 0) {
+  if (amount > usdt || usdt === 0) {
     return res.status(400).json({
       message: "Insufficient balance for investment",
       error: true,
@@ -490,8 +490,8 @@ const userInvest = async (req, res) => {
   }
 
   const investOptions = {
-    amount: amountNumber,
-    plan: planDetails[selectedPlan],
+    amount: amount,
+    plan: plan,
     status: "pending", // Initial status
   };
 
@@ -519,7 +519,7 @@ const userInvest = async (req, res) => {
     transaction.user.username = username;
     await transaction.save();
 
-    user.usdt -= amountNumber;
+    user.usdt -= amount;
     user.investments.push(investmentId);
     user.transactions.push(transactionId);
     await user.save();
