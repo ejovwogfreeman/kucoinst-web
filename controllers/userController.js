@@ -10,6 +10,8 @@ const Withdrawal = require("../models/withdrawalModel");
 const Verify = require("../models/verifyModel");
 const refCode = require("voucher-code-generator");
 const sendEmail = require("../helpers/email");
+const cron = require("node-cron");
+const Investment = require("./models/Investment");
 // const mongoose = require("mongoose");
 
 ///////////////////////////
@@ -282,100 +284,215 @@ const getWithdrawal = async (req, res) => {
 //////////Investment/////////
 /////////////////////////////
 
+// const userInvest = async (req, res) => {
+//   let { amount, plan } = req.body;
+//   const { email, username, _id } = req.user;
+//   amount = Number(amount);
+
+//   if (!amount)
+//     return res
+//       .status(400)
+//       .json({ message: "Amount must not be left empty", error: true });
+//   if (plan.toLowerCase().includes("Lock Up Mining O1")) {
+//     if (amount < 2000) {
+//       return res.status(400).json({
+//         message: "The amount is smaller than the selected plan.",
+//         error: true,
+//       });
+//     }
+//     if (amount > 99999999) {
+//       return res.status(400).json({
+//         message: "The amount is larger than the selected plan.",
+//         error: true,
+//       });
+//     }
+//   }
+
+//   if (plan.toLowerCase().includes("Lock Up Mining O2")) {
+//     if (amount < 5000) {
+//       return res.status(400).json({
+//         message: "The amount is smaller than the selected plan.",
+//         error: true,
+//       });
+//     }
+//     if (amount > 99999999) {
+//       return res.status(400).json({
+//         message: "The amount is larger than the selected plan.",
+//         error: true,
+//       });
+//     }
+//   }
+
+//   if (plan.toLowerCase().includes("Lock Up Mining O3")) {
+//     if (amount < 20000) {
+//       return res.status(400).json({
+//         message: "The amount is smaller than the selected plan.",
+//         error: true,
+//       });
+//     }
+//     if (amount > 99999999) {
+//       return res.status(400).json({
+//         message: "The amount is larger than the selected plan.",
+//         error: true,
+//       });
+//     }
+//   }
+//   if (plan.toLowerCase().includes("Lock Up Mining O4")) {
+//     if (amount < 100000) {
+//       return res.status(400).json({
+//         message: "The amount is smaller than the selected plan.",
+//         error: true,
+//       });
+//     }
+//     if (amount > 99999999) {
+//       return res.status(400).json({
+//         message: "The amount is larger than the selected plan.",
+//         error: true,
+//       });
+//     }
+//   }
+
+//   if (plan.toLowerCase().includes("Lock Up Mining O5")) {
+//     if (amount < 1000000) {
+//       return res.status(400).json({
+//         message: "The amount is smaller than the selected plan.",
+//         error: true,
+//       });
+//     }
+//     if (amount > 99999999) {
+//       return res.status(400).json({
+//         message: "The amount is larger than the selected plan.",
+//         error: true,
+//       });
+//     }
+//   }
+
+//   let user = await User.findById(_id);
+//   let usdt = user.usdt;
+//   if (amount > usdt || usdt === 0)
+//     return res.status(400).json({
+//       message: "You don't have sufficient balance to make this investment",
+//       error: true,
+//     });
+
+//   const investOptions = {
+//     amount: amount,
+//     plan: plan,
+//   };
+
+//   const transactionOptions = {
+//     type: "investment",
+//     status: "pending",
+//   };
+
+//   let transactionId;
+//   let investmentId;
+
+//   try {
+//     const investment = await Investment.create(investOptions);
+//     investmentId = investment.id;
+//     investment.user.id = _id;
+//     investment.user.email = email;
+//     investment.user.username = username;
+//     await investment.save();
+
+//     const transaction = await Transaction.create(transactionOptions);
+//     transactionId = transaction.id;
+//     transaction.transaction = investment.id;
+//     transaction.user.id = _id;
+//     transaction.user.email = email;
+//     transaction.user.username = username;
+//     await transaction.save();
+
+//     const user = await User.findById(_id);
+//     user.usdt = user.usdt - amount;
+//     user.investments.push(investmentId);
+//     user.transactions.push(transactionId);
+//     await user.save();
+//   } catch (err) {
+//     return res.status(400).json(err);
+//   }
+
+//   res.status(200).json({ message: "Investment Added Successfully" });
+// };
+
+cron.schedule("0 0 * * *", async () => {
+  try {
+    const investments = await Investment.find({ status: "pending" });
+
+    for (const investment of investments) {
+      const daysPassed = Math.floor(
+        (Date.now() - investment.createdAt) / (24 * 60 * 60 * 1000)
+      );
+      if (daysPassed >= investment.plan.days) {
+        const earnedProfit =
+          investment.amount *
+          investment.plan.dailyProfit *
+          investment.plan.days;
+
+        const user = await User.findById(investment.user.id);
+        user.usdt += earnedProfit;
+        investment.status = "confirmed";
+
+        await Promise.all([user.save(), investment.save()]);
+      }
+    }
+  } catch (error) {
+    console.error("Error in scheduled task:", error);
+  }
+});
+
 const userInvest = async (req, res) => {
-  let { amount, plan } = req.body;
+  const { amount, plan } = req.body;
   const { email, username, _id } = req.user;
-  amount = Number(amount);
+  const amountNumber = Number(amount);
 
-  if (!amount)
-    return res
-      .status(400)
-      .json({ message: "Amount must not be left empty", error: true });
-  if (plan.toLowerCase().includes("Lock Up Mining O1")) {
-    if (amount < 2000) {
-      return res.status(400).json({
-        message: "The amount is smaller than the selected plan.",
-        error: true,
-      });
-    }
-    if (amount > 99999999) {
-      return res.status(400).json({
-        message: "The amount is larger than the selected plan.",
-        error: true,
-      });
-    }
-  }
-
-  if (plan.toLowerCase().includes("Lock Up Mining O2")) {
-    if (amount < 5000) {
-      return res.status(400).json({
-        message: "The amount is smaller than the selected plan.",
-        error: true,
-      });
-    }
-    if (amount > 99999999) {
-      return res.status(400).json({
-        message: "The amount is larger than the selected plan.",
-        error: true,
-      });
-    }
-  }
-
-  if (plan.toLowerCase().includes("Lock Up Mining O3")) {
-    if (amount < 20000) {
-      return res.status(400).json({
-        message: "The amount is smaller than the selected plan.",
-        error: true,
-      });
-    }
-    if (amount > 99999999) {
-      return res.status(400).json({
-        message: "The amount is larger than the selected plan.",
-        error: true,
-      });
-    }
-  }
-  if (plan.toLowerCase().includes("Lock Up Mining O4")) {
-    if (amount < 100000) {
-      return res.status(400).json({
-        message: "The amount is smaller than the selected plan.",
-        error: true,
-      });
-    }
-    if (amount > 99999999) {
-      return res.status(400).json({
-        message: "The amount is larger than the selected plan.",
-        error: true,
-      });
-    }
-  }
-
-  if (plan.toLowerCase().includes("Lock Up Mining O5")) {
-    if (amount < 1000000) {
-      return res.status(400).json({
-        message: "The amount is smaller than the selected plan.",
-        error: true,
-      });
-    }
-    if (amount > 99999999) {
-      return res.status(400).json({
-        message: "The amount is larger than the selected plan.",
-        error: true,
-      });
-    }
-  }
-
-  let user = await User.findById(_id);
-  let usdt = user.usdt;
-  if (amount > usdt || usdt === 0)
+  if (!amountNumber) {
     return res.status(400).json({
-      message: "You don't have sufficient balance to make this investment",
+      message: "Amount must not be left empty",
       error: true,
     });
+  }
+
+  // Plan details mapping
+  const planDetails = {
+    "lock up mining o1": { minAmount: 2000, dailyProfit: 0.007, days: 5 },
+    "lock up mining o2": { minAmount: 5000, dailyProfit: 0.0125, days: 15 },
+    "lock up mining o3": { minAmount: 20000, dailyProfit: 0.015, days: 30 },
+    "lock up mining o4": { minAmount: 100000, dailyProfit: 0.02, days: 60 },
+    "lock up mining o5": { minAmount: 1000000, dailyProfit: 0.025, days: 90 },
+  };
+
+  const selectedPlan = plan.toLowerCase();
+  if (!planDetails[selectedPlan]) {
+    return res.status(400).json({
+      message: "Invalid plan selected",
+      error: true,
+    });
+  }
+
+  const { minAmount, dailyProfit, days } = planDetails[selectedPlan];
+
+  if (amountNumber < minAmount || amountNumber > 99999999) {
+    return res.status(400).json({
+      message: "Invalid amount for the selected plan",
+      error: true,
+    });
+  }
+
+  const user = await User.findById(_id);
+  const usdt = user.usdt;
+  if (amountNumber > usdt || usdt === 0) {
+    return res.status(400).json({
+      message: "Insufficient balance for investment",
+      error: true,
+    });
+  }
 
   const investOptions = {
-    amount: amount,
-    plan: plan,
+    amount: amountNumber,
+    plan: planDetails[selectedPlan],
+    status: "pending", // Initial status
   };
 
   const transactionOptions = {
@@ -402,8 +519,7 @@ const userInvest = async (req, res) => {
     transaction.user.username = username;
     await transaction.save();
 
-    const user = await User.findById(_id);
-    user.usdt = user.usdt - amount;
+    user.usdt -= amountNumber;
     user.investments.push(investmentId);
     user.transactions.push(transactionId);
     await user.save();
@@ -411,7 +527,9 @@ const userInvest = async (req, res) => {
     return res.status(400).json(err);
   }
 
-  res.status(200).json({ message: "Investment Added Successfully" });
+  res.status(200).json({
+    message: "Investment Added Successfully",
+  });
 };
 
 /////////////////////////////
