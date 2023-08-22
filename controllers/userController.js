@@ -432,6 +432,7 @@ cron.schedule("0 0 * * *", async () => {
 
         const user = await User.findById(investment.user.id);
         user.usdt += earnedProfit;
+        user.profit += earnedProfit;
         investment.status = "confirmed";
 
         await Promise.all([user.save(), investment.save()]);
