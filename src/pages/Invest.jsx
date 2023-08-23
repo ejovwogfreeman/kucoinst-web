@@ -45,6 +45,9 @@ const Invest = ({ user }) => {
 
       toast.success("Order made successfully");
       setAmount("");
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch (error) {
       if (error.response && error.response.data.message) {
         console.log(error.response.data.message);

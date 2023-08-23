@@ -167,4 +167,7 @@ tr td {
     background-color: rgba(13, 110, 253, 0.5);
     padding: 10px 1% 20px !important;
   }
+  .smallme {
+    font-size: 15px;
+  }
 }
