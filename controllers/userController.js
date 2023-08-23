@@ -459,6 +459,7 @@ const userInvest = async (req, res) => {
     "Lock Up Mining 01": {
       minAmount: 2000,
       dailyProfit: 0.007,
+      expectedProfit: amount * 5 * 0.007,
       days: 5,
       limit: "2000 ~ 99999999",
       ror: "0.5 ~ 0.7%",
@@ -467,6 +468,7 @@ const userInvest = async (req, res) => {
     "Lock Up Mining 02": {
       minAmount: 5000,
       dailyProfit: 0.0125,
+      expectedProfit: amount * 15 * 0.0125,
       days: 15,
       limit: "5000 ~ 99999999",
       ror: "1 ~ 1.25%",
@@ -475,6 +477,7 @@ const userInvest = async (req, res) => {
     "Lock Up Mining 03": {
       minAmount: 20000,
       dailyProfit: 0.015,
+      expectedProfit: amount * 30 * 0.015,
       days: 30,
       limit: "20000 ~ 99999999",
       ror: "1.25 ~ 1.5%",
@@ -483,6 +486,7 @@ const userInvest = async (req, res) => {
     "Lock Up Mining 04": {
       minAmount: 100000,
       dailyProfit: 0.02,
+      expectedProfit: amount * 60 * 0.02,
       days: 60,
       limit: "100000 ~ 99999999",
       ror: "1.25 ~ 2%",
@@ -491,6 +495,7 @@ const userInvest = async (req, res) => {
     "Lock Up Mining 05": {
       minAmount: 1000000,
       dailyProfit: 0.025,
+      expectedProfit: amount * 90 * 0.025,
       days: 90,
       ror: "2 ~ 2.5%",
       period: "90(Days)",
@@ -544,6 +549,7 @@ const userInvest = async (req, res) => {
     investmentId = investment.id;
     investment.plan.name = plan;
     investment.plan.dailyProfit = planDetails[plan].dailyProfit;
+    investment.plan.expectedProfit = planDetails[plan].expectedProfit;
     investment.plan.days = planDetails[plan].days;
     investment.plan.limit = planDetails[plan].limit;
     investment.plan.ror = planDetails[plan].ror;

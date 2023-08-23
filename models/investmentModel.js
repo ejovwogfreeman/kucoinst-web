@@ -28,11 +28,12 @@ const investmentSchema = new mongoose.Schema(
       },
       minAmount: {
         type: Number,
-        default: 2000,
       },
       dailyProfit: {
         type: Number,
-        default: 0.007,
+      },
+      expectedProfit: {
+        type: Number,
       },
       days: {
         type: Number,
