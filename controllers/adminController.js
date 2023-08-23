@@ -242,7 +242,6 @@ const getExchanges = async (req, res) => {
 ///////////////////////////////////
 
 const fundUser = async (req, res) => {
-  console.log("you hit the route");
   const { id, amount } = req.body;
 
   const user = await User.findById(id);
@@ -278,11 +277,11 @@ const adminGetUser = async (req, res) => {
 const adminUpdateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, userName, email, phoneNumber, balance, profit } = req.body;
+    const { name, userName, email, phoneNumber, usdt, profit } = req.body;
 
     const updatedUser = await User.findByIdAndUpdate(
       id,
-      { $set: { name, userName, email, phoneNumber, balance, profit } },
+      { $set: { name, userName, email, phoneNumber, usdt, profit } },
       { new: true }
     );
 
