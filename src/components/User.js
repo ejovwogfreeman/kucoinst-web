@@ -62,7 +62,7 @@ const User = () => {
           username: user.username,
           email: user.email,
           phoneNumber: user.phoneNumber,
-          balance: user.usdt,
+          usdt: user.usdt,
         });
       } catch (error) {
         console.log(error);
@@ -182,7 +182,7 @@ const User = () => {
                 onChange={(e) =>
                   setUserDetails({
                     ...userDetails,
-                    balance: e.target.value,
+                    usdt: e.target.value,
                   })
                 }
                 placeholder="Edit Balance"

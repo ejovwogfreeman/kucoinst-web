@@ -301,7 +301,8 @@ export const declineWithdrawal = async (token, id) => {
 
 export const userFund = async (token, details) => {
   const res = await fetch(
-    "https://kucoinst-web.onrender.com/api/users/funduser",
+    // "https://kucoinst-web.onrender.com/api/users/funduser",
+    "http://localhost:8000/api/users/funduser",
     {
       method: "POST",
       headers: {
