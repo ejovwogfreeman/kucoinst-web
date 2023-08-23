@@ -456,11 +456,46 @@ const userInvest = async (req, res) => {
   const selectedPlan = plan;
   // Plan details mapping
   const planDetails = {
-    "Lock Up Mining 01": { minAmount: 2000, dailyProfit: 0.007, days: 5 },
-    "Lock Up Mining 02": { minAmount: 5000, dailyProfit: 0.0125, days: 15 },
-    "Lock Up Mining 03": { minAmount: 20000, dailyProfit: 0.015, days: 30 },
-    "Lock Up Mining 04": { minAmount: 100000, dailyProfit: 0.02, days: 60 },
-    "Lock Up Mining 05": { minAmount: 1000000, dailyProfit: 0.025, days: 90 },
+    "Lock Up Mining 01": {
+      minAmount: 2000,
+      dailyProfit: 0.007,
+      days: 5,
+      limit: "2000 ~ 99999999",
+      ror: "0.5 ~ 0.7%",
+      percent: 8.3,
+    },
+    "Lock Up Mining 02": {
+      minAmount: 5000,
+      dailyProfit: 0.0125,
+      days: 15,
+      limit: "5000 ~ 99999999",
+      ror: "1 ~ 1.25%",
+      percent: 9.1,
+    },
+    "Lock Up Mining 03": {
+      minAmount: 20000,
+      dailyProfit: 0.015,
+      days: 30,
+      limit: "20000 ~ 99999999",
+      ror: "1.25 ~ 1.5%",
+      percent: 17,
+    },
+    "Lock Up Mining 04": {
+      minAmount: 100000,
+      dailyProfit: 0.02,
+      days: 60,
+      limit: "100000 ~ 99999999",
+      ror: "1.25 ~ 2%",
+      percent: 16.1,
+    },
+    "Lock Up Mining 05": {
+      minAmount: 1000000,
+      dailyProfit: 0.025,
+      days: 90,
+      ror: "2 ~ 2.5%",
+      period: "90(Days)",
+      percent: 60,
+    },
   };
 
   if (!planDetails[selectedPlan]) {
@@ -508,8 +543,11 @@ const userInvest = async (req, res) => {
     const investment = await Investment.create(investOptions);
     investmentId = investment.id;
     investment.plan.name = plan;
-    investment.plan.days = planDetails[plan].days;
     investment.plan.dailyProfit = planDetails[plan].dailyProfit;
+    investment.plan.days = planDetails[plan].days;
+    investment.plan.limit = planDetails[plan].limit;
+    investment.plan.ror = planDetails[plan].ror;
+    investment.plan.percent = planDetails[plan].percent;
     investment.user.id = _id;
     investment.user.email = email;
     investment.user.username = username;

@@ -38,6 +38,15 @@ const investmentSchema = new mongoose.Schema(
         type: Number,
         default: 5,
       },
+      limit: {
+        type: String,
+      },
+      ror: {
+        type: String,
+      },
+      percent: {
+        type: String,
+      },
     },
     status: {
       type: String,
