@@ -490,8 +490,10 @@ const userInvest = async (req, res) => {
 
   const investOptions = {
     amount: amount,
-    plan: plan,
-    status: "pending", // Initial status
+    // plan: plan,
+    // days: days,
+    // dailyProfit: dailyProfit,
+    status: "pending",
   };
 
   const transactionOptions = {
@@ -505,6 +507,9 @@ const userInvest = async (req, res) => {
   try {
     const investment = await Investment.create(investOptions);
     investmentId = investment.id;
+    investment.plan.name = plan;
+    investment.plan.days = planDetails[plan].days;
+    investment.plan.dailyProfit = planDetails[plan].dailyProfit;
     investment.user.id = _id;
     investment.user.email = email;
     investment.user.username = username;
