@@ -47,7 +47,7 @@ const User = () => {
     username: "",
     email: "",
     phoneNumber: "",
-    balance: "",
+    usdt: "",
     profit: "",
   });
 
