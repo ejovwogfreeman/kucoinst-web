@@ -7,64 +7,6 @@ import ScrollToTop from "../components/ScrollToTop";
 import axios from "axios";
 
 const InvestmentHistory = ({ user }) => {
-  // const plans = [
-  //   {
-  //     id: 1,
-  //     status: "processing",
-  //     plan: "Lock-Up Mining 01",
-  //     limit: "2000 ~ 99999999",
-  //     ror: "0.5 ~ 0.7%",
-  //     period: "5(Days)",
-  //     percent: 8.3,
-  //     startDate: "02/02/2023",
-  //     endDate: "05/02/2023",
-  //   },
-  //   {
-  //     id: 2,
-  //     status: "processing",
-  //     plan: "Lock-Up Mining 02",
-  //     limit: "5000 ~ 99999999",
-  //     ror: "1 ~ 1.25%",
-  //     period: "15(Days)",
-  //     percent: 9.1,
-  //     startDate: "02/02/2023",
-  //     endDate: "05/02/2023",
-  //   },
-  //   {
-  //     id: 3,
-  //     status: "processing",
-  //     plan: "Lock-Up Mining 03",
-  //     limit: "20000 ~ 99999999",
-  //     ror: "1.25 ~ 1.5%",
-  //     period: "30(Days)",
-  //     percent: 17,
-  //     startDate: "02/02/2023",
-  //     endDate: "05/02/2023",
-  //   },
-  //   {
-  //     id: 4,
-  //     status: "processing",
-  //     plan: "Lock-Up Mining 04",
-  //     limit: "100000 ~ 99999999",
-  //     ror: "1.25 ~ 2%",
-  //     period: "60(Days)",
-  //     percent: 16.1,
-  //     startDate: "02/02/2023",
-  //     endDate: "05/02/2023",
-  //   },
-  //   {
-  //     id: 5,
-  //     status: "processing",
-  //     plan: "Lock-Up Mining 05",
-  //     limit: "1000000 ~ 99999999",
-  //     ror: "2 ~ 2.5%",
-  //     period: "90(Days)",
-  //     percent: 60,
-  //     startDate: "02/02/2023",
-  //     endDate: "05/02/2023",
-  //   },
-  // ];
-
   const [investments, setInvestments] = useState([]);
   const authToken = JSON.parse(localStorage.getItem("user")).token;
   const config = {
@@ -113,7 +55,7 @@ const InvestmentHistory = ({ user }) => {
       <div className="assets-components assetmine pt-0">
         {investments.length > 0 ? (
           <>
-            {investments.map((x) => {
+            {[...investments].reverse().map((x) => {
               return (
                 <div className="plans p-2 mt-3 bg-light rounded" key={x._id}>
                   <div className="d-flex align-items-center justify-content-between">
@@ -138,7 +80,7 @@ const InvestmentHistory = ({ user }) => {
                     </small>
                     <small className="text-center">
                       <small>Period</small> <br />
-                      <span>{x.plan.days}</span>
+                      <span>{x.plan.days}days</span>
                     </small>
                   </div>
                   <div className="d-flex align-items-center justify-content-between head my-2">
@@ -148,7 +90,12 @@ const InvestmentHistory = ({ user }) => {
                     </small>
                     <small className="text-center" style={{ flex: "1" }}>
                       <small>End Date</small> <br />
-                      {/* <span>{x.endDate}</span> */}
+                      <span>
+                        {new Date(
+                          new Date(x.createdAt).getTime() +
+                            5 * 24 * 60 * 60 * 1000
+                        ).toLocaleDateString()}
+                      </span>
                     </small>
                   </div>
                 </div>

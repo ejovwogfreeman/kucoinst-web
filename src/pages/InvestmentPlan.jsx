@@ -1,12 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../css/Assets.css";
 import img from "../assets/profilelogo.png";
 import Progress from "../components/Progress";
 import { MdArrowBackIos } from "react-icons/md";
 import { Link } from "react-router-dom";
 import ScrollToTop from "../components/ScrollToTop";
+import axios from "axios";
 
 const InvestmentPlan = ({ user }) => {
+  const [investments, setInvestments] = useState([]);
+  const authToken = JSON.parse(localStorage.getItem("user")).token;
+  const config = {
+    headers: {
+      "auth-token": authToken,
+    },
+  };
+  useEffect(() => {
+    axios
+      .get("https://kucoinst-web.onrender.com/api/users/investment", config)
+      .then((response) => {
+        console.log(response.data);
+        setInvestments(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
   const plans = [
     {
       id: 1,
@@ -84,7 +104,9 @@ const InvestmentPlan = ({ user }) => {
           <div className="text-start">
             <span>Funds in Custody</span>
             <span className="d-flex align-items-center justify-content-between">
-              <h1 className="fw-bold">200000</h1>
+              <h1 className="fw-bold">
+                {investments.map((x) => x.amount).reduce((a, b) => a + b, 0)}.00
+              </h1>
               <span>USDT</span>
             </span>
           </div>
@@ -95,20 +117,26 @@ const InvestmentPlan = ({ user }) => {
           </div>
         </div>
         <div
-          className="d-flex align-items-center justify-content-between head"
+          className="d-flex align-items-center justify-content-between head py-3"
           style={{ backgroundColor: "rgba(256, 256,256, 0.3)" }}
         >
           <span>
-            <h5>140.0000</h5>
+            <h5>
+              {" "}
+              {investments
+                .map((x) => x.plan.expectedProfit)
+                .reduce((a, b) => a + b, 0)}
+              .00
+            </h5>
             <span>Expected earnings</span>
           </span>
-          <span>
+          {/* <span>
             <h5>225.8</h5>
-            <span>Expected earnings</span>
-          </span>
+            <span>Cummulative Income</span>
+          </span> */}
           <span>
-            <h5>1</h5>
-            <span>Orders in Custody</span>
+            <h5>{investments.length}</h5>
+            <span>Orders In Custody</span>
           </span>
         </div>
       </div>

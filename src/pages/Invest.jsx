@@ -4,7 +4,7 @@ import img from "../assets/profilelogo.png";
 import { MdArrowBackIos } from "react-icons/md";
 import { Link } from "react-router-dom";
 import ScrollToTop from "../components/ScrollToTop";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -18,6 +18,8 @@ const Invest = ({ user }) => {
       "auth-token": authToken,
     },
   };
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,9 +47,7 @@ const Invest = ({ user }) => {
 
       toast.success("Order made successfully");
       setAmount("");
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
+      navigate("/investment_plans");
     } catch (error) {
       if (error.response && error.response.data.message) {
         console.log(error.response.data.message);
