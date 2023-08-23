@@ -79,7 +79,7 @@ const Withdrawal = () => {
       ) : (
         <>
           <Helmet>
-            <title>ET-Options | Withdrawal History</title>
+            <title>EKucoin | Withdrawal History</title>
           </Helmet>
           <Navbar />
           <div className="home-container">

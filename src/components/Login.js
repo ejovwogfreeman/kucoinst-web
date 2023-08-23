@@ -20,7 +20,7 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ const Login = () => {
 
     setLoading(true);
 
-    let login = await loginUser({ email, password });
+    let login = await loginUser({ username, password });
 
     if (login.error) {
       setLoading(false);
@@ -63,14 +63,14 @@ const Login = () => {
 
     navigate("/dashboard");
 
-    setEmail("");
+    setUsername("");
     setPassword("");
   };
 
   return (
     <>
       <Helmet>
-        <title>FFInvestment | Admin Login</title>
+        <title>Kucoin | Admin Login</title>
       </Helmet>
       <div className="general-container">
         <div className="body">
@@ -84,10 +84,10 @@ const Login = () => {
             <h2 style={{ marginTop: "10px" }}>ADMIN LOGIN</h2>
             <div>
               <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your Email"
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Enter your Username"
                 required
               />
             </div>

@@ -29,7 +29,7 @@ const Transactions = () => {
       ) : (
         <>
           <Helmet>
-            <title>ET-Options | Transaction History</title>
+            <title>Kucoin | Transaction History</title>
           </Helmet>
           <Navbar />
           <div className="home-container">

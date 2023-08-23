@@ -79,7 +79,7 @@ const Deposits = () => {
       ) : (
         <>
           <Helmet>
-            <title>ET-Options | Deposit History</title>
+            <title>Kucoin | Deposit History</title>
           </Helmet>
           <Navbar />
           <div className="home-container">

@@ -80,7 +80,7 @@ const Users = () => {
       ) : (
         <>
           <Helmet>
-            <title>ET-Options | All Users</title>
+            <title>Kucoin | All Users</title>
           </Helmet>
           <div className="home-container">
             <Navbar />
@@ -114,7 +114,7 @@ const Users = () => {
                                 <td>{index + 1}</td>
                                 <td>{x.name}</td>
                                 <td>{x.email}</td>
-                                <td>{x.balance}</td>
+                                <td>{x.usdt}</td>
                                 <td>{new Date(x.createdAt).toDateString()}</td>
                                 <td>
                                   <Box sx={{ flexGrow: 1 }}>

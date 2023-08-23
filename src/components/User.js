@@ -62,7 +62,7 @@ const User = () => {
           username: user.username,
           email: user.email,
           phoneNumber: user.phoneNumber,
-          balance: user.balance,
+          balance: user.usdt,
         });
       } catch (error) {
         console.log(error);
@@ -178,7 +178,7 @@ const User = () => {
               <label>Balance</label>
               <input
                 type="text"
-                value={userDetails.balance}
+                value={userDetails.usdt}
                 onChange={(e) =>
                   setUserDetails({
                     ...userDetails,

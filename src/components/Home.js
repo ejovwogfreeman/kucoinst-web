@@ -54,7 +54,7 @@ const Home = () => {
         <>
           <div className="home-container">
             <Helmet>
-              <title>ET-Options | dashboard</title>
+              <title>Kucoin | dashboard</title>
             </Helmet>
             <Navbar />
             <form>
