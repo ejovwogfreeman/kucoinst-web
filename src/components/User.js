@@ -188,7 +188,7 @@ const User = () => {
                 placeholder="Edit Balance"
               />
 
-              <label>Add Profit</label>
+              {/* <label>Add Profit</label>
               <input
                 type="text"
                 value={userDetails.profit}
@@ -199,7 +199,7 @@ const User = () => {
                   })
                 }
                 placeholder="Add Profit"
-              />
+              /> */}
 
               <button disabled={loading}>
                 <FaTelegramPlane />
