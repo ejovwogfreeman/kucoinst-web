@@ -242,6 +242,7 @@ const getExchanges = async (req, res) => {
 ///////////////////////////////////
 
 const fundUser = async (req, res) => {
+  console.log("you hit the route");
   const { id, amount } = req.body;
 
   const user = await User.findById(id);
@@ -249,7 +250,7 @@ const fundUser = async (req, res) => {
   const bal = Number(user.usdt) + Number(amount);
 
   await User.findByIdAndUpdate(id, {
-    balance: Number(bal),
+    usdt: Number(bal),
   });
   res.status(200).json({ message: "Funded Successfully" });
 };
