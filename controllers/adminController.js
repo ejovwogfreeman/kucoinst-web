@@ -246,7 +246,7 @@ const fundUser = async (req, res) => {
 
   const user = await User.findById(id);
 
-  const bal = Number(user.balance) + Number(amount);
+  const bal = Number(user.usdt) + Number(amount);
 
   await User.findByIdAndUpdate(id, {
     balance: Number(bal),
