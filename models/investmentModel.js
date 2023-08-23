@@ -38,7 +38,6 @@ const investmentSchema = new mongoose.Schema(
         type: Number,
         default: 5,
       },
-      // Add more properties as needed
     },
     status: {
       type: String,
