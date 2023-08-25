@@ -31,9 +31,9 @@
 }
 
 @media screen and (max-width: 500px) {
-  .navbar {
+  /* .navbar {
     padding: 0px 0px 0px 5% !important;
-  }
+  } */
   .navbar svg {
     font-size: 20px;
   }

@@ -83,6 +83,23 @@ const Trade = ({ user }) => {
     }
   };
 
+  let gainOrLoss;
+  if (duration === "30") {
+    // Introduce randomness for gains and losses
+    gainOrLoss =
+      Math.random() > 0.7 ? (20 * amount) / 100 : -(20 * amount) / 100;
+  } else if (duration === "60") {
+    gainOrLoss =
+      Math.random() > 0.7 ? (30 * amount) / 100 : -(30 * amount) / 100;
+  } else if (duration === "180") {
+    gainOrLoss =
+      Math.random() > 0.7 ? (50 * amount) / 100 : -(50 * amount) / 100;
+  } else if (duration === "300") {
+    gainOrLoss =
+      Math.random() > 0.7 ? (60 * amount) / 100 : -(60 * amount) / 100;
+  } else {
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log({
@@ -99,6 +116,7 @@ const Trade = ({ user }) => {
     const trade = {
       duration,
       amount,
+      gainOrLoss,
     };
 
     try {
@@ -109,6 +127,7 @@ const Trade = ({ user }) => {
       );
       setShowModal(true);
       handleShowBtn();
+      console.log(user);
       setLoading(false);
     } catch (error) {
       if (error.response) {
@@ -125,17 +144,6 @@ const Trade = ({ user }) => {
     setSelectedDirection(direction);
     setShow(!show);
   };
-
-  let gain;
-  if (duration === "30") {
-    gain = (20 * amount) / 100;
-  } else if (duration === "60") {
-    gain = (30 * amount) / 100;
-  } else if (duration === "180") {
-    gain = (50 * amount) / 100;
-  } else {
-    gain = (60 * amount) / 100;
-  }
 
   const params = useParams();
 
@@ -311,8 +319,16 @@ const Trade = ({ user }) => {
           )}
           {showBtn && (
             <>
-              <div className="text-success d-flex align-items-center justify-content-center">
-                <h3 className="text-strong">+{gain}</h3>
+              <div className="d-flex align-items-center justify-content-center">
+                <h3 className="text-strong">
+                  {gainOrLoss > 0 ? (
+                    <span className="text-success">
+                      +{Math.abs(gainOrLoss)}
+                    </span>
+                  ) : (
+                    <span className="text-danger">-{Math.abs(gainOrLoss)}</span>
+                  )}
+                </h3>
                 <span>USDT</span>
               </div>
               <table className="text-dark" width="100%">

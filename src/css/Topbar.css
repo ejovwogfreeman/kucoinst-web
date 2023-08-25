@@ -14,7 +14,7 @@
   width: 150px;
 }
 
-@media screen and (max-width: 500px) {
+/* @media screen and (max-width: 500px) {
   .topbar {
     display: flex;
     align-items: center;
@@ -30,4 +30,4 @@
     width: 150px;
     margin-left: -20px !important;
   }
-}
+} */
