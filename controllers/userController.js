@@ -530,9 +530,6 @@ const userInvest = async (req, res) => {
 
   const investOptions = {
     amount: amount,
-    // plan: plan,
-    // days: days,
-    // dailyProfit: dailyProfit,
     status: "pending",
   };
 
@@ -773,7 +770,7 @@ const userWithdraw = async (req, res) => {
 const userTrade = async (req, res) => {
   try {
     // Destructuring all information from the request body
-    const { amount, duration } = req.body;
+    const { amount, duration, gainOrLoss } = req.body;
     const { email, username, _id } = req.user;
 
     // Validate inputs
@@ -792,25 +789,11 @@ const userTrade = async (req, res) => {
         error: true,
       });
 
-    // Calculate gain based on duration
-    let gain;
-    if (duration === "30") {
-      gain = (20 * amount) / 100;
-    } else if (duration === "60") {
-      gain = (30 * amount) / 100;
-    } else if (duration === "180") {
-      gain = (50 * amount) / 100;
-    } else if (duration === "300") {
-      gain = (60 * amount) / 100;
-    } else {
-      return res.status(400).json({ message: "Invalid duration", error: true });
-    }
-
     // Create trade and transaction options
     const tradeOptions = {
       amount,
       duration,
-      profit: gain,
+      gainOrLoss,
     };
 
     const transactionOptions = {
@@ -840,7 +823,7 @@ const userTrade = async (req, res) => {
 
       const user = await User.findById(_id);
       user.trades.push(tradeId);
-      user.usdt -= gain;
+      user.usdt += gainOrLoss; // Update balance based on gain or loss
       user.transactions.push(transactionId);
       await user.save();
 
