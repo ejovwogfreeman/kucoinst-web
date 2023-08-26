@@ -329,7 +329,11 @@ const Trade = ({ user }) => {
                     <span className="text-danger">-{Math.abs(gainOrLoss)}</span>
                   )}
                 </h3>
-                <span>USDT</span>
+                {gainOrLoss > 0 ? (
+                  <span className="text-success">USDT</span>
+                ) : (
+                  <span className="text-danger">USDT</span>
+                )}
               </div>
               <table className="text-dark" width="100%">
                 {/* <tr className="px-2">

@@ -130,14 +130,14 @@ const Help = () => {
           </div>
         </div>
         <div className="accordion-item">
-          <h2 className="accordion-header" id="headingFour">
+          <h2 className="accordion-header" id="headingFive">
             <button
               className="accordion-button collapsed"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#collapseFour"
+              data-bs-target="#collapseFive"
               aria-expanded="false"
-              aria-controls="collapseFour"
+              aria-controls="collapseFive"
             >
               <h5 className="m-0">
                 Where is the capital flow after transaction?
@@ -145,9 +145,9 @@ const Help = () => {
             </button>
           </h2>
           <div
-            id="collapseFour"
+            id="collapseFive"
             className="accordion-collapse collapse"
-            aria-labelledby="headingFour"
+            aria-labelledby="headingFive"
             data-bs-parent="#accordionExample"
           >
             <div className="accordion-body">
@@ -159,14 +159,14 @@ const Help = () => {
           </div>
         </div>
         <div className="accordion-item">
-          <h2 className="accordion-header" id="headingFour">
+          <h2 className="accordion-header" id="headingSix">
             <button
               className="accordion-button collapsed"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#collapseFour"
+              data-bs-target="#collapseSix"
               aria-expanded="false"
-              aria-controls="collapseFour"
+              aria-controls="collapseSix"
             >
               <h5 className="m-0">
                 Why limit the number of changes to nicknames?
@@ -174,9 +174,9 @@ const Help = () => {
             </button>
           </h2>
           <div
-            id="collapseFour"
+            id="collapseSix"
             className="accordion-collapse collapse"
-            aria-labelledby="headingFour"
+            aria-labelledby="headingSix"
             data-bs-parent="#accordionExample"
           >
             <div className="accordion-body">
@@ -186,14 +186,14 @@ const Help = () => {
           </div>
         </div>
         <div className="accordion-item">
-          <h2 className="accordion-header" id="headingFour">
+          <h2 className="accordion-header" id="headingSeven">
             <button
               className="accordion-button collapsed"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#collapseFour"
+              data-bs-target="#collapseSeven"
               aria-expanded="false"
-              aria-controls="collapseFour"
+              aria-controls="collapseSeven"
             >
               <h5 className="m-0">
                 What do you mean when you transfer? Why do you need to transfer?
@@ -201,9 +201,9 @@ const Help = () => {
             </button>
           </h2>
           <div
-            id="collapseFour"
+            id="collapseSeven"
             className="accordion-collapse collapse"
-            aria-labelledby="headingFour"
+            aria-labelledby="headingSeven"
             data-bs-parent="#accordionExample"
           >
             <div className="accordion-body">
@@ -215,14 +215,14 @@ const Help = () => {
           </div>
         </div>
         <div className="accordion-item">
-          <h2 className="accordion-header" id="headingFour">
+          <h2 className="accordion-header" id="headingEight">
             <button
               className="accordion-button collapsed"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#collapseFour"
+              data-bs-target="#collapseEight"
               aria-expanded="false"
-              aria-controls="collapseFour"
+              aria-controls="collapseEight"
             >
               <h5 className="m-0">
                 How to calculate your account equity of the user contract?
@@ -230,9 +230,9 @@ const Help = () => {
             </button>
           </h2>
           <div
-            id="collapseFour"
+            id="collapseEight"
             className="accordion-collapse collapse"
-            aria-labelledby="headingFour"
+            aria-labelledby="headingEight"
             data-bs-parent="#accordionExample"
           >
             <div className="accordion-body">
@@ -242,14 +242,14 @@ const Help = () => {
           </div>
         </div>
         <div className="accordion-item">
-          <h2 className="accordion-header" id="headingFour">
+          <h2 className="accordion-header" id="headingNine">
             <button
               className="accordion-button collapsed"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#collapseFour"
+              data-bs-target="#collapseNine"
               aria-expanded="false"
-              aria-controls="collapseFour"
+              aria-controls="collapseNine"
             >
               <h5 className="m-0">
                 What is the value of your stop loss and profit setting in
@@ -258,9 +258,9 @@ const Help = () => {
             </button>
           </h2>
           <div
-            id="collapseFour"
+            id="collapseNine"
             className="accordion-collapse collapse"
-            aria-labelledby="headingFour"
+            aria-labelledby="headingNine"
             data-bs-parent="#accordionExample"
           >
             <div className="accordion-body">
@@ -275,22 +275,22 @@ const Help = () => {
           </div>
         </div>
         <div className="accordion-item">
-          <h2 className="accordion-header" id="headingFour">
+          <h2 className="accordion-header" id="headingTen">
             <button
               className="accordion-button collapsed"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#collapseFour"
+              data-bs-target="#collapseTen"
               aria-expanded="false"
-              aria-controls="collapseFour"
+              aria-controls="collapseTen"
             >
               <h5 className="m-0">How to reduce contract risk?</h5>
             </button>
           </h2>
           <div
-            id="collapseFour"
+            id="collapseTen"
             className="accordion-collapse collapse"
-            aria-labelledby="headingFour"
+            aria-labelledby="headingTen"
             data-bs-parent="#accordionExample"
           >
             <div className="accordion-body">
@@ -301,14 +301,14 @@ const Help = () => {
           </div>
         </div>
         <div className="accordion-item">
-          <h2 className="accordion-header" id="headingFour">
+          <h2 className="accordion-header" id="headingEleven">
             <button
               className="accordion-button collapsed"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#collapseFour"
+              data-bs-target="#collapseEleven"
               aria-expanded="false"
-              aria-controls="collapseFour"
+              aria-controls="collapseEleven"
             >
               <h5 className="m-0">
                 What does the quantity in the contract opening mean?
@@ -316,9 +316,9 @@ const Help = () => {
             </button>
           </h2>
           <div
-            id="collapseFour"
+            id="collapseEleven"
             className="accordion-collapse collapse"
-            aria-labelledby="headingFour"
+            aria-labelledby="headingEleven"
             data-bs-parent="#accordionExample"
           >
             <div className="accordion-body">
@@ -331,14 +331,14 @@ const Help = () => {
           </div>
         </div>
         <div className="accordion-item">
-          <h2 className="accordion-header" id="headingFour">
+          <h2 className="accordion-header" id="headingTwelve">
             <button
               className="accordion-button collapsed"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#collapseFour"
+              data-bs-target="#collapseTwelve"
               aria-expanded="false"
-              aria-controls="collapseFour"
+              aria-controls="collapseTwelve"
             >
               <h5 className="m-0">
                 How is the handling fee in the contract calculated?
@@ -346,9 +346,9 @@ const Help = () => {
             </button>
           </h2>
           <div
-            id="collapseFour"
+            id="collapseTwelve"
             className="accordion-collapse collapse"
-            aria-labelledby="headingFour"
+            aria-labelledby="headingTwelve"
             data-bs-parent="#accordionExample"
           >
             <div className="accordion-body">
@@ -357,22 +357,22 @@ const Help = () => {
           </div>
         </div>
         <div className="accordion-item">
-          <h2 className="accordion-header" id="headingFour">
+          <h2 className="accordion-header" id="headingThirteen">
             <button
               className="accordion-button collapsed"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#collapseFour"
+              data-bs-target="#collapseThirteen"
               aria-expanded="false"
-              aria-controls="collapseFour"
+              aria-controls="collapseThirteen"
             >
               <h5 className="m-0">Notes on forced liquidation</h5>
             </button>
           </h2>
           <div
-            id="collapseFour"
+            id="collapseThirteen"
             className="accordion-collapse collapse"
-            aria-labelledby="headingFour"
+            aria-labelledby="headingThirteen"
             data-bs-parent="#accordionExample"
           >
             <div className="accordion-body">
@@ -393,22 +393,22 @@ const Help = () => {
           </div>
         </div>
         <div className="accordion-item">
-          <h2 className="accordion-header" id="headingFour">
+          <h2 className="accordion-header" id="headingForteen">
             <button
               className="accordion-button collapsed"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#collapseFour"
+              data-bs-target="#collapseForteen"
               aria-expanded="false"
-              aria-controls="collapseFour"
+              aria-controls="collapseForteen"
             >
               <h5 className="m-0">What are the contract trading rules?</h5>
             </button>
           </h2>
           <div
-            id="collapseFour"
+            id="collapseForteen"
             className="accordion-collapse collapse"
-            aria-labelledby="headingFour"
+            aria-labelledby="headingForteen"
             data-bs-parent="#accordionExample"
           >
             <div className="accordion-body">
@@ -424,14 +424,14 @@ const Help = () => {
           </div>
         </div>
         <div className="accordion-item">
-          <h2 className="accordion-header" id="headingFour">
+          <h2 className="accordion-header" id="headingFifteen">
             <button
               className="accordion-button collapsed"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#collapseFour"
+              data-bs-target="#collapseFifteen"
               aria-expanded="false"
-              aria-controls="collapseFour"
+              aria-controls="collapseFifteen"
             >
               <h5 className="m-0">
                 What is the margin in contract transactions?
@@ -439,9 +439,9 @@ const Help = () => {
             </button>
           </h2>
           <div
-            id="collapseFour"
+            id="collapseFifteen"
             className="accordion-collapse collapse"
-            aria-labelledby="headingFour"
+            aria-labelledby="headingFifteen"
             data-bs-parent="#accordionExample"
           >
             <div className="accordion-body">
@@ -455,22 +455,22 @@ const Help = () => {
           </div>
         </div>
         <div className="accordion-item">
-          <h2 className="accordion-header" id="headingFour">
+          <h2 className="accordion-header" id="headingSixteen">
             <button
               className="accordion-button collapsed"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#collapseFour"
+              data-bs-target="#collapseSixteen"
               aria-expanded="false"
-              aria-controls="collapseFour"
+              aria-controls="collapseSixteen"
             >
               <h5 className="m-0">What are limit order and market order?</h5>
             </button>
           </h2>
           <div
-            id="collapseFour"
+            id="collapseSixteen"
             className="accordion-collapse collapse"
-            aria-labelledby="headingFour"
+            aria-labelledby="headingSixteen"
             data-bs-parent="#accordionExample"
           >
             <div className="accordion-body">
@@ -485,14 +485,14 @@ const Help = () => {
           </div>
         </div>
         <div className="accordion-item">
-          <h2 className="accordion-header" id="headingFour">
+          <h2 className="accordion-header" id="headingSeventeen">
             <button
               className="accordion-button collapsed"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#collapseFour"
+              data-bs-target="#collapseSeventeen"
               aria-expanded="false"
-              aria-controls="collapseFour"
+              aria-controls="collapseSeventeen"
             >
               <h5 className="m-0">
                 What does the risk level of contract transaction represents?
@@ -500,9 +500,9 @@ const Help = () => {
             </button>
           </h2>
           <div
-            id="collapseFour"
+            id="collapseSeventeen"
             className="accordion-collapse collapse"
-            aria-labelledby="headingFour"
+            aria-labelledby="headingSeventeen"
             data-bs-parent="#accordionExample"
           >
             <div className="accordion-body">
@@ -516,22 +516,22 @@ const Help = () => {
           </div>
         </div>
         <div className="accordion-item">
-          <h2 className="accordion-header" id="headingFour">
+          <h2 className="accordion-header" id="headingEighteen">
             <button
               className="accordion-button collapsed"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#collapseFour"
+              data-bs-target="#collapseEighteen"
               aria-expanded="false"
-              aria-controls="collapseFour"
+              aria-controls="collapseEighteen"
             >
               <h5 className="m-0">Why is currencty exchange necessary?</h5>
             </button>
           </h2>
           <div
-            id="collapseFour"
+            id="collapseEighteen"
             className="accordion-collapse collapse"
-            aria-labelledby="headingFour"
+            aria-labelledby="headingEighteen"
             data-bs-parent="#accordionExample"
           >
             <div className="accordion-body">
@@ -544,14 +544,14 @@ const Help = () => {
           </div>
         </div>
         <div className="accordion-item">
-          <h2 className="accordion-header" id="headingFour">
+          <h2 className="accordion-header" id="headingNineteen">
             <button
               className="accordion-button collapsed"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#collapseFour"
+              data-bs-target="#collapseNineteen"
               aria-expanded="false"
-              aria-controls="collapseFour"
+              aria-controls="collapseNineteen"
             >
               <h5 className="m-0">
                 Why did the other party not recieve the transfer in time after
@@ -560,9 +560,9 @@ const Help = () => {
             </button>
           </h2>
           <div
-            id="collapseFour"
+            id="collapseNineteen"
             className="accordion-collapse collapse"
-            aria-labelledby="headingFour"
+            aria-labelledby="headingNineteen"
             data-bs-parent="#accordionExample"
           >
             <div className="accordion-body">
@@ -575,22 +575,22 @@ const Help = () => {
           </div>
         </div>
         <div className="accordion-item">
-          <h2 className="accordion-header" id="headingFour">
+          <h2 className="accordion-header" id="headingTwenty">
             <button
               className="accordion-button collapsed"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#collapseFour"
+              data-bs-target="#collapseTwenty"
               aria-expanded="false"
-              aria-controls="collapseFour"
+              aria-controls="collapseTwenty"
             >
               <h5 className="m-0">How to buy USDT through the platform</h5>
             </button>
           </h2>
           <div
-            id="collapseFour"
+            id="collapseTwenty"
             className="accordion-collapse collapse"
-            aria-labelledby="headingFour"
+            aria-labelledby="headingTwenty"
             data-bs-parent="#accordionExample"
           >
             <div className="accordion-body">

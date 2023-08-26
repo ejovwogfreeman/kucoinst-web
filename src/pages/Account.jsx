@@ -55,7 +55,6 @@ const Account = () => {
   }, []);
 
   const today = new Date().toISOString().split("T")[0];
-  console.log(today);
 
   const todayProfitEntries = trades.filter((entry) =>
     entry.createdAt.includes(today)
