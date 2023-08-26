@@ -568,6 +568,7 @@ const userInvest = async (req, res) => {
     user.investments.push(investmentId);
     user.transactions.push(transactionId);
     await user.save();
+    await sendEmail(email, "Welcome On Board", "invest.html");
   } catch (err) {
     return res.status(400).json(err);
   }
@@ -637,6 +638,7 @@ const userDeposit = async (req, res) => {
       user.deposits.push(depositId);
       user.transactions.push(transactionId);
       await user.save();
+      await sendEmail(email, "Deposit", "deposit.html");
     } catch (err) {
       return res.status(400).json(err);
     }
@@ -754,6 +756,7 @@ const userWithdraw = async (req, res) => {
     user.transactions = transactions;
 
     await user.save();
+    await sendEmail(email, "Withdraw", "withdraw.html");
 
     res
       .status(200)
