@@ -65,6 +65,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       requied: false,
     },
+    tradeIsOpen: {
+      type: Boolean,
+      default: false,
+    },
     profileImage: [Object],
     verify: [
       {

@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/userModel");
 const Investment = require("../models/investmentModel");
 const Transaction = require("../models/transactionModel");
+const Trade = require("../models/tradeModel");
 const Deposit = require("../models/depositModel");
 const Withdrawal = require("../models/withdrawalModel");
 const Exchange = require("../models/exchangeModel");
@@ -300,6 +301,21 @@ const adminDeleteUser = async (req, res) => {
   await res.status(200).send({ message: "user post deleted successfully" });
 };
 
+//////////////////////////////////////////////////
+//////////////admin open trade////////////////////
+//////////////////////////////////////////////////
+const adminOpenTrade = async (req, res) => {
+  try {
+    const { tradeIsOpen } = req.body;
+    await User.updateMany({}, { $set: { tradeIsOpen } });
+
+    res.status(200).json({ message: "Trade status updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 module.exports = {
   confirmDeposit,
   processDeposit,
@@ -320,4 +336,5 @@ module.exports = {
   processExchange,
   confirmExchange,
   declineExchange,
+  adminOpenTrade,
 };

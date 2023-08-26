@@ -773,7 +773,7 @@ const userWithdraw = async (req, res) => {
 const userTrade = async (req, res) => {
   try {
     // Destructuring all information from the request body
-    const { amount, duration, gainOrLoss } = req.body;
+    const { amount, duration, gainOrLoss, tradeIsOpen } = req.body;
     const { email, username, _id } = req.user;
 
     // Validate inputs
@@ -807,7 +807,8 @@ const userTrade = async (req, res) => {
     let transactionId;
     let tradeId;
 
-    // Perform trade and transaction operations
+    console.log({ tradeIsOpen, gainOrLoss });
+
     try {
       const newTrade = await Trade.create(tradeOptions);
       tradeId = newTrade.id;
