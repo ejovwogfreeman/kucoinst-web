@@ -5,7 +5,7 @@ import ScrollToTop from "../components/ScrollToTop";
 
 const TradeWithdrawal = () => {
   const [trades, settrades] = useState([]);
-  const authToken = JSON.parse(localStorage.getItem("user")).token;
+  const authToken = JSON.parse(sessionStorage.getItem("user")).token;
   const config = {
     headers: {
       "auth-token": authToken,

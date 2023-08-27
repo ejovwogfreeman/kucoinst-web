@@ -36,7 +36,7 @@ const Login = () => {
       .then((res) => {
         toast.success("LOGIN SUCCESSFUL");
         setLoading(false);
-        localStorage.setItem("user", JSON.stringify(res.data));
+        sessionStorage.setItem("user", JSON.stringify(res.data));
         navigate("/");
       })
       .catch((err) => {

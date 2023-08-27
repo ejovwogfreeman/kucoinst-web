@@ -35,7 +35,7 @@ import InvestmentHistory from "./pages/InvestmentHistory";
 const App = () => {
   const [user, setUser] = useState({});
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
+    const storedUser = sessionStorage.getItem("user");
     if (storedUser) {
       const authToken = JSON.parse(storedUser).token;
       const config = {

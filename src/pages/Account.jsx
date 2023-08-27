@@ -22,14 +22,14 @@ import ScrollToTop from "../components/ScrollToTop";
 const Account = () => {
   const [user, setUser] = useState({});
   const [trades, setTrades] = useState([]);
-  const authToken = JSON.parse(localStorage.getItem("user")).token;
+  const authToken = JSON.parse(sessionStorage.getItem("user")).token;
   const config = {
     headers: {
       "auth-token": authToken,
     },
   };
   const logout = () => {
-    localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
     window.location.reload();
   };
   useEffect(() => {

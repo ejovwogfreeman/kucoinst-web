@@ -62,7 +62,7 @@ const Register = () => {
       );
 
       toast.success("REGISTRATION SUCCESSFUL");
-      localStorage.setItem("user", JSON.stringify(response.data));
+      sessionStorage.setItem("user", JSON.stringify(response.data));
       navigate("/");
     } catch (error) {
       if (error.response) {

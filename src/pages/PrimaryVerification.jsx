@@ -27,7 +27,7 @@ const PrimaryVerification = () => {
     }));
   };
 
-  const authToken = JSON.parse(localStorage.getItem("user")).token;
+  const authToken = JSON.parse(sessionStorage.getItem("user")).token;
   const config = {
     headers: {
       "auth-token": authToken,

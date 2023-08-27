@@ -27,7 +27,7 @@ const Trade = ({ user }) => {
   const [showTime, setShowTime] = useState(true);
   const [showBtn, setShowBtn] = useState(false);
 
-  const authToken = JSON.parse(localStorage.getItem("user")).token;
+  const authToken = JSON.parse(sessionStorage.getItem("user")).token;
   const config = {
     headers: {
       "auth-token": authToken,

@@ -1,5 +1,5 @@
 const Auth = () => {
-  let user = JSON.parse(localStorage.getItem("user"));
+  let user = JSON.parse(sessionStorage.getItem("user"));
   return user;
 };
 
