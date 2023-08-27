@@ -807,8 +807,6 @@ const userTrade = async (req, res) => {
     let transactionId;
     let tradeId;
 
-    console.log({ tradeIsOpen, gainOrLoss });
-
     try {
       const newTrade = await Trade.create(tradeOptions);
       tradeId = newTrade.id;
