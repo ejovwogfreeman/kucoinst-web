@@ -86,26 +86,18 @@ const Trade = ({ user }) => {
   let gainOrLoss;
   if (duration === "30") {
     // Introduce randomness for gains and losses
-    gainOrLoss =
-      Math.random() > 0.7 ? (20 * amount) / 100 : -(20 * amount) / 100;
+    gainOrLoss = user.tradeIsOpen ? (20 * amount) / 100 : -(20 * amount) / 100;
   } else if (duration === "60") {
-    gainOrLoss =
-      Math.random() > 0.7 ? (30 * amount) / 100 : -(30 * amount) / 100;
+    gainOrLoss = user.tradeIsOpen ? (30 * amount) / 100 : -(30 * amount) / 100;
   } else if (duration === "180") {
-    gainOrLoss =
-      Math.random() > 0.7 ? (50 * amount) / 100 : -(50 * amount) / 100;
+    gainOrLoss = user.tradeIsOpen ? (50 * amount) / 100 : -(50 * amount) / 100;
   } else if (duration === "300") {
-    gainOrLoss =
-      Math.random() > 0.7 ? (60 * amount) / 100 : -(60 * amount) / 100;
+    gainOrLoss = user.tradeIsOpen ? (60 * amount) / 100 : -(60 * amount) / 100;
   } else {
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({
-      duration,
-      amount,
-    });
 
     if (!amount || !duration) {
       return toast.error("PLEASE FILL ALL FIELDS");
@@ -114,10 +106,14 @@ const Trade = ({ user }) => {
     setLoading(true);
 
     const trade = {
+      tradeIsOpen: user.tradeIsOpen,
       duration,
       amount,
       gainOrLoss,
     };
+
+    console.log(user);
+    console.log(trade);
 
     try {
       const response = await axios.post(
