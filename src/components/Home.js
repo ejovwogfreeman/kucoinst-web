@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../css/Home.css";
 import Navbar from "./Navbar";
 import SearchIcon from "@mui/icons-material/Search";
@@ -14,6 +14,7 @@ import { Helmet } from "react-helmet";
 import "../css/Home.css";
 // import { UserContext } from "../context/UserContext";
 // import { useNavigate } from "react-router-dom";
+import { Button, Box, Popover, Typography, TextField } from "@mui/material";
 
 const Home = () => {
   let hours = new Date().getHours();
@@ -36,6 +37,8 @@ const Home = () => {
   const [investmentState, setInvestmentState] = investment;
   const [depositState, setDepositState] = deposit;
   const [withdrawalState, setWithdrawalState] = withdrawal;
+  const [tradeIsOpen, setTradeIsOpen] = useState("");
+  const [admin, setAdmin] = useState({});
 
   // const [userState, setUserState] = React.useContext(UserContext);
   // const navigate = useNavigate();
@@ -45,6 +48,60 @@ const Home = () => {
   //     return navigate("/");
   //   }
   // });
+
+  const authToken = JSON.parse(localStorage.getItem("user")).token;
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const response = await fetch(
+          "https://kucoinst-web.onrender.com/api/users/user",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "auth-token": authToken,
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          const user = await response.json();
+          if (user.tradeIsOpen) {
+            setTradeIsOpen(false);
+          } else {
+            setTradeIsOpen(true);
+          }
+        }
+      } catch (error) {
+        console.error("Error getting user:", error);
+      }
+    };
+
+    getUser();
+  }, []);
+
+  const handleUpdateStatus = async () => {
+    setTradeIsOpen(!tradeIsOpen);
+    try {
+      const response = await fetch(
+        "https://kucoinst-web.onrender.com/api/users/trade",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": authToken,
+          },
+          body: JSON.stringify({ tradeIsOpen }),
+        }
+      );
+
+      if (response.status === 200) {
+        console.log("Trade status updated successfully");
+      }
+    } catch (error) {
+      console.error("Error updating trade status:", error);
+    }
+  };
 
   return (
     <>
@@ -61,7 +118,25 @@ const Home = () => {
               <input type="text" />
               <SearchIcon className="search-icon" />
             </form>
-            <h1>Hello Admin, {time}</h1>
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <h1>Hello Admin, {time}</h1>
+              <button
+                className={
+                  tradeIsOpen === false ? "closeTradeStyle" : "openTradeStyle"
+                }
+                onClick={handleUpdateStatus}
+              >
+                {tradeIsOpen === false ? "LOCK TRADE" : "OPEN TRADE"}
+              </button>
+            </div>
+
             <div className="user-container">
               <div>
                 <SupervisedUserCircleIcon className="icon" />
