@@ -83,15 +83,19 @@ const Trade = ({ user }) => {
     }
   };
 
-  let gainOrLoss;
+  // let gainOrLoss;
   // if (duration === "30") {
-  //   gainOrLoss = user.tradeIsOpen ? (20 * amount) / 100 : -(20 * amount) / 100;
+  //   gainOrLoss =
+  //     user.tradeIsOpen === true ? (20 * amount) / 100 : -(20 * amount) / 100;
   // } else if (duration === "60") {
-  //   gainOrLoss = user.tradeIsOpen ? (30 * amount) / 100 : -(30 * amount) / 100;
+  //   gainOrLoss =
+  //     user.tradeIsOpen === true ? (30 * amount) / 100 : -(30 * amount) / 100;
   // } else if (duration === "180") {
-  //   gainOrLoss = user.tradeIsOpen ? (50 * amount) / 100 : -(50 * amount) / 100;
+  //   gainOrLoss =
+  //     user.tradeIsOpen === true ? (50 * amount) / 100 : -(50 * amount) / 100;
   // } else if (duration === "300") {
-  //   gainOrLoss = user.tradeIsOpen ? (60 * amount) / 100 : -(60 * amount) / 100;
+  //   gainOrLoss =
+  //     user.tradeIsOpen === true ? (60 * amount) / 100 : -(60 * amount) / 100;
   // } else {
   // }
 
