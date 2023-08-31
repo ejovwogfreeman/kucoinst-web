@@ -99,6 +99,7 @@ const Trade = ({ user }) => {
   // } else {
   // }
 
+  let gainOrLoss;
   if (duration === "30") {
     gainOrLoss = (20 * amount) / 100;
   } else if (duration === "60") {
