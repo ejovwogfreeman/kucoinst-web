@@ -813,6 +813,7 @@ const userTrade = async (req, res) => {
       newTrade.user.id = _id;
       newTrade.user.email = email;
       newTrade.user.username = username;
+      newTrade.profit = gainOrLoss;
       await newTrade.save();
 
       const newTransaction = await Transaction.create(transactionOptions);
