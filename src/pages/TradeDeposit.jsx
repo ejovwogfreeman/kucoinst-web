@@ -29,7 +29,7 @@ const TradeDeposit = () => {
         <tr className="px-2">
           <th>TYPE</th>
           <th>AMOUNT</th>
-          <th>PROFIT</th>
+          {/* <th>PROFIT</th> */}
           <th>DATE</th>
         </tr>
         {[...trades].reverse().map((x) => {
@@ -38,7 +38,7 @@ const TradeDeposit = () => {
               <tr className="px-2">
                 <td>Trade</td>
                 <td>{x.amount}</td>
-                <td>+{x.profit}</td>
+                {/* <td>+{x.profit}</td> */}
                 <td>{new Date(x.createdAt).toLocaleDateString()}</td>
               </tr>
             </div>
