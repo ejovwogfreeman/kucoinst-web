@@ -38,7 +38,13 @@ const Trades = () => {
               <tr className="px-2">
                 <td>Trade</td>
                 <td>{x.amount}</td>
-                <td>+{x.profit}</td>
+                <td
+                  style={{
+                    color: x.profit <= 0 ? "red" : "green",
+                  }}
+                >
+                  {x.profit <= 0 ? x.profit : "+" + x.profit}
+                </td>
                 <td>{new Date(x.createdAt).toLocaleDateString()}</td>
               </tr>
             </div>
