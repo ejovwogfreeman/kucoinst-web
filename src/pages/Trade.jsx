@@ -8,6 +8,7 @@ import { toast } from "react-toastify"; // Make sure to import toast
 import "react-toastify/dist/ReactToastify.css"; // Import toast styles
 import GaugeChart from "react-gauge-chart";
 import ScrollToTop from "../components/ScrollToTop";
+import { AiOutlineReload } from "react-icons/ai";
 
 const Trade = ({ user }) => {
   const [data, setData] = useState(null);
@@ -32,6 +33,10 @@ const Trade = ({ user }) => {
     headers: {
       "auth-token": authToken,
     },
+  };
+
+  const reload = () => {
+    window.location.reload();
   };
 
   const handleClick = (e) => {
@@ -98,18 +103,6 @@ const Trade = ({ user }) => {
       user.tradeIsOpen === true ? (60 * amount) / 100 : -(60 * amount) / 100;
   } else {
   }
-
-  // let gainOrLoss;
-  // if (duration === "30") {
-  //   gainOrLoss = (20 * amount) / 100;
-  // } else if (duration === "60") {
-  //   gainOrLoss = (30 * amount) / 100;
-  // } else if (duration === "180") {
-  //   gainOrLoss = (50 * amount) / 100;
-  // } else if (duration === "300") {
-  //   gainOrLoss = (60 * amount) / 100;
-  // } else {
-  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -219,6 +212,7 @@ const Trade = ({ user }) => {
         >
           Buy Up
         </button>
+        <AiOutlineReload className="reload" onClick={reload} />
         <div className="btn btn-danger" onClick={() => handleShow("Buy Fall")}>
           Buy Fall
         </div>
