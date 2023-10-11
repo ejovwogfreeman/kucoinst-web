@@ -79,10 +79,17 @@ const app = express();
 const userRoutes = require("./routes/userRoutes");
 const supportRoutes = require("./routes/supportRoutes");
 const connectDB = require("./config/db");
+const User = require("./models/userModel");
+const Transaction = require("./models/transactionModel");
+const Deposit = require("./models/depositModel");
+const Investment = require("./models/investmentModel");
 const Email = require("./models/emailModel");
 const cors = require("cors");
+const multer = require("multer");
 const { GridFsStorage } = require("multer-gridfs-storage");
+const Grid = require("gridfs-stream");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 const corsOptions = {
   origin: "*",
