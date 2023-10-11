@@ -81,7 +81,7 @@ const SecondaryVerification = () => {
       navigate("/");
     } catch (error) {
       console.error(error);
-      toast.error("ERROR VERIFYING");
+      toast.error(error.message ? error.message : "ERROR VERIFYING");
       setLoading(false);
     }
   };

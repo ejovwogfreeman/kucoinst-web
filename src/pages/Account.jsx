@@ -18,6 +18,8 @@ import profilelogo from "../assets/profilelogo.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import ScrollToTop from "../components/ScrollToTop";
+// import verified from "../assets/verfied.png";
+import verified from "../assets/verified.png";
 
 const Account = () => {
   const [user, setUser] = useState({});
@@ -175,7 +177,17 @@ const Account = () => {
                 ) : (
                   <img src={profilelogo} width="70px" />
                 )}
-                <span>{user.username}</span>
+                <span>
+                  <span>{user.username}</span>
+                  {user.verified && (
+                    <img
+                      src={verified}
+                      alt=""
+                      width="25px"
+                      style={{ border: "none" }}
+                    />
+                  )}
+                </span>
                 <span>{user.email}</span>
               </div>
               <Link to="/settings" className="abs-right">
@@ -208,7 +220,17 @@ const Account = () => {
             <BiLogOut onClick={logout} className="abs-left" />
             <div className="profileinfo">
               <img src={profilelogo} width="70px" />
-              <span>{user.username}</span>
+              <span>
+                <span>{user.username}</span>
+                {user.verified && (
+                  <img
+                    src={verified}
+                    alt=""
+                    width="25px"
+                    style={{ border: "none" }}
+                  />
+                )}
+              </span>
               <span>{user.email}</span>
             </div>
             <Link to="/settings" className="abs-right">
