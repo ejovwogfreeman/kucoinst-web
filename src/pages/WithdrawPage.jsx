@@ -23,6 +23,7 @@ const WithdrawPage = () => {
   const config = {
     headers: {
       "auth-token": authToken,
+      "Content-Type": "multipart/form-data",
     },
   };
   const handleSubmit = async (e) => {

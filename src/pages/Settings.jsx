@@ -39,6 +39,7 @@ const Settings = () => {
   const config = {
     headers: {
       "auth-token": authToken,
+      "Content-Type": "multipart/form-data",
     },
   };
 

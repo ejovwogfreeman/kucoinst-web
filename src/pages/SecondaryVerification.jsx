@@ -37,6 +37,7 @@ const SecondaryVerification = () => {
   const config = {
     headers: {
       "auth-token": authToken,
+      "Content-Type": "multipart/form-data",
     },
   };
 
@@ -73,6 +74,7 @@ const SecondaryVerification = () => {
     try {
       await axios.post(
         "https://kucoinst-web.onrender.com/api/users/verify",
+        // "http://localhost:8000/api/users/verify",
         formData,
         config
       );

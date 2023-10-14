@@ -97,14 +97,14 @@ const Account = () => {
       url: "/trades",
     },
     {
-      id: 4,
+      id: 5,
       icon: icon3,
       action: "Deposits Details",
       text: "",
       url: "/deposits",
     },
     {
-      id: 4,
+      id: 6,
       icon: icon3,
       action: "Withdrawal Details",
       text: "",
