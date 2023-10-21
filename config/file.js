@@ -146,7 +146,7 @@ const storage = new GridFsStorage({
 
     if (match.indexOf(file.mimetype) === -1) {
       const filename = `${Date.now()}-image-${file.originalname}`;
-      return filename;
+      return { _id: Math.random(), filename };
     }
 
     return {
