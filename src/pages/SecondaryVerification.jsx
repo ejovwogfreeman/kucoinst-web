@@ -29,7 +29,15 @@ const SecondaryVerification = () => {
   const handleImageChange = (event) => {
     setProfile((prevData) => ({
       ...prevData,
-      verifiedPic: event.target.files[0],
+      verifiedPic: {
+        file: {
+          _id: Math.random(),
+          data: event.target.files[0].data,
+          name: event.target.files[0].name,
+          type: event.target.files[0].type,
+          size: event.target.files[0].size,
+        },
+      },
     }));
   };
 
@@ -54,6 +62,7 @@ const SecondaryVerification = () => {
   }, []);
 
   const handleSubmit = async (event) => {
+    console.log(verifiedPic);
     event.preventDefault();
 
     if (!verifiedDoc || !verifiedPic) {
@@ -70,6 +79,11 @@ const SecondaryVerification = () => {
       setLoading(false);
       return toast.error("PLEASE COMPLETE PRIMARY VERIFICATION FIRST");
     }
+
+    // if (user.verified) {
+    //   setLoading(false);
+    //   return toast.error("THIS USER HAS BEEN VERIFIED ALREADY");
+    // }
 
     try {
       await axios.post(

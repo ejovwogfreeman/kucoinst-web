@@ -15,26 +15,41 @@ const DepositPage = () => {
   const params = useParams();
   const navigate = useNavigate();
 
-  const [depost, setDepost] = useState({
+  const [deposit, setDeposit] = useState({
     method: "",
     amount: "",
     proof: null,
   });
 
-  const { method, amount, proof } = depost;
+  const { method, amount, proof } = deposit;
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setDepost((prevData) => ({
+    setDeposit((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
 
+  // const handleImageChange = (event) => {
+  //   setDeposit((prevData) => ({
+  //     ...prevData,
+  //     proof: event.target.files[0],
+  //   }));
+  // };
+
   const handleImageChange = (event) => {
-    setDepost((prevData) => ({
+    setDeposit((prevData) => ({
       ...prevData,
-      proof: event.target.files[0],
+      proof: {
+        file: {
+          _id: Math.random(),
+          data: event.target.files[0].data,
+          name: event.target.files[0].name,
+          type: event.target.files[0].type,
+          size: event.target.files[0].size,
+        },
+      },
     }));
   };
 
@@ -42,22 +57,23 @@ const DepositPage = () => {
   const config = {
     headers: {
       "auth-token": authToken,
+      "Content-Type": "multipart/form-data",
     },
   };
 
   useEffect(() => {
     const address =
       params.method === "usdt_trc20"
-        ? "TUQSURgy9KUcV7c9AWVMrLVr1m2nHPLEZp"
+        ? "TUQSURgy9KUcV7c9AWVMrLVr1m2nHPLEZp TAg76W5NfAQYgFsJzHZaGaQt4uEUgLMZZj"
         : params.method.trim() === "usdt_erc20"
-        ? "0x0d2B1bF4Bde9D74543303C9CB846f6d9394Dc4E1"
-        : "bc1qtjlh63059h0rxsv7c70pa5gl7h6zxyh30ek4ly";
+        ? "0x0d2B1bF4Bde9D74543303C9CB846f6d9394Dc4E1 0x167EAF64ca4dD4E175b4c645D0F66fC5188F983f"
+        : "bc1qtjlh63059h0rxsv7c70pa5gl7h6zxyh30ek4ly bc1qumznts7fpwsj50gutk74aq9p540kc5nxxrafej";
     const value =
       (params.method === "usdt_trc20" && "usdt_trc20") ||
       (params.method === "usdt_erc20" && "usdt_erc20") ||
       (params.method === "btc" && "btc");
     setText(address);
-    setDepost({ ...depost, method: value });
+    setDeposit({ ...deposit, method: value });
   }, [params.method]);
 
   const handleCopyClick = () => {
@@ -74,6 +90,7 @@ const DepositPage = () => {
       });
   };
   const handleSubmit = async (e) => {
+    console.log(proof);
     e.preventDefault();
 
     if (!method || !amount || !proof) {
@@ -121,7 +138,12 @@ const DepositPage = () => {
               (method === "usdt_erc20" && "USDT(ERC20)") ||
               (method === "btc" && "BTC")}
           </h5>
-          <div className="mb-3 address-text">{text}</div>
+          <div className="mb-3 address-text">
+            Address 1 - {text.split(" ")[0]}
+          </div>
+          <div className="mb-3 address-text">
+            Address 2 - {text.split(" ")[1]}
+          </div>
           <span className="btn btn-outline-primary" onClick={handleCopyClick}>
             {copied ? "Copied!" : "Copy to Clipboard"}
           </span>
@@ -149,7 +171,12 @@ const DepositPage = () => {
             <label htmlFor="">
               Provide a screenshot of the completed transfer
             </label>
-            <input type="file" onChange={handleImageChange} />
+            <input
+              type="file"
+              name="proof"
+              accept="image/*"
+              onChange={handleImageChange}
+            />
             <button
               type="submit"
               disabled={loading}
