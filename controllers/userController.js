@@ -638,13 +638,15 @@ const userDeposit = async (req, res) => {
       user.deposits.push(depositId);
       user.transactions.push(transactionId);
       await user.save();
-      await sendEmail(email, "Deposit", "deposit.html");
+      // await sendEmail(email, "Deposit", "deposit.html");
     } catch (err) {
+      console.log(err);
       return res.status(400).json(err);
     }
 
     res.status(201).json({ message: "Files Uploaded Successfully" });
   } catch (error) {
+    console.log(error);
     res.status(400).json({ message: error.message, error: true });
   }
 };
