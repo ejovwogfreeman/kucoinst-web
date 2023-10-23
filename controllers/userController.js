@@ -667,7 +667,6 @@ const userVerify = async (req, res) => {
     let filesArray = [];
     req.files.forEach((element) => {
       const file = {
-        _id: new Date(),
         fileName: element.originalname,
         fileType: element.mimetype,
         link: `file/${element.filename}`,
@@ -701,6 +700,7 @@ const userVerify = async (req, res) => {
 
     res.status(201).json({ message: "Files Uploaded Successfully" });
   } catch (error) {
+    console.log(error);
     res.status(400).json({ message: error.message, error: true });
   }
 };
