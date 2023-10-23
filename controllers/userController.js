@@ -667,6 +667,7 @@ const userVerify = async (req, res) => {
     let filesArray = [];
     req.files.forEach((element) => {
       const file = {
+        _id: new Date(),
         fileName: element.originalname,
         fileType: element.mimetype,
         link: `file/${element.filename}`,
