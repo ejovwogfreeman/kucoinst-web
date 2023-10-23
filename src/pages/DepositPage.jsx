@@ -42,9 +42,7 @@ const DepositPage = () => {
   const config = {
     headers: {
       "auth-token": authToken,
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-      // "Content-Type": "multipart/form-data",
+      "Content-Type": "multipart/form-data",
     },
   };
 
