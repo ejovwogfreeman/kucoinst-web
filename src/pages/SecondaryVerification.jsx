@@ -37,7 +37,7 @@ const SecondaryVerification = () => {
   const config = {
     headers: {
       "auth-token": authToken,
-      "Content-Type": "multipart/form-data",
+      // "Content-Type": "multipart/form-data",
     },
   };
 
