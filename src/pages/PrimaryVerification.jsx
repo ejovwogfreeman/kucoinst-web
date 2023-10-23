@@ -57,6 +57,11 @@ const PrimaryVerification = () => {
 
     setLoading(true);
 
+    if (user.name) {
+      setLoading(false);
+      return toast.error("THIS USER HAS DONE PRIMARY VERIFICATION ALREADY");
+    }
+
     try {
       await axios.patch(
         "https://kucoinst-web.onrender.com/api/users/update-user",

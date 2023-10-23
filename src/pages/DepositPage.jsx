@@ -31,25 +31,10 @@ const DepositPage = () => {
     }));
   };
 
-  // const handleImageChange = (event) => {
-  //   setDeposit((prevData) => ({
-  //     ...prevData,
-  //     proof: event.target.files[0],
-  //   }));
-  // };
-
   const handleImageChange = (event) => {
     setDeposit((prevData) => ({
       ...prevData,
-      proof: {
-        file: {
-          _id: Math.random(),
-          data: event.target.files[0].data,
-          name: event.target.files[0].name,
-          type: event.target.files[0].type,
-          size: event.target.files[0].size,
-        },
-      },
+      proof: event.target.files[0],
     }));
   };
 
@@ -107,6 +92,7 @@ const DepositPage = () => {
     try {
       await axios.post(
         "https://kucoinst-web.onrender.com/api/users/deposit",
+        // "http://localhost:8000/api/users/deposit",
         formData,
         config
       );

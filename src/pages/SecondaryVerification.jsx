@@ -29,15 +29,7 @@ const SecondaryVerification = () => {
   const handleImageChange = (event) => {
     setProfile((prevData) => ({
       ...prevData,
-      verifiedPic: {
-        file: {
-          _id: Math.random(),
-          data: event.target.files[0].data,
-          name: event.target.files[0].name,
-          type: event.target.files[0].type,
-          size: event.target.files[0].size,
-        },
-      },
+      verifiedPic: event.target.files[0],
     }));
   };
 
@@ -75,20 +67,19 @@ const SecondaryVerification = () => {
     formData.append("verifiedDoc", verifiedDoc);
     formData.append("files", verifiedPic);
 
-    if (user.name === "") {
+    if (!user.name) {
       setLoading(false);
       return toast.error("PLEASE COMPLETE PRIMARY VERIFICATION FIRST");
     }
 
-    // if (user.verified) {
-    //   setLoading(false);
-    //   return toast.error("THIS USER HAS BEEN VERIFIED ALREADY");
-    // }
+    if (user.verified) {
+      setLoading(false);
+      return toast.error("THIS USER HAS BEEN VERIFIED ALREADY");
+    }
 
     try {
       await axios.post(
         "https://kucoinst-web.onrender.com/api/users/verify",
-        // "http://localhost:8000/api/users/verify",
         formData,
         config
       );

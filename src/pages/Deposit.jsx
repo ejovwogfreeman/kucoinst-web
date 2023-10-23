@@ -56,3 +56,11 @@ const Deposit = () => {
 };
 
 export default Deposit;
+
+// "https://kucoinst-web.onrender.com/api/users/deposit",
+// const handleImageChange = (event) => {
+//   setDeposit((prevData) => ({
+//     ...prevData,
+//     proof: event.target.files[0],
+//   }));
+// };

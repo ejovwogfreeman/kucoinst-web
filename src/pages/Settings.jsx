@@ -70,6 +70,13 @@ const Settings = () => {
 
     setLoading(true);
 
+    if (!user.name || !user.verified) {
+      setLoading(false);
+      return toast.error(
+        "YOU MUST BE VERIFIED IN OTHER TO UPDATE YOUR PROFILE"
+      );
+    }
+
     const formData = new FormData();
     formData.append("name", name);
     formData.append("username", username);
