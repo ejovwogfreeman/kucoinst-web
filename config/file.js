@@ -61,20 +61,20 @@ const storage = new GridFsStorage({
   url: process.env.MONGO_URI, // Provide your MongoDB URL here
   file: (req, file) => {
     const match = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
-    const fileId = req.body._id; // Get the custom _id from the request body
+    const customId = req.body.custom_id; // Assuming you send the custom _id in the request body
 
     if (match.indexOf(file.mimetype) === -1) {
       const filename = `${Date.now()}-image-${file.originalname}`;
       return {
         filename,
-        metadata: { _id: fileId }, // Set the custom _id as metadata
+        metadata: { _id: customId }, // Set the custom _id in the metadata
       };
     }
 
     return {
       bucketName: "photos",
       filename: `${Date.now()}-image-${file.originalname}`,
-      metadata: { _id: fileId }, // Set the custom _id as metadata
+      metadata: { _id: customId }, // Set the custom _id in the metadata
     };
   },
 });
