@@ -79,7 +79,8 @@ const SecondaryVerification = () => {
 
     try {
       await axios.post(
-        "https://kucoinst-web.onrender.com/api/users/verify",
+        // "https://kucoinst-web.onrender.com/api/users/verify",
+        "http://localhost:8000/api/users/verify",
         formData,
         config
       );

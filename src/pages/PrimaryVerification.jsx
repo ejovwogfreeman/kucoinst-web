@@ -34,8 +34,6 @@ const PrimaryVerification = () => {
     },
   };
 
-  console.log(config);
-
   useEffect(() => {
     axios
       .get("https://kucoinst-web.onrender.com/api/users/user", config)

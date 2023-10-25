@@ -86,7 +86,8 @@ const Settings = () => {
 
     try {
       await axios.patch(
-        "https://kucoinst-web.onrender.com/api/users/update-user",
+        // "https://kucoinst-web.onrender.com/api/users/update-user",
+        "http://localhost:8000/api/users/update-user",
         formData,
         config
       );

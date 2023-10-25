@@ -172,10 +172,21 @@ const Account = () => {
                 {user.profileImage ? (
                   <img
                     src={`https://kucoinst-web.onrender.com/${user.profileImage[0].link}`}
-                    width="70px"
+                    style={{
+                      width: "70px",
+                      height: "70px",
+                      objectFit: "cover",
+                    }}
                   />
                 ) : (
-                  <img src={profilelogo} width="70px" />
+                  <img
+                    src={profilelogo}
+                    style={{
+                      width: "70px",
+                      height: "70px",
+                      objectFit: "cover",
+                    }}
+                  />
                 )}
                 <span>
                   <span>{user.username}</span>
@@ -219,7 +230,14 @@ const Account = () => {
           <div className="account-banner">
             <BiLogOut onClick={logout} className="abs-left" />
             <div className="profileinfo">
-              <img src={profilelogo} width="70px" />
+              <img
+                src={profilelogo}
+                style={{
+                  width: "70px",
+                  height: "70px",
+                  objectFit: "cover",
+                }}
+              />
               <span>
                 <span>{user.username}</span>
                 {user.verified && (
