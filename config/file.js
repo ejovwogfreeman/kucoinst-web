@@ -69,11 +69,15 @@ const storage = new GridFsStorage({
       return {
         bucketName: "photos",
         filename: `${Date.now()}-image-${file.originalname}`,
+        _id: new mongoose.Types.ObjectId(), // Ensure _id is defined
       };
     }
 
     const filename = `${Date.now()}-image-${file.originalname}`;
-    return filename;
+    return {
+      filename,
+      _id: new mongoose.Types.ObjectId(), // Ensure _id is defined
+    };
   },
 });
 
