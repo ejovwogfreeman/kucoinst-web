@@ -64,7 +64,7 @@ const registerUser = async (req, res) => {
 
     if (user) {
       const { password, ...others } = user.toObject();
-      await sendEmail(email, "Welcome On Board", "register.html");
+      // await sendEmail(email, "Welcome On Board", "register.html");
       return res.status(200).json({
         ...others,
         token: accessToken(user),
@@ -568,7 +568,7 @@ const userInvest = async (req, res) => {
     user.investments.push(investmentId);
     user.transactions.push(transactionId);
     await user.save();
-    await sendEmail(email, "Welcome On Board", "invest.html");
+    // await sendEmail(email, "Welcome On Board", "invest.html");
   } catch (err) {
     return res.status(400).json(err);
   }
@@ -655,6 +655,60 @@ const userDeposit = async (req, res) => {
 ///////////Deposit///////////
 /////////////////////////////
 
+// const userVerify = async (req, res) => {
+//   const { verifiedDoc } = req.body;
+//   const { email, username, _id } = req.user;
+
+//   if (!verifiedDoc) {
+//     return res.send({ message: "Please add all fields", error: true });
+//   }
+
+//   try {
+//     let filesArray = [];
+//     req.files.forEach((element) => {
+//       const file = {
+//         fileName: element.originalname,
+//         fileType: element.mimetype,
+//         link: `file/${element.filename}`,
+//       };
+//       filesArray.push(file);
+//     });
+
+//     console.log(filesArray);
+
+//     const verifyOptions = {
+//       verifiedDoc,
+//       verifiedPic: filesArray,
+//       status: false,
+//     };
+
+//     let verifyId;
+
+//     try {
+//       const verify = await Verify.create(verifyOptions);
+//       verifyId = verify.id;
+//       verify.user.id = _id;
+//       verify.user.email = email;
+//       verify.user.username = username;
+//       verify.user.verified = true;
+
+//       await verify.save();
+
+//       const user = await User.findById(_id);
+//       user.verify.push(verifyId);
+
+//       await user.save();
+//     } catch (err) {
+//       return res.status(400).json(err);
+//     }
+
+//     res.status(201).json({ message: "Files Uploaded Successfully" });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(400).json({ message: error.message, error: true });
+//   }
+// };
+
 const userVerify = async (req, res) => {
   const { verifiedDoc } = req.body;
   const { email, username, _id } = req.user;
@@ -680,6 +734,8 @@ const userVerify = async (req, res) => {
       status: false,
     };
 
+    console.log(verifyOptions);
+
     let verifyId;
 
     try {
@@ -688,11 +744,13 @@ const userVerify = async (req, res) => {
       verify.user.id = _id;
       verify.user.email = email;
       verify.user.username = username;
-      verify.user.verified = true;
+      verify.user.verified = true; // Set the verified status to true
+
       await verify.save();
 
       const user = await User.findById(_id);
       user.verify.push(verifyId);
+      user.verified = true; // Set the verified status of the user to true
       await user.save();
     } catch (err) {
       return res.status(400).json(err);
@@ -759,7 +817,7 @@ const userWithdraw = async (req, res) => {
     user.transactions = transactions;
 
     await user.save();
-    await sendEmail(email, "Withdraw", "withdraw.html");
+    // await sendEmail(email, "Withdraw", "withdraw.html");
 
     res
       .status(200)
