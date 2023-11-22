@@ -63,31 +63,19 @@ const storage = new GridFsStorage({
     useUnifiedTopology: true,
   },
   file: (req, file) => {
-    console.log("File received:", file);
-
     const match = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
 
     if (match.includes(file.mimetype)) {
-      const fileInfo = {
+      return {
         bucketName: "photos",
         filename: `${Date.now()}-image-${file.originalname}`,
-        _id: new mongoose.Types.ObjectId(), // Ensure _id is defined
       };
-
-      console.log("File info:", fileInfo);
-
-      return fileInfo;
     }
 
     const filename = `${Date.now()}-image-${file.originalname}`;
-    const fileInfo = {
+    return {
       filename,
-      _id: new mongoose.Types.ObjectId(), // Ensure _id is defined
     };
-
-    console.log("File info:", fileInfo);
-
-    return fileInfo;
   },
 });
 
