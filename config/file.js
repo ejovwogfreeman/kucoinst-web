@@ -21,6 +21,7 @@ const storage = new GridFsStorage({
     useUnifiedTopology: true,
   },
   file: (req, file) => {
+    console.log(file);
     const match = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
 
     if (match.indexOf(file.mimetype) === -1) {
