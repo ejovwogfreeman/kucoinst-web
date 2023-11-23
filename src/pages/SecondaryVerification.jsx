@@ -79,8 +79,10 @@ const SecondaryVerification = () => {
 
     try {
       await axios.post(
+        "http://54.82.1.193/api/users/verify",
         // "https://kucoinst-web.onrender.com/api/users/verify",
-        "http://localhost:8000/api/users/verify",
+        // "http://localhost:8000/api/users/verify",
+        // "https://shy-frog-nightshirt.cyclic.app/api/users/verify",
         formData,
         config
       );

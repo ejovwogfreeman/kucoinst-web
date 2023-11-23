@@ -92,7 +92,8 @@ const DepositPage = () => {
     try {
       await axios.post(
         // "https://kucoinst-web.onrender.com/api/users/deposit",
-        "http://localhost:8000/api/users/deposit",
+        // "http://localhost:8000/api/users/deposit",
+        "http://54.82.1.193/api/users/deposit",
         formData,
         config
       );
