@@ -15,6 +15,11 @@ const { GridFsStorage } = require("multer-gridfs-storage");
 const Grid = require("gridfs-stream");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const fs = require("fs");
+const https = require("https");
+
+const key = fs.readFileSync("private.key");
+const cert = fs.readFileSync("certificate.crt");
 
 const corsOptions = {
   origin: "*",
@@ -47,6 +52,12 @@ app.use(
   })
 );
 
+const cred = {
+  key,
+  cert,
+};
+
+
 app.get("/file/:filename", async (req, res) => {
   try {
     const file = await gfs.files.findOne({ filename: req.params.filename });
@@ -72,3 +83,6 @@ const func = async () => {
 app.listen(port, () => {
   console.log(`server started at port ${port}`);
 });
+
+const httpssever = https.createServer(cred, app);
+httpssever.listen(8443);
